@@ -5,12 +5,13 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import cn.alien95.view.RefreshRecyclerView;
 import cn.alien95.view.callback.Action;
+import cn.lemon.common.base.RequirePresenter;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.JavaCourseModel;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import cn.lemon.jcourse.module.ServiceResponse;
-
+@RequirePresenter(StarJCourseListPresenter.class)
 public class StarJCourseListActivity extends ToolbarActivity {
 
     private RefreshRecyclerView mRecyclerView;
@@ -27,19 +28,19 @@ public class StarJCourseListActivity extends ToolbarActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new JavaTextAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.post(new Runnable() {
-            @Override
-            public void run() {
-                mRecyclerView.getSwipeRefreshLayout().setRefreshing(true);
-                getList(true);
-            }
-        });
         mRecyclerView.refresh(new Action() {
             @Override
             public void onAction() {
                 getList(true);
             }
         });
+        getList(true);
+    }
+    public JavaTextAdapter getAdapter(){
+        return mAdapter;
+    }
+    public RefreshRecyclerView getRecyclerView(){
+        return mRecyclerView;
     }
 
     public void getList(final boolean isRefresh) {
@@ -55,7 +56,9 @@ public class StarJCourseListActivity extends ToolbarActivity {
                     mAdapter.clear();
                 }
                 mAdapter.addAll(javaCourses);
-                if (javaCourses.length < 20) {
+                if(javaCourses.length == 0 && mPage == 0){
+                    showEmpty();
+                }else if (javaCourses.length < 20) {
                     mRecyclerView.stopMore();
                 }
                 if (mRecyclerView.getSwipeRefreshLayout().isRefreshing()) {

@@ -1,27 +1,17 @@
 package cn.lemon.jcourse.module.java;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import cn.alien95.view.RefreshRecyclerView;
-import cn.alien95.view.adapter.BaseViewHolder;
-import cn.alien95.view.adapter.RecyclerAdapter;
 import cn.alien95.view.callback.Action;
 import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.jcourse.R;
-import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.JavaCourseModel;
 import cn.lemon.jcourse.model.bean.JavaCourse;
-import rx.Subscriber;
+import cn.lemon.jcourse.module.ServiceResponse;
 
 /**
  * Created by linlongxin on 2016/8/6.
@@ -46,7 +36,7 @@ public class TextFragment extends SuperFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        showContent();
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
@@ -72,32 +62,25 @@ public class TextFragment extends SuperFragment {
         } else {
             mPage++;
         }
-        JavaCourseModel.getInstance().getTextJavaCourseList(mPage, 20, new Subscriber<JavaCourse[]>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                showError();
-            }
-
+        JavaCourseModel.getInstance().getTextJavaCourseList(mPage, 20, new ServiceResponse<JavaCourse[]>() {
             @Override
             public void onNext(JavaCourse[] javaCourses) {
-                showContent();
                 if (isRefresh) {
                     mAdapter.clear();
                     mRecyclerView.dismissRefresh();
                 }
                 mAdapter.addAll(javaCourses);
-                if (javaCourses.length < 20) {
+                if (javaCourses.length == 0 && mPage == 0) {
+                    showEmpty();
+                } else if (javaCourses.length < 20) {
                     mRecyclerView.stopMore();
+                }
+                if (mRecyclerView.getSwipeRefreshLayout().isRefreshing()) {
+                    mRecyclerView.getSwipeRefreshLayout().setRefreshing(false);
                 }
             }
         });
     }
-
 
 
 }

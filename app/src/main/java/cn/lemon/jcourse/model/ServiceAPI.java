@@ -2,11 +2,13 @@ package cn.lemon.jcourse.model;
 
 
 import cn.lemon.jcourse.model.bean.Account;
+import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -17,6 +19,12 @@ import rx.Observable;
  */
 
 public interface ServiceAPI {
+
+    /**
+     * banner
+     */
+    @GET("accounts/banner.php")
+    Observable<Banner> getBanner();
 
     /**
      * Accounts相关

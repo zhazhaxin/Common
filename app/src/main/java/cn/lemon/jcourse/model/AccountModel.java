@@ -8,6 +8,7 @@ import cn.lemon.common.base.model.SuperModel;
 import cn.lemon.common.net.HeadersInterceptor;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.Account;
+import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.net.RetrofitModel;
 import cn.lemon.jcourse.model.net.SchedulersTransformer;
@@ -23,22 +24,25 @@ import rx.functions.Action1;
 
 public class AccountModel extends SuperModel {
 
-    private SchedulersTransformer<Info> mSchedulersTransformer;
     private Account mAccount;
 
     public AccountModel() {
-        mSchedulersTransformer = new SchedulersTransformer<>();
     }
 
     public static AccountModel getInstance() {
         return getInstance(AccountModel.class);
     }
 
-    public void saveAccount(Account account) {
+    public void saveAccount(Account account, boolean isUpdate) {
         putObject(Config.ACCOUNT, account);
         setAccount(account);
         setHeaders(account);
-        EventBus.getDefault().post(Config.UPDATE_ACCOUNT_ON_DRAWER);
+        if (isUpdate)
+            EventBus.getDefault().post(Config.UPDATE_ACCOUNT_ON_DRAWER);
+    }
+
+    public void saveAccount(Account account) {
+        saveAccount(account, true);
     }
 
     public Account getAccount() {
@@ -60,11 +64,17 @@ public class AccountModel extends SuperModel {
     }
 
     public void deleteAccount() {
+        mAccount = null;
         clearCacheObject();
         HeadersInterceptor.UID = "";
         HeadersInterceptor.TOKEN = "";
         EventBus.getDefault().post(Config.UPDATE_ACCOUNT_ON_DRAWER);
-        mAccount = null;
+    }
+
+    public void getBanner(ServiceResponse<Banner> response) {
+        RetrofitModel.getServiceAPI().getBanner()
+                .compose(new SchedulersTransformer<Banner>())
+                .subscribe(response);
     }
 
     public void register(String name, String password, ServiceResponse<Info> subscriber) {
@@ -99,9 +109,10 @@ public class AccountModel extends SuperModel {
                 .compose(new SchedulersTransformer<Account>())
                 .subscribe(response);
     }
-    public void updateAvatar(File file,ServiceResponse<Info> response){
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/type"),file);
-        MultipartBody.Part part = MultipartBody.Part.createFormData("picture",file.getName(),requestBody);
+
+    public void updateAvatar(File file, ServiceResponse<Info> response) {
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/type"), file);
+        MultipartBody.Part part = MultipartBody.Part.createFormData("picture", file.getName(), requestBody);
         RetrofitModel.getServiceAPI().updateAvatar(part)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);

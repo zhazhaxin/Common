@@ -135,11 +135,16 @@ public class MainActivity extends ToolbarActivity
     }
 
     public void loginOut() {
+        if(AccountModel.getInstance().getAccount() == null){
+            Utils.Toast("请先登录");
+            return;
+        }
         showDialog("确定要退出？", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 AccountModel.getInstance().deleteAccount();
                 dismissDialog();
+                Utils.Toast("已退出");
             }
         }, null);
     }

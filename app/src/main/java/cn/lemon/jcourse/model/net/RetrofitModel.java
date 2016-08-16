@@ -36,13 +36,13 @@ public class RetrofitModel {
             OkHttpClient.Builder mOkHttpClientBuilder = new OkHttpClient.Builder();
             if (BuildConfig.DEBUG) {
                 //debug模式下添加日志拦截器
-                mOkHttpClientBuilder
-                        .addInterceptor(new HeadersInterceptor())
-                        .addInterceptor(new LogInterceptor()
+                LogInterceptor logInterceptor = new LogInterceptor()
                         .setLevel(LogInterceptor.Level.BASIC)
-                        .setLogTag(Config.NET_LOG_TAG)
-                        .setDebugMode(true));
+                        .setLogTag(Config.NET_LOG_TAG).setDebugMode(true);
+                mOkHttpClientBuilder
+                        .addInterceptor(logInterceptor);
             }
+            mOkHttpClientBuilder.addInterceptor(new HeadersInterceptor());
             mOkHttpClientBuilder.connectTimeout(10, TimeUnit.SECONDS);
             mOkHttpClientBuilder.readTimeout(20, TimeUnit.SECONDS);
             mOkHttpClientBuilder.writeTimeout(20, TimeUnit.SECONDS);
