@@ -35,6 +35,7 @@ AND j_course.id = j_course_relation.j_course_id LIMIT $start,$page_num";
 $query_result = $pdo_connect->query($sql);
 $rows = $query_result->fetchAll();
 
+$result = array();
 $index = 0;
 foreach ($rows as $row) {
     $temp['id'] = intval($row['id']);

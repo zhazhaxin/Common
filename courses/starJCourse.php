@@ -26,11 +26,11 @@ if($check_result->rowCount() == 0){
     $sql = "INSERT INTO j_course_relation (user_id,j_course_id) VALUES ($uid,$id)";
     $insert_result = $pdo_connect->exec($sql);
     if($insert_result > 0){
-        $result['info'] = "success";
+        $result['info'] = "收藏成功";
     }else{
         serverError();
     }
 }else{
-    $result['info'] = "already star";
+    $result['info'] = "已收藏";
 }
 echo json_encode($result);

@@ -22,6 +22,7 @@ $sql = "SELECT * FROM j_course LIMIT $start,$page_num";
 $query_result = $pdo_connect->query($sql);
 $rows = $query_result->fetchAll();
 
+$result = array();
 $index = 0;
 foreach ($rows as $row) {
     $temp['id'] = intval($row['id']);
