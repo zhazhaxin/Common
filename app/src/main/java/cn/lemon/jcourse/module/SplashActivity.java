@@ -51,7 +51,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 jumpHome();
             }
-        }, 1500);
+        }, 2000);
     }
 
     public void jumpHome() {

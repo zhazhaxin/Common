@@ -36,7 +36,6 @@ public class TextFragment extends SuperFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        showContent();
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
@@ -65,19 +64,28 @@ public class TextFragment extends SuperFragment {
         JavaCourseModel.getInstance().getTextJavaCourseList(mPage, 20, new ServiceResponse<JavaCourse[]>() {
             @Override
             public void onNext(JavaCourse[] javaCourses) {
+
                 if (isRefresh) {
                     mAdapter.clear();
                     mRecyclerView.dismissRefresh();
                 }
-                mAdapter.addAll(javaCourses);
                 if (javaCourses.length == 0 && mPage == 0) {
                     showEmpty();
-                } else if (javaCourses.length < 20) {
+                }
+                showContent();
+                mAdapter.addAll(javaCourses);
+                if (javaCourses.length < 20) {
                     mRecyclerView.stopMore();
                 }
+
                 if (mRecyclerView.getSwipeRefreshLayout().isRefreshing()) {
                     mRecyclerView.getSwipeRefreshLayout().setRefreshing(false);
                 }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
             }
         });
     }
