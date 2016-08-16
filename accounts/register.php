@@ -26,12 +26,12 @@ $real_token_str = $token->get_token($name, "pick_picture");
 $sign = "more code，keep heart";
 $avatar = Config::$DEFAULT_AVATAR;
 
-$insert_sql = "insert into user (name,password,avatar,token) 
-values('$name','$password','$avatar','$real_token_str')";
+$insert_sql = "insert into user (name,password,avatar,token,sign) 
+values('$name','$password','$avatar','$real_token_str','$sign')";
 $insert_user = $pdo_connect->exec($insert_sql);
 
 if ($insert_user) {
-    $result['info'] = "success";
+    $result['info'] = "注册成功";
 } else {
     serverError();
 }
