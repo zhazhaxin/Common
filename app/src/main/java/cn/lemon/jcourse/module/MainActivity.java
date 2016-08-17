@@ -121,8 +121,7 @@ public class MainActivity extends ToolbarActivity
             case R.id.android:
                 break;
             case R.id.star:
-                mNavigationView.setCheckedItem(R.id.java);
-                startActivity(new Intent(this, StarJCourseListActivity.class));
+                jumpStarList();
                 break;
             case R.id.about:
                 break;
@@ -134,8 +133,19 @@ public class MainActivity extends ToolbarActivity
         return true;
     }
 
+    public boolean jumpStarList(){
+        if (AccountModel.getInstance().getAccount() == null) {
+            Utils.Toast("请先登录");
+            startActivity(new Intent(this, LoginActivity.class));
+            return true;
+        }
+        mNavigationView.setCheckedItem(R.id.java);
+        startActivity(new Intent(this, StarJCourseListActivity.class));
+        return true;
+    }
+
     public void loginOut() {
-        if(AccountModel.getInstance().getAccount() == null){
+        if (AccountModel.getInstance().getAccount() == null) {
             Utils.Toast("请先登录");
             return;
         }

@@ -23,6 +23,6 @@ public class VideoFragment extends SuperFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
     }
 }

@@ -15,14 +15,14 @@ public class StarJCourseListPresenter extends Presenter<StarJCourseListActivity>
 
     @Override
     public void onCreate() {
-        super.onCreate();
-    }
-
-    public void refreshData(){
         getData(true);
     }
 
-    public void getData(final boolean isRefresh){
+    public void refreshData() {
+        getData(true);
+    }
+
+    public void getData(final boolean isRefresh) {
         JavaCourseModel.getInstance().getStarJCourseList(mPage, new ServiceResponse<JavaCourse[]>() {
             @Override
             public void onNext(JavaCourse[] javaCourses) {
@@ -32,9 +32,9 @@ public class StarJCourseListPresenter extends Presenter<StarJCourseListActivity>
                     getView().getAdapter().clear();
                 }
                 getView().getAdapter().addAll(javaCourses);
-                if(javaCourses.length == 0 && mPage == 0){
+                if (javaCourses.length == 0 && mPage == 0) {
                     getView().showEmpty();
-                }else if (javaCourses.length < 20) {
+                } else if (javaCourses.length < 20) {
                     getView().getRecyclerView().stopMore();
                 }
                 if (getView().getRecyclerView().getSwipeRefreshLayout().isRefreshing()) {

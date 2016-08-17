@@ -1,0 +1,78 @@
+[
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_light.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_light.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_default.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_tint_default.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_dark.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_btn_colored_borderless_text_material.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_edittext.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_material_dark.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_disable_only_material_light.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_primary_text_disable_only_material_light.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_spinner.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_tint_spinner.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_secondary_text_material_light.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_secondary_text_material_light.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\mis_folder_text_color.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.github.lovetuzitong\\MultiImageSelector\\1.2\\res\\color\\mis_folder_text_color.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_btn_checkable.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_primary_text_disable_only_material_dark.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_switch_track.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\switch_thumb_material_dark.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_switch_thumb.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_tint_switch_thumb.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\mis_default_text_color.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.github.lovetuzitong\\MultiImageSelector\\1.2\\res\\color\\mis_default_text_color.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_search_url_text.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_search_url_text.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\release\\color\\abc_tint_seek_thumb.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\color\\abc_tint_seek_thumb.xml"
+    }
+]

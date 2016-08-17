@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<instant-run
+    abi="armeabi,armeabi-v7a"
+    api-level="23"
+    density="xxhdpi"
+    format="8"
+    timestamp="528343170005981"
+    token="-2146961625032751919"
+    verifier="COLD_SWAP_REQUESTED" >
+
+    <task
+        name="javac"
+        duration="638" />
+    <task
+        name="instant-run-dex"
+        duration="0" />
+    <task
+        name="instant-run-transform"
+        duration="94" />
+    <task
+        name="verifier"
+        duration="21" />
+
+    <artifact
+        location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
+        type="DEX" />
+    <artifact
+        location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+        type="DEX" />
+
+    <build
+        timestamp="524680573798361"
+        verifier="FULL_BUILD_REQUESTED" >
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\outputs\apk\app-debug.apk"
+            type="MAIN" />
+    </build>
+    <build
+        timestamp="525707373526498"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_9\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="528140358924598"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="528343170005981"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_8\classes.dex"
+            type="DEX" />
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+            type="DEX" />
+    </build>
+
+</instant-run>
