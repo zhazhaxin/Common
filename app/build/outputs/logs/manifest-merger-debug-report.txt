@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:2:1-53:12
+ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:2:1-57:12
 	package
 		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:3:5-31
 		INJECTED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml
@@ -30,7 +30,7 @@ MERGED from [com.github.lovetuzitong:MultiImageSelector:1.2] F:\WorkSpace\Androi
 	android:name
 		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:7:22-78
 application
-ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:9:5-51:19
+ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:9:5-55:19
 MERGED from [com.android.support:appcompat-v7:24.0.0-alpha1] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.0.0-alpha1\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-vector-drawable:24.0.0-alpha1] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.0.0-alpha1\AndroidManifest.xml:23:5-20
 MERGED from [com.android.support:support-v4:24.0.0-alpha1] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0-alpha1\AndroidManifest.xml:22:5-20
@@ -184,6 +184,16 @@ ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:48:9-50
 		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:50:13-33
 	android:name
 		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:49:13-64
+activity#cn.lemon.jcourse.module.java.JavaCourseDirList
+ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:51:9-53:40
+	android:label
+		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:53:13-37
+	android:name
+		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:52:13-58
+activity#cn.lemon.jcourse.module.java.JavaCourseUnitListActivity
+ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:54:9-76
+	android:name
+		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:54:19-73
 uses-sdk
 INJECTED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [JCourse:common:unspecified] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\JCourse\common\unspecified\AndroidManifest.xml:7:5-9:41

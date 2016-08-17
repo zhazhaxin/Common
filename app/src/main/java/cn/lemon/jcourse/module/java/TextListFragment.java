@@ -14,13 +14,13 @@ import cn.lemon.jcourse.R;
 /**
  * Created by linlongxin on 2016/8/6.
  */
-@RequirePresenter(TextPresenter.class)
-public class TextFragment extends SuperFragment<TextPresenter> {
+@RequirePresenter(TextListPresenter.class)
+public class TextListFragment extends SuperFragment<TextListPresenter> {
 
     private RefreshRecyclerView mRecyclerView;
     private JavaTextAdapter mAdapter;
 
-    public TextFragment() {
+    public TextListFragment() {
         super(R.layout.java_fragment_text_course_list, true);
     }
 

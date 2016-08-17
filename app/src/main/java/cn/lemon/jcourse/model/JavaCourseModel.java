@@ -47,4 +47,10 @@ public class JavaCourseModel extends SuperModel {
                 .subscribe(response);
     }
 
+    public void getJavaCourseFromDir(int unit, int page, ServiceResponse<JavaCourse[]> response) {
+        RetrofitModel.getServiceAPI().getJavaCourseFromDir(unit, page)
+                .compose(new SchedulersTransformer<JavaCourse[]>())
+                .subscribe(response);
+    }
+
 }

@@ -56,12 +56,20 @@
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\select_dialog_singlechoice_material.xml"
     },
     {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\java_activity_course_unit_list.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\java_activity_course_unit_list.xml"
+    },
+    {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_simple_overlay_action_mode.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\abc_screen_simple_overlay_action_mode.xml"
     },
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_navigation_menu_item.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0-alpha1\\res\\layout\\design_navigation_menu_item.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\java_activity_course_dir_list.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\java_activity_course_dir_list.xml"
     },
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_bar_up_container.xml",
@@ -278,6 +286,10 @@
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main_activity_splash.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\main_activity_splash.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\java_holder_dir.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\java_holder_dir.xml"
     },
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_popup_menu_header_item_layout.xml",

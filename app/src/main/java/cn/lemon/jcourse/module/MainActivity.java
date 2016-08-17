@@ -11,6 +11,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,8 +32,9 @@ import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
+import cn.lemon.jcourse.module.java.JavaCourseDirList;
 import cn.lemon.jcourse.module.java.StarJCourseListActivity;
-import cn.lemon.jcourse.module.java.TextFragment;
+import cn.lemon.jcourse.module.java.TextListFragment;
 import cn.lemon.jcourse.module.java.VideoFragment;
 
 public class MainActivity extends ToolbarActivity
@@ -76,7 +78,7 @@ public class MainActivity extends ToolbarActivity
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mAdapter = new ViewPagerAdapter();
-        mAdapter.addFragment(new TextFragment(), "课程");
+        mAdapter.addFragment(new TextListFragment(), "课程");
         mAdapter.addFragment(new VideoFragment(), "视频");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -139,7 +141,6 @@ public class MainActivity extends ToolbarActivity
             startActivity(new Intent(this, LoginActivity.class));
             return true;
         }
-        mNavigationView.setCheckedItem(R.id.java);
         startActivity(new Intent(this, StarJCourseListActivity.class));
         return true;
     }
@@ -168,6 +169,21 @@ public class MainActivity extends ToolbarActivity
             startActivity(new Intent(this, UpdateInfoActivity.class));
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.dir){
+            startActivity(new Intent(this, JavaCourseDirList.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Subscribe

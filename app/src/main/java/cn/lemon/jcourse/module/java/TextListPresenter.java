@@ -9,7 +9,7 @@ import cn.lemon.jcourse.module.ServiceResponse;
  * Created by linlongxin on 2016/8/17.
  */
 
-public class TextPresenter extends Presenter<TextFragment> {
+public class TextListPresenter extends Presenter<TextListFragment> {
 
     private int mPage = 0;
 

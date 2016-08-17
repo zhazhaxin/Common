@@ -11,15 +11,14 @@
             android:id="@+id/android"
             android:icon="@drawable/menu_android"
             android:title="Android" />
-
-        <item
-            android:id="@+id/star"
-            android:icon="@drawable/menu_star"
-            android:title="收藏" />
     </group>
 
     <item android:title="其他">
         <menu>
+            <item
+                android:id="@+id/star"
+                android:icon="@drawable/menu_star"
+                android:title="收藏" />
             <item
                 android:id="@+id/setting"
                 android:icon="@drawable/menu_setting"
