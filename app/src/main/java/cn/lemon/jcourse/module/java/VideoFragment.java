@@ -3,10 +3,9 @@ package cn.lemon.jcourse.module.java;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-
-import cn.alien95.view.RefreshRecyclerView;
 import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.jcourse.R;
+import cn.lemon.view.RefreshRecyclerView;
 
 /**
  * Created by linlongxin on 2016/8/6.

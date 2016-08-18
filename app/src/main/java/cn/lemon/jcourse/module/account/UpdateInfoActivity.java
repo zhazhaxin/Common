@@ -23,7 +23,7 @@ import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.Info;
-import cn.lemon.jcourse.module.ServiceResponse;
+import cn.lemon.jcourse.model.ServiceResponse;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
