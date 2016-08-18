@@ -28,7 +28,6 @@ public class SuperModel {
     protected SharedPreferences mSP;
     protected SharedPreferences.Editor mEditor;
 
-
     public SuperModel() {
         mSP = mContext.getSharedPreferences(mContext.getPackageName(), Context.MODE_PRIVATE);
         mEditor = mSP.edit();

@@ -17,7 +17,9 @@ import java.lang.annotation.Annotation;
 
 import cn.alien95.util.Utils;
 import cn.lemon.common.R;
-import cn.lemon.common.base.view.MaterialDialog;
+import cn.lemon.common.base.presenter.SuperPresenter;
+import cn.lemon.common.base.presenter.RequirePresenter;
+import cn.lemon.common.base.widget.MaterialDialog;
 
 /**
  * Activity顶级父类 : 添加各种状态(数据错误，数据为空，数据加载中)页的展示，
@@ -25,7 +27,7 @@ import cn.lemon.common.base.view.MaterialDialog;
  * Created by linlongxin on 2016/8/3.
  */
 
-public class SuperActivity<T extends Presenter> extends AppCompatActivity {
+public class SuperActivity<T extends SuperPresenter> extends AppCompatActivity {
 
     private boolean isUseStatusPages = false;
 

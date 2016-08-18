@@ -1,6 +1,6 @@
 package cn.lemon.jcourse.module.java;
 
-import cn.lemon.common.base.Presenter;
+import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.jcourse.model.JavaCourseModel;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import cn.lemon.jcourse.model.ServiceResponse;
@@ -9,7 +9,7 @@ import cn.lemon.jcourse.model.ServiceResponse;
  * Created by linlongxin on 2016/8/16.
  */
 
-public class StarJCourseListPresenter extends Presenter<StarJCourseListActivity> {
+public class StarJCourseListPresenter extends SuperPresenter<StarJCourseListActivity> {
 
     private int mPage = 0;
 

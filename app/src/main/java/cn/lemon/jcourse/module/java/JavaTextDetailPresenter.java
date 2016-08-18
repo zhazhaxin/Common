@@ -3,7 +3,7 @@ package cn.lemon.jcourse.module.java;
 import android.content.Intent;
 
 import cn.alien95.util.Utils;
-import cn.lemon.common.base.Presenter;
+import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
@@ -17,7 +17,7 @@ import cn.lemon.jcourse.module.account.LoginActivity;
  * Created by linlongxin on 2016/8/18.
  */
 
-public class JavaTextDetailPresenter extends Presenter<JavaTextDetailActivity> {
+public class JavaTextDetailPresenter extends SuperPresenter<JavaTextDetailActivity> {
 
     private JavaCourse mData;
     private boolean isStar = false;

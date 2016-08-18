@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import cn.lemon.common.base.RequirePresenter;
+import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.jcourse.R;
 import cn.lemon.view.RefreshRecyclerView;

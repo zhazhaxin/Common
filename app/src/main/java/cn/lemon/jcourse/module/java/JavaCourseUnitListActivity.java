@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import cn.lemon.common.base.RequirePresenter;
+import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;

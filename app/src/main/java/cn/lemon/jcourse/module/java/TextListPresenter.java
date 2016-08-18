@@ -1,6 +1,6 @@
 package cn.lemon.jcourse.module.java;
 
-import cn.lemon.common.base.Presenter;
+import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.jcourse.model.JavaCourseModel;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import cn.lemon.jcourse.model.ServiceResponse;
@@ -9,7 +9,7 @@ import cn.lemon.jcourse.model.ServiceResponse;
  * Created by linlongxin on 2016/8/17.
  */
 
-public class TextListPresenter extends Presenter<TextListFragment> {
+public class TextListPresenter extends SuperPresenter<TextListFragment> {
 
     private int mPage = 0;
 

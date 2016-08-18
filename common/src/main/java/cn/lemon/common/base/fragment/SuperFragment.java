@@ -18,15 +18,15 @@ import java.lang.annotation.Annotation;
 
 import cn.alien95.util.Utils;
 import cn.lemon.common.R;
-import cn.lemon.common.base.Presenter;
-import cn.lemon.common.base.RequirePresenter;
-import cn.lemon.common.base.view.MaterialDialog;
+import cn.lemon.common.base.presenter.SuperPresenter;
+import cn.lemon.common.base.presenter.RequirePresenter;
+import cn.lemon.common.base.widget.MaterialDialog;
 
 /**
  * Created by linlongxin on 2016/8/6.
  */
 
-public class SuperFragment<T extends Presenter> extends Fragment {
+public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     private final String TAG = "SuperFragment";
     private boolean isUseStatusPages = false;
@@ -93,10 +93,10 @@ public class SuperFragment<T extends Presenter> extends Fragment {
                         mPresenter.attachView(this);
                     } catch (java.lang.InstantiationException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperActivity : " + e.getMessage());
+                        Utils.Log("SuperFragment : " + e.getMessage());
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperActivity : " + e.getMessage());
+                        Utils.Log("SuperFragment : " + e.getMessage());
                     }
                 }
             }
@@ -180,8 +180,6 @@ public class SuperFragment<T extends Presenter> extends Fragment {
 
     /**
      * 展示状态页添加动画
-     *
-     * @param view
      */
     public void showViewWithAnimation(View view) {
         if (mShowAnimator != null) {
@@ -196,8 +194,6 @@ public class SuperFragment<T extends Presenter> extends Fragment {
 
     /**
      * 隐藏状态页添加动画
-     *
-     * @param view
      */
     public void hideViewWithAnimation(View view) {
         if (mHideAnimator != null) {
@@ -213,11 +209,6 @@ public class SuperFragment<T extends Presenter> extends Fragment {
 
     /**
      * 展示一个对话框 : title,content,确定按钮，取消按钮
-     *
-     * @param title
-     * @param content
-     * @param positiveListener
-     * @param passiveListener
      */
     public void showDialog(String title, String content, DialogInterface.OnClickListener positiveListener,
                            DialogInterface.OnClickListener passiveListener) {

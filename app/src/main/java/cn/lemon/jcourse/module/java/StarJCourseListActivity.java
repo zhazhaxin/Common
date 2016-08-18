@@ -3,7 +3,7 @@ package cn.lemon.jcourse.module.java;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
-import cn.lemon.common.base.RequirePresenter;
+import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
 import cn.lemon.view.RefreshRecyclerView;

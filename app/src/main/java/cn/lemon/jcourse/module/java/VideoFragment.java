@@ -3,6 +3,7 @@ package cn.lemon.jcourse.module.java;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+
 import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.jcourse.R;
 import cn.lemon.view.RefreshRecyclerView;
@@ -23,5 +24,13 @@ public class VideoFragment extends SuperFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
+        synchronized (mRecyclerView){
+            try {
+                mRecyclerView.wait(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        showEmpty();
     }
 }

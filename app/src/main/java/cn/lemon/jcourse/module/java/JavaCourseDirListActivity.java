@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import cn.lemon.common.base.RequirePresenter;
+import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;

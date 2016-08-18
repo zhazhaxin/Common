@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cn.lemon.common.R;
+import cn.lemon.common.base.presenter.SuperPresenter;
 
 
 /**
@@ -17,7 +18,7 @@ import cn.lemon.common.R;
  * Created by linlongxin on 2016/7/31.
  */
 
-public class ToolbarActivity<T extends Presenter> extends SuperActivity<T> {
+public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> {
 
     private boolean isHomeBack = true;
     private Toolbar mToolbar;
