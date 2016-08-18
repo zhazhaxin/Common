@@ -3,7 +3,7 @@ package cn.lemon.jcourse.module.java;
 import cn.lemon.common.base.Presenter;
 import cn.lemon.jcourse.model.JavaCourseModel;
 import cn.lemon.jcourse.model.bean.JavaCourse;
-import cn.lemon.jcourse.module.ServiceResponse;
+import cn.lemon.jcourse.model.ServiceResponse;
 
 /**
  * Created by linlongxin on 2016/8/16.
@@ -34,8 +34,8 @@ public class StarJCourseListPresenter extends Presenter<StarJCourseListActivity>
                 getView().getAdapter().addAll(javaCourses);
                 if (javaCourses.length == 0 && mPage == 0) {
                     getView().showEmpty();
-                } else if (javaCourses.length < 20) {
-                    getView().getRecyclerView().stopMore();
+                } else if (javaCourses.length < 10) {
+                    getView().getRecyclerView().showNoMore();
                 }
                 if (getView().getRecyclerView().getSwipeRefreshLayout().isRefreshing()) {
                     getView().getRecyclerView().getSwipeRefreshLayout().setRefreshing(false);

@@ -451,18 +451,18 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020049;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f02004a;
 		public static final int abc_textfield_search_material = 0x7f02004b;
-		public static final int mis_action_btn = 0x7f020064;
-		public static final int mis_asv = 0x7f020065;
-		public static final int mis_asy = 0x7f020066;
-		public static final int mis_btn_back = 0x7f020067;
-		public static final int mis_btn_selected = 0x7f020068;
-		public static final int mis_btn_unselected = 0x7f020069;
-		public static final int mis_default_check = 0x7f02006a;
-		public static final int mis_default_check_s = 0x7f02006b;
-		public static final int mis_default_error = 0x7f02006c;
-		public static final int mis_ic_menu_back = 0x7f02006d;
-		public static final int mis_selector_indicator = 0x7f02006e;
-		public static final int mis_text_indicator = 0x7f02006f;
+		public static final int mis_action_btn = 0x7f02005e;
+		public static final int mis_asv = 0x7f02005f;
+		public static final int mis_asy = 0x7f020060;
+		public static final int mis_btn_back = 0x7f020061;
+		public static final int mis_btn_selected = 0x7f020062;
+		public static final int mis_btn_unselected = 0x7f020063;
+		public static final int mis_default_check = 0x7f020064;
+		public static final int mis_default_check_s = 0x7f020065;
+		public static final int mis_default_error = 0x7f020066;
+		public static final int mis_ic_menu_back = 0x7f020067;
+		public static final int mis_selector_indicator = 0x7f020068;
+		public static final int mis_text_indicator = 0x7f020069;
 		public static final int notification_template_icon_bg = 0x7f020072;
 	}
 	public static final class id {
@@ -524,7 +524,7 @@ public final class R {
 		public static final int media_actions = 0x7f0c00b0;
 		public static final int middle = 0x7f0c003b;
 		public static final int multiply = 0x7f0c001b;
-		public static final int name = 0x7f0c0075;
+		public static final int name = 0x7f0c0074;
 		public static final int never = 0x7f0c003f;
 		public static final int none = 0x7f0c0010;
 		public static final int normal = 0x7f0c000c;

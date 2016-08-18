@@ -44,10 +44,10 @@
             android:name="cn.lemon.jcourse.module.java.JavaTextDetailActivity"
             android:label="课程详情" />
         <activity
-            android:name="cn.lemon.jcourse.module.RegisterActivity"
+            android:name="cn.lemon.jcourse.module.account.RegisterActivity"
             android:label="注册" />
         <activity
-            android:name="cn.lemon.jcourse.module.LoginActivity"
+            android:name="cn.lemon.jcourse.module.account.LoginActivity"
             android:label="登录" />
         <activity
             android:name="cn.lemon.jcourse.module.account.UpdateInfoActivity"
@@ -56,7 +56,7 @@
             android:name="cn.lemon.jcourse.module.java.StarJCourseListActivity"
             android:label="我的收藏" />
         <activity
-            android:name="cn.lemon.jcourse.module.java.JavaCourseDirList"
+            android:name="cn.lemon.jcourse.module.java.JavaCourseDirListActivity"
             android:label="Java课程目录" />
         <activity android:name="cn.lemon.jcourse.module.java.JavaCourseUnitListActivity" />
     </application>

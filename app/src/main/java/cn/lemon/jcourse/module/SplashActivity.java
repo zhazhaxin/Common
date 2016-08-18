@@ -12,6 +12,7 @@ import java.util.TimerTask;
 
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
+import cn.lemon.jcourse.model.ServiceResponse;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.Banner;
 

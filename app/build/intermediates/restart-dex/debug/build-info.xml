@@ -4,50 +4,56 @@
     api-level="23"
     density="xxhdpi"
     format="8"
-    timestamp="540443525674127"
+    timestamp="615467639714850"
     token="-2146961625032751919"
-    verifier="FIELD_ADDED" >
+    verifier="CLASS_ADDED" >
 
     <task
         name="javac"
-        duration="875" />
+        duration="569" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="64" />
+        duration="101" />
     <task
         name="verifier"
-        duration="7" />
+        duration="8" />
 
-    <artifact
-        location="F:\WorkSpace\Android\JCourse\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
-        type="RESOURCES" />
     <artifact
         location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
         type="DEX" />
 
     <build
-        timestamp="539662576323632"
-        verifier="COLD_SWAP_REQUESTED" >
+        timestamp="607556205867199"
+        verifier="MANIFEST_FILE_CHANGE" >
         <artifact
             location="F:\WorkSpace\Android\JCourse\app\build\outputs\apk\app-debug.apk"
             type="MAIN" />
     </build>
     <build
-        timestamp="539900416473333"
-        verifier="FIELD_REMOVED" >
-        <artifact
-            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_9\classes.dex"
-            type="DEX" />
-    </build>
-    <build
-        timestamp="540443525674127"
-        verifier="FIELD_ADDED" >
+        timestamp="614502926887045"
+        verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="F:\WorkSpace\Android\JCourse\app\build\intermediates\instant-run-resources\resources-debug.ir.ap_"
             type="RESOURCES" />
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_0\classes.dex"
+            type="DEX" />
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_2\classes.dex"
+            type="DEX" />
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_5\classes.dex"
+            type="DEX" />
+        <artifact
+            location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_4\classes.dex"
+            type="DEX" />
+    </build>
+    <build
+        timestamp="615467639714850"
+        verifier="CLASS_ADDED" >
         <artifact
             location="F:\WorkSpace\Android\JCourse\app\build\intermediates\transforms\dex\debug\folders\1000\5\slice_1\classes.dex"
             type="DEX" />

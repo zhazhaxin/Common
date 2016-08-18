@@ -3,11 +3,11 @@ package cn.lemon.jcourse.module.java;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
-import cn.alien95.view.RefreshRecyclerView;
-import cn.alien95.view.callback.Action;
 import cn.lemon.common.base.RequirePresenter;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
+import cn.lemon.view.RefreshRecyclerView;
+import cn.lemon.view.adapter.Action;
 
 @RequirePresenter(StarJCourseListPresenter.class)
 public class StarJCourseListActivity extends ToolbarActivity<StarJCourseListPresenter> {
@@ -25,7 +25,7 @@ public class StarJCourseListActivity extends ToolbarActivity<StarJCourseListPres
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new JavaTextAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.refresh(new Action() {
+        mRecyclerView.setRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().refreshData();

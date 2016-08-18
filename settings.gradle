@@ -1,1 +1,1 @@
-include ':app', ':common', ':refreshrecyclerview'
+include ':app', ':common', ':RefreshRecyclerView'

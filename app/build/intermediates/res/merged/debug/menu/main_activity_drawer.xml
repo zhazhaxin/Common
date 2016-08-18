@@ -5,11 +5,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/java"
-            android:icon="@drawable/menu_java"
+            android:icon="@drawable/ic_menu_java"
             android:title="Java" />
         <item
             android:id="@+id/android"
-            android:icon="@drawable/menu_android"
+            android:icon="@drawable/ic_menu_android"
             android:title="Android" />
     </group>
 
@@ -17,21 +17,21 @@
         <menu>
             <item
                 android:id="@+id/star"
-                android:icon="@drawable/menu_star"
+                android:icon="@drawable/ic_menu_star"
                 android:title="收藏" />
             <item
                 android:id="@+id/setting"
-                android:icon="@drawable/menu_setting"
+                android:icon="@drawable/ic_menu_setting"
                 android:title="设置" />
 
             <item
                 android:id="@+id/login_out"
-                android:icon="@drawable/menu_login_out"
+                android:icon="@drawable/ic_menu_login_out"
                 android:title="退出" />
 
             <item
                 android:id="@+id/about"
-                android:icon="@drawable/menu_about"
+                android:icon="@drawable/ic_menu_about"
                 android:title="关于" />
         </menu>
     </item>

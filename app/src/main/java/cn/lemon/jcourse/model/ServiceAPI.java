@@ -53,7 +53,7 @@ public interface ServiceAPI {
      */
     @FormUrlEncoded
     @POST("courses/javaCourseList.php")
-    Observable<JavaCourse[]> getTextJavaCourseList(@Field("page") int page, @Field("pageNum") int pageNum);
+    Observable<JavaCourse[]> getTextJavaCourseList(@Field("page") int page);
 
     @FormUrlEncoded
     @POST("courses/starJCourse.php")

@@ -5,7 +5,6 @@ import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import cn.lemon.jcourse.model.net.RetrofitModel;
 import cn.lemon.jcourse.model.net.SchedulersTransformer;
-import cn.lemon.jcourse.module.ServiceResponse;
 
 /**
  * Created by linlongxin on 2016/8/7.
@@ -17,8 +16,8 @@ public class JavaCourseModel extends SuperModel {
         return getInstance(JavaCourseModel.class);
     }
 
-    public void getTextJavaCourseList(int page, int pageNum, ServiceResponse<JavaCourse[]> subscriber) {
-        RetrofitModel.getServiceAPI().getTextJavaCourseList(page, pageNum)
+    public void getTextJavaCourseList(int page, ServiceResponse<JavaCourse[]> subscriber) {
+        RetrofitModel.getServiceAPI().getTextJavaCourseList(page)
                 .compose(new SchedulersTransformer<JavaCourse[]>())
                 .subscribe(subscriber);
     }

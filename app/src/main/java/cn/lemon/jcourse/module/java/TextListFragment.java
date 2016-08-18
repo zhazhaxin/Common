@@ -5,11 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import cn.alien95.view.RefreshRecyclerView;
-import cn.alien95.view.callback.Action;
 import cn.lemon.common.base.RequirePresenter;
 import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.jcourse.R;
+import cn.lemon.view.RefreshRecyclerView;
+import cn.lemon.view.adapter.Action;
 
 /**
  * Created by linlongxin on 2016/8/6.
@@ -36,13 +36,13 @@ public class TextListFragment extends SuperFragment<TextListPresenter> {
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.refresh(new Action() {
+        mRecyclerView.setRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().refreshData();
             }
         });
-        mRecyclerView.loadMore(new Action() {
+        mRecyclerView.setLoadMoreAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().loadMore();

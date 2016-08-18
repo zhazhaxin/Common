@@ -20,6 +20,10 @@
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\notification_template_lines.xml"
     },
     {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\account_activity_login.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\account_activity_login.xml"
+    },
+    {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main_holder_java_text.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\main_holder_java_text.xml"
     },
@@ -46,6 +50,10 @@
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_bottom_sheet_dialog.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\design\\24.0.0-alpha1\\res\\layout\\design_bottom_sheet_dialog.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\account_activity_register.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\account_activity_register.xml"
     },
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\select_dialog_item_material.xml",
@@ -120,10 +128,6 @@
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\notification_template_media.xml"
     },
     {
-        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
-        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\activity_login.xml"
-    },
-    {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_action_mode_close_item_material.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\abc_action_mode_close_item_material.xml"
     },
@@ -146,6 +150,10 @@
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_screen_toolbar.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_status_last.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\cn.lemon\\RefreshRecyclerView\\0.1.0\\res\\layout\\view_status_last.xml"
     },
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_search_view.xml",
@@ -196,10 +204,6 @@
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\main_activity.xml"
     },
     {
-        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_register.xml",
-        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\activity_register.xml"
-    },
-    {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\abc_alert_dialog_button_bar_material.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\abc_alert_dialog_button_bar_material.xml"
     },
@@ -237,7 +241,7 @@
     },
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\view_refresh_recycler.xml",
-        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\JCourse\\refreshrecyclerview\\unspecified\\res\\layout\\view_refresh_recycler.xml"
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\cn.lemon\\RefreshRecyclerView\\0.1.0\\res\\layout\\view_refresh_recycler.xml"
     },
     {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\design_layout_tab_icon.xml",

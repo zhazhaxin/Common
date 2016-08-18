@@ -12,7 +12,6 @@ import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.net.RetrofitModel;
 import cn.lemon.jcourse.model.net.SchedulersTransformer;
-import cn.lemon.jcourse.module.ServiceResponse;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

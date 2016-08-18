@@ -473,7 +473,7 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020049;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f02004a;
 		public static final int abc_textfield_search_material = 0x7f02004b;
-		public static final int crop_image_menu_crop = 0x7f020071;
+		public static final int crop_image_menu_crop = 0x7f02006b;
 		public static final int crop_image_menu_rotate_left = 0x7f02004e;
 		public static final int crop_image_menu_rotate_right = 0x7f02004f;
 		public static final int notification_template_icon_bg = 0x7f020072;
@@ -511,9 +511,9 @@ public final class R {
 		public static final int collapseActionView = 0x7f0c003d;
 		public static final int contentPanel = 0x7f0c0053;
 		public static final int cropImageView = 0x7f0c0081;
-		public static final int crop_image_menu_crop = 0x7f0c00c0;
-		public static final int crop_image_menu_rotate_left = 0x7f0c00be;
-		public static final int crop_image_menu_rotate_right = 0x7f0c00bf;
+		public static final int crop_image_menu_crop = 0x7f0c00c2;
+		public static final int crop_image_menu_rotate_left = 0x7f0c00c0;
+		public static final int crop_image_menu_rotate_right = 0x7f0c00c1;
 		public static final int custom = 0x7f0c0059;
 		public static final int customPanel = 0x7f0c0058;
 		public static final int decor_content_parent = 0x7f0c0062;

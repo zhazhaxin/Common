@@ -3,7 +3,7 @@ package cn.lemon.jcourse.module.java;
 import cn.lemon.common.base.Presenter;
 import cn.lemon.jcourse.model.JavaCourseModel;
 import cn.lemon.jcourse.model.bean.JavaCourse;
-import cn.lemon.jcourse.module.ServiceResponse;
+import cn.lemon.jcourse.model.ServiceResponse;
 
 /**
  * Created by linlongxin on 2016/8/17.
@@ -32,7 +32,7 @@ public class TextListPresenter extends Presenter<TextListFragment> {
         } else {
             mPage++;
         }
-        JavaCourseModel.getInstance().getTextJavaCourseList(mPage, 20, new ServiceResponse<JavaCourse[]>() {
+        JavaCourseModel.getInstance().getTextJavaCourseList(mPage, new ServiceResponse<JavaCourse[]>() {
             @Override
             public void onNext(JavaCourse[] javaCourses) {
 
@@ -45,8 +45,8 @@ public class TextListPresenter extends Presenter<TextListFragment> {
                 }
                 getView().showContent();
                 getView().getAdapter().addAll(javaCourses);
-                if (javaCourses.length < 20) {
-                    getView().getRecyclerView().stopMore();
+                if (javaCourses.length < 10) {
+                    getView().getRecyclerView().showNoMore();
                 }
                 if (getView().getRecyclerView().getSwipeRefreshLayout().isRefreshing()) {
                     getView().getRecyclerView().getSwipeRefreshLayout().setRefreshing(false);

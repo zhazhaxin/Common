@@ -31,8 +31,9 @@ import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
+import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
-import cn.lemon.jcourse.module.java.JavaCourseDirList;
+import cn.lemon.jcourse.module.java.JavaCourseDirListActivity;
 import cn.lemon.jcourse.module.java.StarJCourseListActivity;
 import cn.lemon.jcourse.module.java.TextListFragment;
 import cn.lemon.jcourse.module.java.VideoFragment;
@@ -180,7 +181,7 @@ public class MainActivity extends ToolbarActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.dir){
-            startActivity(new Intent(this, JavaCourseDirList.class));
+            startActivity(new Intent(this, JavaCourseDirListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

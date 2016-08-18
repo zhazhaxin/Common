@@ -4,7 +4,7 @@ import cn.lemon.common.base.Presenter;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.JavaCourseModel;
 import cn.lemon.jcourse.model.bean.JavaCourse;
-import cn.lemon.jcourse.module.ServiceResponse;
+import cn.lemon.jcourse.model.ServiceResponse;
 
 /**
  * Created by linlongxin on 2016/8/17.
@@ -43,8 +43,8 @@ public class JavaCourseUnitListPresenter extends Presenter<JavaCourseUnitListAct
                     getView().showEmpty();
                 } else {
                     getView().getAdapter().addAll(javaCourses);
-                    if (javaCourses.length < 20) {
-                        getView().getRecyclerView().stopMore();
+                    if (javaCourses.length < 10) {
+                        getView().getRecyclerView().showNoMore();
                     }
                 }
                 if (getView().getRecyclerView().getSwipeRefreshLayout().isRefreshing()) {

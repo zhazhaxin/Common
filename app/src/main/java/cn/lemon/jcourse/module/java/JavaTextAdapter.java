@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
-import cn.alien95.view.adapter.BaseViewHolder;
-import cn.alien95.view.adapter.RecyclerAdapter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.JavaCourse;
+import cn.lemon.view.adapter.BaseViewHolder;
+import cn.lemon.view.adapter.RecyclerAdapter;
 
 class JavaTextAdapter extends RecyclerAdapter<JavaCourse> {
 

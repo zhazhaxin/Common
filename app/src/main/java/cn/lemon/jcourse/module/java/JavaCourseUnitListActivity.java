@@ -10,15 +10,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import cn.alien95.view.RefreshRecyclerView;
-import cn.alien95.view.adapter.BaseViewHolder;
-import cn.alien95.view.adapter.RecyclerAdapter;
-import cn.alien95.view.callback.Action;
 import cn.lemon.common.base.RequirePresenter;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.JavaCourse;
+import cn.lemon.view.RefreshRecyclerView;
+import cn.lemon.view.adapter.Action;
+import cn.lemon.view.adapter.BaseViewHolder;
+import cn.lemon.view.adapter.RecyclerAdapter;
 
 @RequirePresenter(JavaCourseUnitListPresenter.class)
 public class JavaCourseUnitListActivity extends ToolbarActivity<JavaCourseUnitListPresenter> {
@@ -36,13 +36,13 @@ public class JavaCourseUnitListActivity extends ToolbarActivity<JavaCourseUnitLi
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.refresh(new Action() {
+        mRecyclerView.setRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().getData(true);
             }
         });
-        mRecyclerView.loadMore(new Action() {
+        mRecyclerView.setLoadMoreAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().getData(false);
@@ -72,7 +72,7 @@ public class JavaCourseUnitListActivity extends ToolbarActivity<JavaCourseUnitLi
     class JavaDirViewHolder extends BaseViewHolder<JavaCourse> {
 
         private ImageView mCover;
-        private TextView mTitle;
+        private TextView mSubitle;
 
         public JavaDirViewHolder(ViewGroup parent) {
             super(parent, R.layout.java_holder_dir);
@@ -82,7 +82,7 @@ public class JavaCourseUnitListActivity extends ToolbarActivity<JavaCourseUnitLi
         public void onInitializeView() {
             super.onInitializeView();
             mCover = findViewById(R.id.cover);
-            mTitle = findViewById(R.id.title);
+            mSubitle = findViewById(R.id.subtitle);
         }
 
         @Override
@@ -91,7 +91,7 @@ public class JavaCourseUnitListActivity extends ToolbarActivity<JavaCourseUnitLi
             Glide.with(itemView.getContext())
                     .load(object.cover)
                     .into(mCover);
-            mTitle.setText(object.title);
+            mSubitle.setText(object.subtitle);
         }
 
         @Override
