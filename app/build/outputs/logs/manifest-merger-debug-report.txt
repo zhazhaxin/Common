@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:2:1-57:12
+ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:2:1-60:12
 	package
 		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:3:5-31
 		INJECTED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml
@@ -30,7 +30,7 @@ MERGED from [com.github.lovetuzitong:MultiImageSelector:1.2] F:\WorkSpace\Androi
 	android:name
 		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:7:22-78
 application
-ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:9:5-55:19
+ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:9:5-58:19
 MERGED from [com.android.support:appcompat-v7:24.0.0-alpha1] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.0.0-alpha1\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-vector-drawable:24.0.0-alpha1] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.0.0-alpha1\AndroidManifest.xml:23:5-20
 MERGED from [com.android.support:support-v4:24.0.0-alpha1] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0-alpha1\AndroidManifest.xml:22:5-20
@@ -100,7 +100,7 @@ MERGED from [com.android.support:support-vector-drawable:24.0.0-alpha1] F:\WorkS
 MERGED from [com.android.support:support-v4:24.0.0-alpha1] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0-alpha1\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-v4:24.0.0-alpha1] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.0.0-alpha1\AndroidManifest.xml:22:5-20
 	android:label
-		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:13:9-41
+		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:13:9-29
 	android:supportsRtl
 		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:14:9-35
 	android:allowBackup
@@ -186,6 +186,12 @@ activity#cn.lemon.jcourse.module.java.JavaCourseUnitListActivity
 ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:54:9-76
 	android:name
 		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:54:19-73
+activity#cn.lemon.jcourse.module.AboutActivity
+ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:55:9-57:34
+	android:label
+		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:57:13-31
+	android:name
+		ADDED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml:56:13-49
 uses-sdk
 INJECTED from F:\WorkSpace\Android\JCourse\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [JCourse:common:unspecified] F:\WorkSpace\Android\JCourse\app\build\intermediates\exploded-aar\JCourse\common\unspecified\AndroidManifest.xml:7:5-9:41

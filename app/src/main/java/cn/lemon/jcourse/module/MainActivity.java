@@ -121,12 +121,11 @@ public class MainActivity extends ToolbarActivity
         switch (item.getItemId()) {
             case R.id.java:
                 break;
-            case R.id.android:
-                break;
             case R.id.star:
                 jumpStarList();
                 break;
             case R.id.about:
+                startActivity(new Intent(this,AboutActivity.class));
                 break;
             case R.id.login_out:
                 loginOut();

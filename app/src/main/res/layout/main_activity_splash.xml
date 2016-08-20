@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:textSize="12sp"
         android:gravity="center_horizontal"
         android:text="\@2016，JCourse all right reserved" />
 

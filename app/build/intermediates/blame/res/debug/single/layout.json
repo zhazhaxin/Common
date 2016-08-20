@@ -92,6 +92,10 @@
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\abc_activity_chooser_view.xml"
     },
     {
+        "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\main_activity_about.xml",
+        "source": "F:\\WorkSpace\\Android\\JCourse\\app\\src\\main\\res\\layout\\main_activity_about.xml"
+    },
+    {
         "merged": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
         "source": "F:\\WorkSpace\\Android\\JCourse\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.0.0-alpha1\\res\\layout\\notification_media_cancel_action.xml"
     },

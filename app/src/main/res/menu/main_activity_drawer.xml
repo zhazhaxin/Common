@@ -6,11 +6,8 @@
         <item
             android:id="@+id/java"
             android:icon="@drawable/ic_menu_java"
+            android:checked="true"
             android:title="Java" />
-        <item
-            android:id="@+id/android"
-            android:icon="@drawable/ic_menu_android"
-            android:title="Android" />
     </group>
 
     <item android:title="其他">
@@ -19,10 +16,6 @@
                 android:id="@+id/star"
                 android:icon="@drawable/ic_menu_star"
                 android:title="收藏" />
-            <item
-                android:id="@+id/setting"
-                android:icon="@drawable/ic_menu_setting"
-                android:title="设置" />
 
             <item
                 android:id="@+id/login_out"
