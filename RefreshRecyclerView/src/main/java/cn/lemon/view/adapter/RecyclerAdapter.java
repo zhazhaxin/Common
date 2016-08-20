@@ -145,8 +145,14 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     public void showNoMore() {
         isShowNoMore = true;
-        mLoadMoreView.setVisibility(View.GONE);
-        mNoMoreView.setVisibility(View.VISIBLE);
+        mLoadMoreView.post(new Runnable() {
+            @Override
+            public void run() {
+                mLoadMoreView.setVisibility(View.GONE);
+                mNoMoreView.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
     public void setLoadMoreAction(Action action) {

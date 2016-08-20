@@ -31,6 +31,12 @@ public class StarJCourseListActivity extends ToolbarActivity<StarJCourseListPres
                 getPresenter().refreshData();
             }
         });
+        mRecyclerView.setLoadMoreAction(new Action() {
+            @Override
+            public void onAction() {
+                getPresenter().loadMoreData();
+            }
+        });
     }
 
     public JavaTextAdapter getAdapter() {

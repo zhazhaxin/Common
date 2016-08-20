@@ -22,7 +22,16 @@ public class StarJCourseListPresenter extends SuperPresenter<StarJCourseListActi
         getData(true);
     }
 
-    public void getData(final boolean isRefresh) {
+    public void loadMoreData() {
+        getData(false);
+    }
+
+    private void getData(final boolean isRefresh) {
+        if(isRefresh){
+            mPage = 0;
+        }else {
+            mPage++;
+        }
         JavaCourseModel.getInstance().getStarJCourseList(mPage, new ServiceResponse<JavaCourse[]>() {
             @Override
             public void onNext(JavaCourse[] javaCourses) {
@@ -32,8 +41,12 @@ public class StarJCourseListPresenter extends SuperPresenter<StarJCourseListActi
                     getView().getAdapter().clear();
                 }
                 getView().getAdapter().addAll(javaCourses);
-                if (javaCourses.length == 0 && mPage == 0) {
-                    getView().showEmpty();
+                if (javaCourses.length == 0) {
+                    if (mPage == 0) {
+                        getView().showEmpty();
+                    } else {
+                        getView().getRecyclerView().showNoMore();
+                    }
                 } else if (javaCourses.length < 10) {
                     getView().getRecyclerView().showNoMore();
                 }

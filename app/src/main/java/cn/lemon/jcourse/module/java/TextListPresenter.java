@@ -40,8 +40,12 @@ public class TextListPresenter extends SuperPresenter<TextListFragment> {
                     getView().getAdapter().clear();
                     getView().getRecyclerView().dismissRefresh();
                 }
-                if (javaCourses.length == 0 && mPage == 0) {
-                    getView().showEmpty();
+                if (javaCourses.length == 0) {
+                    if(mPage == 0){
+                        getView().showEmpty();
+                    }else {
+                        getView().getRecyclerView().showNoMore();
+                    }
                 }
                 getView().showContent();
                 getView().getAdapter().addAll(javaCourses);
