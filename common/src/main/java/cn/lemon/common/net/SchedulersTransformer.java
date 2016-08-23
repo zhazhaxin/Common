@@ -1,4 +1,4 @@
-package cn.lemon.jcourse.model.net;
+package cn.lemon.common.net;
 
 
 import rx.Observable;

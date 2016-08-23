@@ -175,9 +175,11 @@ public Object getObject(String key);
 
 </LinearLayout>
 ```
-**注意**：Toolbar的id必须是`android:id="@+id/toolbar"``。
+
+**注意**：Toolbar的id必须是`android:id="@+id/toolbar"`。
 
  - Toolbar相关操作
+
 ```
 //获取Toolbar
 public Toolbar getToolbar()

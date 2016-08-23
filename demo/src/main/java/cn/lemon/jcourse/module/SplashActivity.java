@@ -10,9 +10,9 @@ import com.bumptech.glide.Glide;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
-import cn.lemon.jcourse.model.ServiceResponse;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.Banner;
 

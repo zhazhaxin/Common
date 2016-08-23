@@ -4,11 +4,11 @@ import android.content.Intent;
 
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.presenter.SuperPresenter;
+import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.JavaCourseModel;
-import cn.lemon.jcourse.model.ServiceResponse;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import cn.lemon.jcourse.module.account.LoginActivity;

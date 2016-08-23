@@ -1,4 +1,4 @@
-package cn.lemon.jcourse.model;
+package cn.lemon.common.net;
 
 
 import cn.alien95.util.Utils;

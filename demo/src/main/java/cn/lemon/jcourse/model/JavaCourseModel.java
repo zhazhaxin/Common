@@ -1,10 +1,11 @@
 package cn.lemon.jcourse.model;
 
 import cn.lemon.common.base.model.SuperModel;
+import cn.lemon.common.net.SchedulersTransformer;
+import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import cn.lemon.jcourse.model.net.RetrofitModel;
-import cn.lemon.jcourse.model.net.SchedulersTransformer;
 
 /**
  * Created by linlongxin on 2016/8/7.

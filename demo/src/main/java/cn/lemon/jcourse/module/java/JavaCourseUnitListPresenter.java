@@ -1,10 +1,10 @@
 package cn.lemon.jcourse.module.java;
 
 import cn.lemon.common.base.presenter.SuperPresenter;
+import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.JavaCourseModel;
 import cn.lemon.jcourse.model.bean.JavaCourse;
-import cn.lemon.jcourse.model.ServiceResponse;
 
 /**
  * Created by linlongxin on 2016/8/17.
