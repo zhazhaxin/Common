@@ -174,7 +174,6 @@ public Object getObject(String key);
         android:layout_height="wrap_content" />
 
 </LinearLayout>
-
 ```
 **注意**：Toolbar的id必须是`android:id="@+id/toolbar"``。
 
