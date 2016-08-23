@@ -38,7 +38,7 @@ public class TextListPresenter extends SuperPresenter<TextListFragment> {
 
                 if (isRefresh) {
                     getView().getAdapter().clear();
-                    getView().getRecyclerView().dismissRefresh();
+                    getView().getRecyclerView().dismissSwipeRefresh();
                 }
                 if (javaCourses.length == 0) {
                     if(mPage == 0){

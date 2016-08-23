@@ -24,13 +24,6 @@ public class VideoFragment extends SuperFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
-        synchronized (mRecyclerView){
-            try {
-                mRecyclerView.wait(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
         showEmpty();
     }
 }

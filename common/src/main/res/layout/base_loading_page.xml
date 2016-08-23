@@ -8,16 +8,8 @@
     android:visibility="visible">
 
     <ProgressBar
-        android:layout_width="28dp"
-        android:layout_height="28dp" />
-
-    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:maxLines="1"
-        android:text="正在加载......"
-        android:textColor="@color/loadingTextColor"
-        android:textSize="17sp" />
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>

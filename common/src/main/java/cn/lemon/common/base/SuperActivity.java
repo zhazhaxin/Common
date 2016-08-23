@@ -27,7 +27,7 @@ import cn.lemon.common.base.widget.MaterialDialog;
  * Created by linlongxin on 2016/8/3.
  */
 
-public class SuperActivity<T extends SuperPresenter> extends AppCompatActivity {
+public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
     private boolean isUseStatusPages = false;
 
@@ -43,7 +43,7 @@ public class SuperActivity<T extends SuperPresenter> extends AppCompatActivity {
     private ObjectAnimator mShowAnimator;
     private ObjectAnimator mHideAnimator;
 
-    private T mPresenter;
+    private P mPresenter;
 
     //在setContentView()之前调用，如果activity的toolbar功能会受到其他view影响则不能使用状态页，如：带DrawLayout的toolbar
     public void useStatusPages(boolean show) {
@@ -82,7 +82,7 @@ public class SuperActivity<T extends SuperPresenter> extends AppCompatActivity {
                 if (annotation instanceof RequirePresenter) {
                     RequirePresenter presenter = (RequirePresenter) annotation;
                     try {
-                        mPresenter = (T) presenter.value().newInstance();
+                        mPresenter = (P) presenter.value().newInstance();
                         mPresenter.attachView(this);
                     } catch (InstantiationException e) {
                         e.printStackTrace();
@@ -96,7 +96,7 @@ public class SuperActivity<T extends SuperPresenter> extends AppCompatActivity {
         }
     }
 
-    public T getPresenter() {
+    public P getPresenter() {
         return mPresenter;
     }
 

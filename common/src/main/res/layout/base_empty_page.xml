@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:text="没有任何数据( ^_^ )"
+    android:text="没有任何数据O(∩_∩)O"
     android:textColor="@color/grey"
     android:textSize="18sp"
     android:visibility="gone">
