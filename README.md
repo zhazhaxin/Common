@@ -111,16 +111,16 @@ public void onDestroy(){}
 
  - View层和Presenter层相互调用
 
- presenter中
- ```
- //获取对应的view（activity）
- protected V getView();
- ```
- activity中
- ```
- //获取对应的presenter
- public P getPresenter()
- ```
+presenter中
+```
+//获取对应的view（activity）
+protected V getView();
+```
+activity中
+```
+//获取对应的presenter
+public P getPresenter()
+```
 
 ##SuperModel
 
