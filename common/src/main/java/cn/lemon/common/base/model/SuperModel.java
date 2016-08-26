@@ -34,27 +34,28 @@ public class SuperModel {
         mObjectCachePath = mContext.getExternalFilesDir(OBJECT_CACHE).getAbsolutePath();
     }
 
+    //这样去写单例模式虽然可以省去很多代码，不过因为newInstance方法有限制：构造函数必须public,必须有一个构造函数没有参数
     public static void initialize(Context context) {
         mContext = context;
     }
 
     public static <T extends SuperModel> T getInstance(Class<T> model) {
-        if (mInstanceMap.containsKey(model.getSimpleName())) {
-            return (T) mInstanceMap.get(model.getSimpleName());
-        } else {
-            try {
-                SuperModel instance = model.newInstance();
-                mInstanceMap.put(model.getSimpleName(), instance);
-                return (T) instance;
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-                return null;
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-                return null;
+        if(!mInstanceMap.containsKey(model.getSimpleName())){
+            synchronized (model){
+                try {
+                    T instance = model.newInstance();
+                    mInstanceMap.put(model.getSimpleName(), instance);
+                    return instance;
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                    return null;
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                    return null;
+                }
             }
         }
-
+        return (T) mInstanceMap.get(model.getSimpleName());
     }
 
     /**

@@ -8,9 +8,9 @@
 
 ###状态页
 
-<img src="loading.png" width="180" height="320"/>
-<img src="empty.png" width="180" height="320"/>
-<img src="error.png" width="180" height="320"/>
+<img src="loading.png" width="260" height="462"/>
+<img src="empty.png" width="260" height="462"/>
+<img src="error.png" width="260" height="462"/>
 
  - SuperFragment
  ```
@@ -48,8 +48,8 @@
 
 ###Dialog
 
-<img src="material_dialog.png" width="180" height="320"/>
-<img src="loading_dialog.png" width="180" height="320"/>
+<img src="material_dialog.png" width="320" height="569"/>
+<img src="loading_dialog.png" width="320" height="569"/>
 
  - SuperFragment
 
