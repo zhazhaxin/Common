@@ -37,8 +37,7 @@ public class RetrofitModel {
             if (BuildConfig.DEBUG) {
                 //debug模式下添加日志拦截器
                 LogInterceptor logInterceptor = new LogInterceptor()
-                        .setLevel(LogInterceptor.Level.BASIC)
-                        .setLogTag(Config.NET_LOG_TAG).setDebugMode(true);
+                        .setLogTag(Config.NET_LOG_TAG);
                 mOkHttpClientBuilder
                         .addInterceptor(logInterceptor);
             }

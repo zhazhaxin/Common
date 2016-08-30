@@ -31,7 +31,6 @@ public class LogInterceptor implements Interceptor {
 
     private static int mCounter = 0;
     private static final Charset UTF8 = Charset.forName("UTF-8");
-    private volatile int mLevel = Level.NONE;
     private boolean isDebug = true;
 
     private Map<String, Integer> mRequestTime;
@@ -40,27 +39,13 @@ public class LogInterceptor implements Interceptor {
         mRequestTime = new HashMap<>();
     }
 
-    public interface Level {
-        int NONE = 1;
-        int BASIC = 2;
-    }
-
     public LogInterceptor setLogTag(String tag) {
         LOG_TAG = tag;
         return this;
     }
 
-    public LogInterceptor setDebugMode(boolean isDebug) {
+    public LogInterceptor setDebug(boolean isDebug) {
         this.isDebug = isDebug;
-        return this;
-    }
-
-    /**
-     * Change the level at which this interceptor logs.
-     */
-    public LogInterceptor setLevel(int level) {
-        if (level == 0) throw new RuntimeException("level == 0. Use Level.NONE instead.");
-        this.mLevel = level;
         return this;
     }
 
@@ -69,9 +54,9 @@ public class LogInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
-        if (mLevel == Level.NONE || !isDebug) {
+        if (!isDebug) {
             return chain.proceed(request);
-        } else if (mLevel == Level.BASIC) {
+        } else {
             /**
              * print request log
              */
@@ -145,8 +130,6 @@ public class LogInterceptor implements Interceptor {
             }
 
             return response;
-        } else {
-            throw new RuntimeException("level == 0 , please set level through setLevel()");
         }
     }
 
