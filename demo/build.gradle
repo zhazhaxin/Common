@@ -11,15 +11,43 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+
+    //签名配置
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
+        release {
+            signingConfig signingConfigs.release
         }
     }
     lintOptions{
         checkReleaseBuilds false
         abortOnError false
+    }
+
+    //多渠道打包
+    productFlavors {
+
+        dev{}
+        wandoujia {}
+        yingyongbao{}
+        baidu {}
+        c360 {}
+        uc {}
+
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
     }
 }
 
@@ -33,4 +61,6 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.theartofdev.edmodo:android-image-cropper:2.2.5'
     compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
+
+    compile 'com.umeng.analytics:analytics:latest.integration'
 }
