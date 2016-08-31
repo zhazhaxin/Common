@@ -22,6 +22,7 @@ import okio.Buffer;
 import okio.BufferedSource;
 
 /**
+ * 完美的日志拦截器，建议在Debug模式下使用
  * Created by linlongxin on 2016/7/25.
  */
 
@@ -92,7 +93,7 @@ public class LogInterceptor implements Interceptor {
             }
 
             long startNs = System.nanoTime();
-            Response response = null;
+            Response response;
             try {
                 response = chain.proceed(request);
             } catch (Exception e) {
@@ -113,7 +114,7 @@ public class LogInterceptor implements Interceptor {
 
             if (responseBody.contentLength() != 0) {
                 /**
-                 * pint response log
+                 * print response log
                  */
                 synchronized (this) {
                     String key = response.request().url().toString();
@@ -121,7 +122,7 @@ public class LogInterceptor implements Interceptor {
                         int count = mRequestTime.get(key);
                         mRequestTime.remove(key);
                         Log.i(LOG_TAG, count + "  Times Response : " + response.code() + ' ' + response.message() + ' '
-                                + " (" + tookMs + "ms" + ')' + " Result : " + buffer.clone().readString(UTF8));
+                                + '(' + tookMs + "ms" + ')' + " Result : " + buffer.clone().readString(UTF8));
                     } else {
                         Log.i(LOG_TAG, "not find response url : " + key);
                     }
@@ -155,11 +156,5 @@ public class LogInterceptor implements Interceptor {
         } catch (EOFException e) {
             return false; // Truncated UTF-8 sequence.
         }
-    }
-
-    public synchronized void printRequestLog(Request request, String strUrl) {
-        mRequestTime.put(request.url().toString(), mCounter);
-        Log.i(LOG_TAG, mCounter + "  Times Request : " + request.method() + ' ' + strUrl);
-        mCounter++;
     }
 }

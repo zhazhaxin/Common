@@ -63,8 +63,6 @@ public class MaterialDialog extends AppCompatDialog {
 
     /**
      * 确认按钮监听器
-     *
-     * @param listener
      */
     private void setPositiveClickListener(final OnClickListener listener) {
         mPositiveButton.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +77,6 @@ public class MaterialDialog extends AppCompatDialog {
 
     /**
      * 取消安装监听器
-     *
-     * @param listener
      */
     private void setPassiveClickListener(final OnClickListener listener) {
         mPassiveButton.setOnClickListener(new View.OnClickListener() {
