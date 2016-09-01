@@ -8,9 +8,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
@@ -33,12 +31,6 @@ public class LogInterceptor implements Interceptor {
     private static int mCounter = 0;
     private static final Charset UTF8 = Charset.forName("UTF-8");
     private boolean isDebug = true;
-
-    private Map<String, Integer> mRequestTime;
-
-    public LogInterceptor() {
-        mRequestTime = new HashMap<>();
-    }
 
     public LogInterceptor setLogTag(String tag) {
         LOG_TAG = tag;
@@ -86,11 +78,8 @@ public class LogInterceptor implements Interceptor {
                 }
             }
 
-            synchronized (this) {
-                mRequestTime.put(request.url().toString(), mCounter);
-                Log.i(LOG_TAG, mCounter + "  Times Request : " + request.method() + ' ' + strUrl);
-                mCounter++;
-            }
+            int localCount = mCounter++;
+            Log.i(LOG_TAG, localCount + "  Times Request : " + request.method() + ' ' + strUrl);
 
             long startNs = System.nanoTime();
             Response response;
@@ -116,18 +105,8 @@ public class LogInterceptor implements Interceptor {
                 /**
                  * print response log
                  */
-                synchronized (this) {
-                    String key = response.request().url().toString();
-                    if (mRequestTime.containsKey(key)) {
-                        int count = mRequestTime.get(key);
-                        mRequestTime.remove(key);
-                        Log.i(LOG_TAG, count + "  Times Response : " + response.code() + ' ' + response.message() + ' '
-                                + '(' + tookMs + "ms" + ')' + " Result : " + buffer.clone().readString(UTF8));
-                    } else {
-                        Log.i(LOG_TAG, "not find response url : " + key);
-                    }
-
-                }
+                Log.i(LOG_TAG, localCount + "  Times Response : " + response.code() + ' ' + response.message() + ' '
+                        + '(' + tookMs + "ms" + ')' + " Result : " + buffer.clone().readString(UTF8));
             }
 
             return response;
