@@ -187,4 +187,4 @@ public Toolbar getToolbar()
 public void setToolbarHomeBack(boolean isHomeBack)
 ```
 
-[更多用法请看Demo](https://github.com/llxdaxia/Common/tree/dev/common)
+[更多用法请看Demo](https://github.com/llxdaxia/Common/tree/dev/demo)
