@@ -83,7 +83,11 @@ public class MainActivity extends ToolbarActivity
         mAdapter.addFragment(new VideoFragment(), "视频");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         updateAccountInfo();
     }
 
@@ -92,6 +96,7 @@ public class MainActivity extends ToolbarActivity
         if (account != null) {
             Glide.with(MainActivity.this)
                     .load(account.avatar)
+                    .placeholder(R.drawable.ic_avatar)
                     .into(mAvatar);
             mName.setText(account.name);
             mSign.setText(account.sign);
@@ -125,7 +130,7 @@ public class MainActivity extends ToolbarActivity
                 jumpStarList();
                 break;
             case R.id.about:
-                startActivity(new Intent(this,AboutActivity.class));
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
             case R.id.login_out:
                 loginOut();
@@ -135,7 +140,7 @@ public class MainActivity extends ToolbarActivity
         return true;
     }
 
-    public boolean jumpStarList(){
+    public boolean jumpStarList() {
         if (AccountModel.getInstance().getAccount() == null) {
             Utils.Toast("请先登录");
             startActivity(new Intent(this, LoginActivity.class));
@@ -173,13 +178,13 @@ public class MainActivity extends ToolbarActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_activity,menu);
+        getMenuInflater().inflate(R.menu.main_activity, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.dir){
+        if (item.getItemId() == R.id.dir) {
             startActivity(new Intent(this, JavaCourseDirListActivity.class));
             return true;
         }

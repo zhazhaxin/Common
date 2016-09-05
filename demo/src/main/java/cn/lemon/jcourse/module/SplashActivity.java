@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
                 @Override
                 public void onNext(Account account) {
                     super.onNext(account);
-                    AccountModel.getInstance().saveAccount(account, false);
+                    AccountModel.getInstance().saveAccount(account);
                 }
             });
         }

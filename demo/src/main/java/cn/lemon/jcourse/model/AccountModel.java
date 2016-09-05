@@ -33,16 +33,10 @@ public class AccountModel extends SuperModel {
         return getInstance(AccountModel.class);
     }
 
-    public void saveAccount(Account account, boolean isUpdate) {
+    public void saveAccount(Account account) {
         putObject(Config.ACCOUNT, account);
         setAccount(account);
         setHeaders(account);
-        if (isUpdate)
-            EventBus.getDefault().post(Config.UPDATE_ACCOUNT_ON_DRAWER);
-    }
-
-    public void saveAccount(Account account) {
-        saveAccount(account, true);
     }
 
     public Account getAccount() {
