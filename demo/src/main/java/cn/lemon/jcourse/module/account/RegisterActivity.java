@@ -19,7 +19,6 @@ public class RegisterActivity extends ToolbarActivity implements View.OnClickLis
 
     private TextInputLayout mTextName;
     private TextInputLayout mTextPassword;
-    private TextView mRegisterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +27,7 @@ public class RegisterActivity extends ToolbarActivity implements View.OnClickLis
 
         mTextName = (TextInputLayout) findViewById(R.id.name);
         mTextPassword = (TextInputLayout) findViewById(R.id.password);
-        mRegisterButton = (TextView) findViewById(R.id.register);
+        TextView mRegisterButton = (TextView) findViewById(R.id.register);
 
         mRegisterButton.setOnClickListener(this);
     }
