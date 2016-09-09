@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 正在加载页文字颜色 -->
+    <color name="loadingTextColor">@color/grey</color>
+    <!-- view之间的分割线 -->
+    <color name="divider">@color/greyLight</color>
+    <!-- MaterialDialog title颜色 -->
+    <color name="materialDialogTitle">@color/greenDark</color>
+    <!-- Button 按下的背景色-->
+    <color name="buttonPressed">@color/greyLight</color>
+
+    <!-- 灰色 -->
+    <color name="grey">#9e9e9e</color>
+    <color name="greyLight">#e0e0e0</color>
+    <!-- 粉红色 -->
+    <color name="pink">#e91e63</color>
+    <!-- 绿色 -->
+    <color name="green">#259b24</color>
+    <color name="greenDark">#0a7e07</color>
+
+
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 按照功能命名 -->
+
+    <color name="colorPrimary">@color/blackLight</color>
+    <color name="colorPrimaryDark">@color/translucentBlack</color>
+    <color name="colorAccent">@color/red</color>
+
+    <color name="colorNavBarStartColor">#FF353434</color>
+    <color name="colorNavBarEndColor">@color/blackLight</color>
+    <color name="colorLoginButtonPressed">@color/redDark</color>
+
+
+    <!-- 颜色列表，按照颜色命名 -->
+
+    <color name="white">#ffffff</color>
+    <color name="translucentBlack">#ee000000</color>
+    <color name="blackLight">#121111</color>
+    <color name="red">#f42930</color>
+    <color name="redDark">#FFC72127</color>
+
+
+
+</resources>
