@@ -22,6 +22,7 @@ $name = $_POST['name'];
 $sign = $_POST['sign'];
 
 check_empty($name,$sign,$avatar);
+check_has_exist($pdo_connect,"user","name",$name,"用户名已存在");
 
 $sql = "UPDATE user SET name='$name',sign='$sign',avatar='$avatar' WHERE id='$id'";
 $update_result = $pdo_connect->exec($sql);
