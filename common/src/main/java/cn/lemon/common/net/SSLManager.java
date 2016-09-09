@@ -25,8 +25,10 @@ public class SSLManager {
     private static SSLManager instance;
 
     private SSLManager() {
+        LogInterceptor mLogInterceptor = new LogInterceptor();
+        mLogInterceptor.setLogTag("self_sign_https");
         mClientBuilder = new OkHttpClient.Builder()
-                .addInterceptor(new LogInterceptor().setLevel(LogInterceptor.Level.BASIC));
+                .addInterceptor(mLogInterceptor);
     }
 
     public static SSLManager getInstance() {

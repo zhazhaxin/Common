@@ -14,7 +14,8 @@ import cn.lemon.common.base.presenter.SuperPresenter;
 
 
 /**
- * Activity顶部应添加一个标准的toolbar(xml)
+ * Activity顶部可添加一个标准的toolbar，只需在xml中添加一个id = toolbar的Toolbar即可，样式可自定义
+ * <p>
  * Created by linlongxin on 2016/7/31.
  */
 
@@ -86,10 +87,8 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            if (isHomeBack) {
-                finish();
-            }
+        if (item.getItemId() == android.R.id.home && isHomeBack) {
+            finish();
             return true;
         } else {
             return super.onOptionsItemSelected(item);

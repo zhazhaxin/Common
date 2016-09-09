@@ -8,9 +8,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.FormBody;
@@ -22,6 +20,7 @@ import okio.Buffer;
 import okio.BufferedSource;
 
 /**
+ * 完美的日志拦截器，建议在Debug模式下使用
  * Created by linlongxin on 2016/7/25.
  */
 
@@ -31,36 +30,15 @@ public class LogInterceptor implements Interceptor {
 
     private static int mCounter = 0;
     private static final Charset UTF8 = Charset.forName("UTF-8");
-    private volatile int mLevel = Level.NONE;
     private boolean isDebug = true;
-
-    private Map<String, Integer> mRequestTime;
-
-    public LogInterceptor() {
-        mRequestTime = new HashMap<>();
-    }
-
-    public interface Level {
-        int NONE = 1;
-        int BASIC = 2;
-    }
 
     public LogInterceptor setLogTag(String tag) {
         LOG_TAG = tag;
         return this;
     }
 
-    public LogInterceptor setDebugMode(boolean isDebug) {
+    public LogInterceptor setDebug(boolean isDebug) {
         this.isDebug = isDebug;
-        return this;
-    }
-
-    /**
-     * Change the level at which this interceptor logs.
-     */
-    public LogInterceptor setLevel(int level) {
-        if (level == 0) throw new RuntimeException("level == 0. Use Level.NONE instead.");
-        this.mLevel = level;
         return this;
     }
 
@@ -69,9 +47,9 @@ public class LogInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
-        if (mLevel == Level.NONE || !isDebug) {
+        if (!isDebug) {
             return chain.proceed(request);
-        } else if (mLevel == Level.BASIC) {
+        } else {
             /**
              * print request log
              */
@@ -100,14 +78,11 @@ public class LogInterceptor implements Interceptor {
                 }
             }
 
-            synchronized (this) {
-                mRequestTime.put(request.url().toString(), mCounter);
-                Log.i(LOG_TAG, mCounter + "  Times Request : " + request.method() + ' ' + strUrl);
-                mCounter++;
-            }
+            int localCount = mCounter++;
+            Log.i(LOG_TAG, localCount + "  Times Request : " + request.method() + ' ' + strUrl);
 
             long startNs = System.nanoTime();
-            Response response = null;
+            Response response;
             try {
                 response = chain.proceed(request);
             } catch (Exception e) {
@@ -128,25 +103,13 @@ public class LogInterceptor implements Interceptor {
 
             if (responseBody.contentLength() != 0) {
                 /**
-                 * pint response log
+                 * print response log
                  */
-                synchronized (this) {
-                    String key = response.request().url().toString();
-                    if (mRequestTime.containsKey(key)) {
-                        int count = mRequestTime.get(key);
-                        mRequestTime.remove(key);
-                        Log.i(LOG_TAG, count + "  Times Response : " + response.code() + ' ' + response.message() + ' '
-                                + " (" + tookMs + "ms" + ')' + " Result : " + buffer.clone().readString(UTF8));
-                    } else {
-                        Log.i(LOG_TAG, "not find response url : " + key);
-                    }
-
-                }
+                Log.i(LOG_TAG, localCount + "  Times Response : " + response.code() + ' ' + response.message() + ' '
+                        + '(' + tookMs + "ms" + ')' + " Result : " + buffer.clone().readString(UTF8));
             }
 
             return response;
-        } else {
-            throw new RuntimeException("level == 0 , please set level through setLevel()");
         }
     }
 
@@ -172,11 +135,5 @@ public class LogInterceptor implements Interceptor {
         } catch (EOFException e) {
             return false; // Truncated UTF-8 sequence.
         }
-    }
-
-    public synchronized void printRequestLog(Request request, String strUrl) {
-        mRequestTime.put(request.url().toString(), mCounter);
-        Log.i(LOG_TAG, mCounter + "  Times Request : " + request.method() + ' ' + strUrl);
-        mCounter++;
     }
 }

@@ -1,4 +1,4 @@
-#宇宙通用技术 --- Android
+#通用技术 --- Android
 
 > - 开发中的顶级父类，如：SuperActivity,SuperFragment,SuperModel,SuperPresenter
 > - 网络当然也是必不可少的，在OkHttp下添加日志拦截器LogInterceptor，添加请求头的拦截器HeadersInterceptor，还有一些用法不好封装成通用，详细看demo
@@ -187,4 +187,4 @@ public Toolbar getToolbar()
 public void setToolbarHomeBack(boolean isHomeBack)
 ```
 
-[更多用法请看Demo](https://github.com/llxdaxia/Common/tree/dev/common)
+[更多用法请看Demo](https://github.com/llxdaxia/Common/tree/dev/demo)

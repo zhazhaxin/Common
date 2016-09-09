@@ -23,6 +23,11 @@ import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.common.base.widget.MaterialDialog;
 
 /**
+ * Fragment顶级父类 : 添加各种状态(数据错误，数据为空，数据加载中)页的展示，
+ * 自定义的MaterialDialog的显示，进度条dialog显示
+ *
+ * MVP模型中把Fragment作为view层，可通过getPresenter()调用对应的presenter实例
+ *
  * Created by linlongxin on 2016/8/6.
  */
 

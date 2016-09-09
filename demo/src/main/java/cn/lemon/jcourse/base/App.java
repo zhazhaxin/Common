@@ -2,6 +2,8 @@ package cn.lemon.jcourse.base;
 
 import android.app.Application;
 
+import com.umeng.analytics.MobclickAgent;
+
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.model.SuperModel;
 import cn.lemon.jcourse.BuildConfig;
@@ -20,5 +22,7 @@ public class App extends Application {
         if(BuildConfig.DEBUG){
             Utils.setDebug(true,"JCourse");
         }
+        MobclickAgent.UMAnalyticsConfig config = new MobclickAgent.UMAnalyticsConfig(this,"57c3fd24e0f55a756700263e","wandoujia");
+        MobclickAgent. startWithConfigure(config);
     }
 }
