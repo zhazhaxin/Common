@@ -14,7 +14,7 @@ $page = $_POST["page"];  //从零开始
 $page_num = $_POST["pageNum"];
 
 if ($page_num == 0) {
-    $page_num = 20;
+    $page_num = 10;
 }
 $start = $page_num * $page;
 $end = $page_num * ($page + 1);
