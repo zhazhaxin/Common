@@ -6,4 +6,6 @@
 build
 /captures
 .externalNativeBuild
+/base/config.php
+/base/connect_pdo.php
 
