@@ -4,6 +4,7 @@ import cn.lemon.common.base.model.SuperModel;
 import cn.lemon.common.net.SchedulersTransformer;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.model.bean.Info;
+import cn.lemon.jcourse.model.bean.JVideo;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import cn.lemon.jcourse.model.net.RetrofitModel;
 
@@ -53,4 +54,9 @@ public class JavaCourseModel extends SuperModel {
                 .subscribe(response);
     }
 
+    public void getVideoList(int page, ServiceResponse<JVideo[]> response){
+        RetrofitModel.getServiceAPI().getVideoList(page)
+                .compose(new SchedulersTransformer<JVideo[]>())
+                .subscribe(response);
+    }
 }

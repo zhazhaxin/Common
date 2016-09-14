@@ -31,7 +31,7 @@ class JavaTextAdapter extends RecyclerAdapter<JavaCourse> {
         private TextView mContent;
 
         public JavaTextViewHolder(ViewGroup parent) {
-            super(parent, R.layout.main_holder_java_text);
+            super(parent, R.layout.java_holder_text);
         }
 
         @Override

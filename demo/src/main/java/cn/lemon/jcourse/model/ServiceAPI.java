@@ -4,6 +4,7 @@ package cn.lemon.jcourse.model;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
+import cn.lemon.jcourse.model.bean.JVideo;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 import okhttp3.MultipartBody;
 import retrofit2.http.Field;
@@ -74,4 +75,8 @@ public interface ServiceAPI {
     @FormUrlEncoded
     @POST("courses/javaCourseFromDir.php")
     Observable<JavaCourse[]> getJavaCourseFromDir(@Field("unit") int unit,@Field("page") int page);
+
+    @FormUrlEncoded
+    @POST("courses/javaVideoList.php")
+    Observable<JVideo[]> getVideoList(@Field("page") int page);
 }
