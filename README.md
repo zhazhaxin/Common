@@ -35,8 +35,8 @@
  public BBSFragment() {
     super(R.layout.bbs_fragment, true);
  }
+
  //重写onViewCreated()实例化view
- @Override
  public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
      super.onViewCreated(view, savedInstanceState);
      mAddBBS = findViewById(R.id.add_bbs);
@@ -45,8 +45,10 @@
      mAdapter = new BBSAdapter(getActivity());
      mRecyclerView.setAdapter(mAdapter);
  }
+
+注意：不再重写onCreateView()方法
  ```
-**注意**：不再重写onCreateView()方法
+
 
  - SuperActivity
  ```
