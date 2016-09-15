@@ -27,11 +27,12 @@ import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
+import cn.lemon.jcourse.model.net.GlideCircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
 import cn.lemon.jcourse.module.bbs.BBSFragment;
-import cn.lemon.jcourse.module.java.JavaCourseDirListActivity;
-import cn.lemon.jcourse.module.java.StarJCourseListActivity;
+import cn.lemon.jcourse.module.java.CourseDirListActivity;
+import cn.lemon.jcourse.module.java.StarListActivity;
 import cn.lemon.jcourse.module.java.TextListFragment;
 import cn.lemon.jcourse.module.java.VideoFragment;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -89,6 +90,7 @@ public class MainActivity extends ToolbarActivity
         if (account != null) {
             Glide.with(MainActivity.this)
                     .load(account.avatar)
+                    .transform(new GlideCircleTransform(this))
                     .into(mAvatar);
             mName.setText(account.name);
             mSign.setText(account.sign);
@@ -141,7 +143,7 @@ public class MainActivity extends ToolbarActivity
             startActivity(new Intent(this, LoginActivity.class));
             return true;
         }
-        startActivity(new Intent(this, StarJCourseListActivity.class));
+        startActivity(new Intent(this, StarListActivity.class));
         return true;
     }
 
@@ -180,7 +182,7 @@ public class MainActivity extends ToolbarActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.dir) {
-            startActivity(new Intent(this, JavaCourseDirListActivity.class));
+            startActivity(new Intent(this, CourseDirListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

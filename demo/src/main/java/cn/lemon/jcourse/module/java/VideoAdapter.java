@@ -16,11 +16,11 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
  * Created by linlongxin on 2016/9/14.
  */
 
-public class JavaVideoAdapter extends RecyclerAdapter<JVideo> {
+public class VideoAdapter extends RecyclerAdapter<JVideo> {
 
     private Context mContext;
 
-    public JavaVideoAdapter(Context context) {
+    public VideoAdapter(Context context) {
         super(context);
         mContext = context;
     }

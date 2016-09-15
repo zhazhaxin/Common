@@ -20,8 +20,8 @@ import cn.lemon.view.adapter.Action;
 import cn.lemon.view.adapter.BaseViewHolder;
 import cn.lemon.view.adapter.RecyclerAdapter;
 
-@RequirePresenter(JavaCourseUnitListPresenter.class)
-public class JavaCourseUnitListActivity extends ToolbarActivity<JavaCourseUnitListPresenter> {
+@RequirePresenter(CourseUnitListPresenter.class)
+public class CourseUnitListActivity extends ToolbarActivity<CourseUnitListPresenter> {
 
     private JavaDirAdapter mAdapter;
     private RefreshRecyclerView mRecyclerView;
@@ -97,7 +97,7 @@ public class JavaCourseUnitListActivity extends ToolbarActivity<JavaCourseUnitLi
         @Override
         public void onItemViewClick(JavaCourse object) {
             super.onItemViewClick(object);
-            Intent intent = new Intent(itemView.getContext(), JavaTextDetailActivity.class);
+            Intent intent = new Intent(itemView.getContext(), TextDetailActivity.class);
             intent.putExtra(Config.JAVA_COURSE_DETAIL, object);
             startActivity(intent);
         }

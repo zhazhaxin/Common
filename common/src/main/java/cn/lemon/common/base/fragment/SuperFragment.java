@@ -50,9 +50,6 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     private T mPresenter;
 
-    public SuperFragment() {
-    }
-
     public SuperFragment(View fragment) {
         mView = fragment;
     }

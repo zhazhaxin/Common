@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide;
 
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.bean.BBS;
+import cn.lemon.jcourse.model.net.GlideCircleTransform;
 import cn.lemon.multi.MultiView;
 import cn.lemon.view.adapter.BaseViewHolder;
 import cn.lemon.view.adapter.RecyclerAdapter;
@@ -21,6 +22,7 @@ import cn.lemon.view.adapter.RecyclerAdapter;
 public class BBSAdapter extends RecyclerAdapter<BBS> {
 
     private Context mContext;
+
     public BBSAdapter(Context context) {
         super(context);
         mContext = context;
@@ -32,11 +34,12 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
     }
 
 
-    class BBSViewHolder extends BaseViewHolder<BBS>{
+    class BBSViewHolder extends BaseViewHolder<BBS> {
 
         private ImageView mAvatar;
         private TextView mName;
         private TextView mSign;
+        private TextView mTitle;
         private TextView mContent;
         private MultiView mMultiView;
 
@@ -50,6 +53,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
             mAvatar = findViewById(R.id.avatar);
             mName = findViewById(R.id.name);
             mSign = findViewById(R.id.sign);
+            mTitle = findViewById(R.id.title);
             mContent = findViewById(R.id.content);
             mMultiView = findViewById(R.id.multi_view);
         }
@@ -57,11 +61,13 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
         @Override
         public void setData(BBS bbs) {
             Glide.with(mContext)
-            .load(bbs.avatar)
-            .into(mAvatar);
-            mContent.setText(bbs.content);
+                    .load(bbs.avatar)
+                    .transform(new GlideCircleTransform(mContext))
+                    .into(mAvatar);
             mName.setText(bbs.name);
             mSign.setText(bbs.sign);
+            mTitle.setText(bbs.title);
+            mContent.setText(bbs.content);
 //            mMultiView.setImages();
         }
     }

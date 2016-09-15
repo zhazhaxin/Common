@@ -9,6 +9,7 @@ public class BBS {
     public String avatar;
     public String name;
     public String sign;
+    public String title;
     public String content;
     public String pictures;
     public Comment[] comments;

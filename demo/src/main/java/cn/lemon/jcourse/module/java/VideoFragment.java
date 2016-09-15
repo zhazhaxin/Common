@@ -21,7 +21,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 public class VideoFragment extends SuperFragment<VideoPresenter> {
 
     private RefreshRecyclerView mRecyclerView;
-    private JavaVideoAdapter mAdapter;
+    private VideoAdapter mAdapter;
 
     public VideoFragment() {
         super(R.layout.java_fragment_video,true);
@@ -32,7 +32,7 @@ public class VideoFragment extends SuperFragment<VideoPresenter> {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdapter = new JavaVideoAdapter(getActivity());
+        mAdapter = new VideoAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setRefreshAction(new Action() {
             @Override

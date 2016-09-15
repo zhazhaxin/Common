@@ -3,6 +3,7 @@ package cn.lemon.common.base;
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -57,6 +58,10 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         attachPresenter();
+    }
+
+    public <V extends View> V $(@IdRes int id) {
+        return (V) super.findViewById(id);
     }
 
     //在onStart之后回调

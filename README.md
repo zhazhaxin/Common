@@ -29,6 +29,25 @@
  public void showContent();
   ```
 
+ 其他
+ ```
+ //构造函数
+ public BBSFragment() {
+    super(R.layout.bbs_fragment, true);
+ }
+ //重写onViewCreated()实例化view
+ @Override
+ public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+     super.onViewCreated(view, savedInstanceState);
+     mAddBBS = findViewById(R.id.add_bbs);
+     mRecyclerView = findViewById(R.id.recycler_view);
+     mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+     mAdapter = new BBSAdapter(getActivity());
+     mRecyclerView.setAdapter(mAdapter);
+ }
+ ```
+**注意**：不再重写onCreateView()方法
+
  - SuperActivity
  ```
  //show设置是否使用状态页，必须在setContentView()方法之前调用
@@ -45,6 +64,10 @@
  //显示正常内容状态
  public void showContent();
   ```
+ 其他
+ ```
+ mTitle = $(R.id.title);  //取代findViewById()
+ ```
 
 ###Dialog
 

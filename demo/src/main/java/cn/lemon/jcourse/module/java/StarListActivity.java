@@ -9,11 +9,11 @@ import cn.lemon.jcourse.R;
 import cn.lemon.view.RefreshRecyclerView;
 import cn.lemon.view.adapter.Action;
 
-@RequirePresenter(StarJCourseListPresenter.class)
-public class StarJCourseListActivity extends ToolbarActivity<StarJCourseListPresenter> {
+@RequirePresenter(StarListPresenter.class)
+public class StarListActivity extends ToolbarActivity<StarListPresenter> {
 
     private RefreshRecyclerView mRecyclerView;
-    private JavaTextAdapter mAdapter;
+    private TextAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class StarJCourseListActivity extends ToolbarActivity<StarJCourseListPres
 
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new JavaTextAdapter(this);
+        mAdapter = new TextAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setRefreshAction(new Action() {
             @Override
@@ -39,7 +39,7 @@ public class StarJCourseListActivity extends ToolbarActivity<StarJCourseListPres
         });
     }
 
-    public JavaTextAdapter getAdapter() {
+    public TextAdapter getAdapter() {
         return mAdapter;
     }
 

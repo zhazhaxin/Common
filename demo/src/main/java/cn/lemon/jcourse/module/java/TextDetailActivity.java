@@ -25,8 +25,8 @@ import static cn.lemon.jcourse.R.id.star;
  * Created by linlongxin on 2016/8/7.
  */
 
-@RequirePresenter(JavaTextDetailPresenter.class)
-public class JavaTextDetailActivity extends ToolbarActivity<JavaTextDetailPresenter> implements View.OnTouchListener, GestureDetector.OnGestureListener, View.OnClickListener {
+@RequirePresenter(TextDetailPresenter.class)
+public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> implements View.OnTouchListener, GestureDetector.OnGestureListener, View.OnClickListener {
 
     private ImageView mCover;
     private TextView mTitle;

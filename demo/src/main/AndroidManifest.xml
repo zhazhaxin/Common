@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.java.JavaTextDetailActivity"
+            android:name=".module.java.TextDetailActivity"
             android:label="课程详情" />
         <activity
             android:name=".module.account.RegisterActivity"
@@ -57,15 +57,17 @@
             android:name=".module.account.UpdateInfoActivity"
             android:label="个人信息" />
         <activity
-            android:name=".module.java.StarJCourseListActivity"
+            android:name=".module.java.StarListActivity"
             android:label="我的收藏" />
         <activity
-            android:name=".module.java.JavaCourseDirListActivity"
+            android:name=".module.java.CourseDirListActivity"
             android:label="Java课程目录" />
-        <activity android:name=".module.java.JavaCourseUnitListActivity" />
+        <activity android:name=".module.java.CourseUnitListActivity" />
         <activity
             android:name=".module.AboutActivity"
             android:label="关于" />
+        <activity android:name=".module.bbs.PublishBBSActivity"
+            android:label="发布"/>
     </application>
 
 </manifest>
