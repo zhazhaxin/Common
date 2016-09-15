@@ -10,7 +10,7 @@ import cn.lemon.jcourse.model.bean.JavaCourse;
  * Created by linlongxin on 2016/8/17.
  */
 
-public class JavaCourseUnitListPresenter extends SuperPresenter<JavaCourseUnitListActivity> {
+public class CourseUnitListPresenter extends SuperPresenter<CourseUnitListActivity> {
 
     private int mUnit;
     private int mPage = 0;

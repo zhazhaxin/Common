@@ -18,23 +18,18 @@ import cn.lemon.view.adapter.Action;
 public class TextListFragment extends SuperFragment<TextListPresenter> {
 
     private RefreshRecyclerView mRecyclerView;
-    private JavaTextAdapter mAdapter;
+    private TextAdapter mAdapter;
 
     public TextListFragment() {
-        super(R.layout.java_fragment_text_course_list, true);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mAdapter = new JavaTextAdapter(getActivity());
+        super(R.layout.java_fragment_text, true);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAdapter = new TextAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setRefreshAction(new Action() {
             @Override
@@ -50,7 +45,7 @@ public class TextListFragment extends SuperFragment<TextListPresenter> {
         });
     }
 
-    public JavaTextAdapter getAdapter() {
+    public TextAdapter getAdapter() {
         return mAdapter;
     }
 

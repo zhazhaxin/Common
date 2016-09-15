@@ -9,7 +9,7 @@ import cn.lemon.jcourse.model.bean.JavaCourse;
  * Created by linlongxin on 2016/8/16.
  */
 
-public class StarJCourseListPresenter extends SuperPresenter<StarJCourseListActivity> {
+public class StarListPresenter extends SuperPresenter<StarListActivity> {
 
     private int mPage = 0;
 

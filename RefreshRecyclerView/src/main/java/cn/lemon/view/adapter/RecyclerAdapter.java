@@ -19,11 +19,13 @@ import cn.lemon.view.R;
 
 
 /**
- * Created by llxal on 2015/12/19.
+ * Created by linlongxin on 2015/12/19.
  */
 public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
 
     private static final String TAG = "RecyclerAdapter";
+    private boolean allowLog = true;  //改成false关闭日志
+
     private static final int HEADER_TYPE = 111;
     private static final int FOOTER_TYPE = 222;
     protected static final int STATUS_TYPE = 333;
@@ -34,7 +36,8 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     public boolean isRefreshing = false; //刷新
     public boolean isLoadingMore = false; //正在加载
     public boolean isShowNoMore = false;//停止加载
-    public boolean isLoadEnd = false;
+    public boolean isLoadEnd = false;  //是否加载到底部
+    public boolean loadMoreAble = false; //是够可加载更多
 
     protected Action mLoadMoreAction;
 
@@ -44,11 +47,13 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     private View footerView;
     protected View mStatusView;
     protected LinearLayout mLoadMoreView;
-    protected TextView mNoMoreView;
+    public TextView mNoMoreView;
 
     private Context mContext;
 
-    private boolean allowLog = true;  //改成false关闭日志
+    public void colseLog() {
+        allowLog = false;
+    }
 
     public RecyclerAdapter(Context context) {
         mContext = context;
@@ -93,7 +98,9 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     @Override
     public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
         log("onBindViewHolder -- position : " + position);
-        if (!hasHeader && !hasFooter && position < mData.size()) { //没有Header和Footer
+        if(position == mViewCount - 1){
+            return;
+        }else if (!hasHeader && !hasFooter && position < mData.size()) { //没有Header和Footer
             holder.setData(mData.get(position));
         } else if (hasHeader && !hasFooter && position > 0 && position < mViewCount - 1) { //有Header没有Footer
             holder.setData(mData.get(position - 1));
@@ -116,7 +123,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                 mLoadMoreView.setVisibility(View.VISIBLE);
             }
             isLoadEnd = true;
-            if (mLoadMoreAction != null && !isLoadingMore) {
+            if (mLoadMoreAction != null && !isLoadingMore && loadMoreAble) {
                 mLoadMoreAction.onAction();
                 isLoadingMore = true;
             }
@@ -125,7 +132,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     @Override
     public int getItemViewType(int position) {
-        log("getItemViewType : " + mViewCount);
+        log("getItemViewType");
         if (hasHeader && position == 0) {  //header
             return HEADER_TYPE;
         }
@@ -165,6 +172,11 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             isLoadingMore = false;
             mData.add(object);
             mViewCount++;
+            int position = mData.size();
+            if(hasHeader){
+                position ++;
+            }
+            notifyItemInserted(position);
         }
     }
 
@@ -194,6 +206,9 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     }
 
     public void addAll(T[] objects) {
+        if(objects.length == 0){
+            return;
+        }
         addAll(Arrays.asList(objects));
     }
 

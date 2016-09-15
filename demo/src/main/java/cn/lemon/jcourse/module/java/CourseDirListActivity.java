@@ -10,8 +10,8 @@ import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 
-@RequirePresenter(JavaCourseDirListPresenter.class)
-public class JavaCourseDirListActivity extends ToolbarActivity<JavaCourseDirListPresenter> implements View.OnClickListener {
+@RequirePresenter(CourseDirListPresenter.class)
+public class CourseDirListActivity extends ToolbarActivity<CourseDirListPresenter> implements View.OnClickListener {
 
     private Button mOne, mTwo, mThree, mFour, mFive;
 
@@ -55,7 +55,7 @@ public class JavaCourseDirListActivity extends ToolbarActivity<JavaCourseDirList
     }
 
     public void starActivityWithUnit(int unit) {
-        Intent intent = new Intent(this, JavaCourseUnitListActivity.class);
+        Intent intent = new Intent(this, CourseUnitListActivity.class);
         intent.putExtra(Config.JAVA_COURSE_UNIT, unit);
         startActivity(intent);
     }

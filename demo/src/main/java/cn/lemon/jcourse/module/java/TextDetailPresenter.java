@@ -17,7 +17,7 @@ import cn.lemon.jcourse.module.account.LoginActivity;
  * Created by linlongxin on 2016/8/18.
  */
 
-public class JavaTextDetailPresenter extends SuperPresenter<JavaTextDetailActivity> {
+public class TextDetailPresenter extends SuperPresenter<TextDetailActivity> {
 
     private JavaCourse mData;
     private boolean isStar = false;

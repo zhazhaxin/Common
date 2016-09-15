@@ -22,7 +22,7 @@ public class MultiTypeAdapter extends RecyclerAdapter {
 
     private final String TAG = "MultiTypeAdapter";
     private List<Object> mViewsData;
-    private Map<Integer, Integer> mPositionViewType;  //position --> type
+    private Map<Integer, Integer> mPositionViewType;  //position --> ViewType
     private ViewHolderManager mViewHolderManager;
 
     public MultiTypeAdapter(Context context) {
@@ -84,20 +84,27 @@ public class MultiTypeAdapter extends RecyclerAdapter {
         if (position == mViewCount - 1) {
             return STATUS_TYPE;
         }
-        Log.i(TAG, "mViewCount : " + mViewCount + "  position : " + position);
         return mPositionViewType.get(position);
     }
 
     @Override
-    public BaseViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        log("onCreateViewHolder -- viewType : " + viewType);
         if (viewType == STATUS_TYPE) {
             return new BaseViewHolder(mStatusView);
         }
         Class clazzViewHolder = mViewHolderManager.getViewHolder(viewType);
         try {
+            //这里只适配了ViewHolder构造函数只有ViewGroup.class参数或者无参情况的构造函数
+            BaseViewHolder holder;
             Constructor constructor = clazzViewHolder.getDeclaredConstructor(new Class[]{ViewGroup.class});
             constructor.setAccessible(true);
-            return (BaseViewHolder) constructor.newInstance(new Object[]{parent});
+            holder = (BaseViewHolder) constructor.newInstance(new Object[]{parent});
+            if (holder == null) {
+                constructor = clazzViewHolder.getDeclaredConstructor();
+                holder = (BaseViewHolder) constructor.newInstance();
+            }
+            return holder;
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             Log.i(TAG, "onCreateBaseViewHolder : " + e.getMessage());
@@ -112,14 +119,21 @@ public class MultiTypeAdapter extends RecyclerAdapter {
             Log.i(TAG, "onCreateBaseViewHolder : " + e.getMessage());
         }
         return null;
+
+    }
+
+    @Override
+    public BaseViewHolder onCreateBaseViewHolder(ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
+        log("onBindViewHolder -- position : " + position);
         if (position == 0 && mViewCount == 1) return;
         if (position == mViewCount - 1) { //显示加载更多
             isLoadEnd = true;
-            if (mLoadMoreAction != null && !isShowNoMore && !isLoadingMore) {
+            if (loadMoreAble && mLoadMoreAction != null && !isShowNoMore && !isLoadingMore) {
                 mLoadMoreView.setVisibility(View.VISIBLE);
                 mLoadMoreAction.onAction();
                 isLoadingMore = true;

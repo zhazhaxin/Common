@@ -19,24 +19,24 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
-import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
+import cn.lemon.jcourse.model.net.GlideCircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
-import cn.lemon.jcourse.module.java.JavaCourseDirListActivity;
-import cn.lemon.jcourse.module.java.StarJCourseListActivity;
+import cn.lemon.jcourse.module.bbs.BBSFragment;
+import cn.lemon.jcourse.module.java.CourseDirListActivity;
+import cn.lemon.jcourse.module.java.StarListActivity;
 import cn.lemon.jcourse.module.java.TextListFragment;
 import cn.lemon.jcourse.module.java.VideoFragment;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
+import retrofit2.http.HEAD;
 
 public class MainActivity extends ToolbarActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -57,8 +57,6 @@ public class MainActivity extends ToolbarActivity
         super.onCreate(savedInstanceState);
         setToolbarHomeBack(false);
         setContentView(R.layout.main_activity);
-
-        EventBus.getDefault().register(this);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -81,6 +79,7 @@ public class MainActivity extends ToolbarActivity
         mAdapter = new ViewPagerAdapter();
         mAdapter.addFragment(new TextListFragment(), "课程");
         mAdapter.addFragment(new VideoFragment(), "视频");
+        mAdapter.addFragment(new BBSFragment(),"社区");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
@@ -96,7 +95,7 @@ public class MainActivity extends ToolbarActivity
         if (account != null) {
             Glide.with(MainActivity.this)
                     .load(account.avatar)
-                    .placeholder(R.drawable.ic_avatar)
+                    .transform(new GlideCircleTransform(this))
                     .into(mAvatar);
             mName.setText(account.name);
             mSign.setText(account.sign);
@@ -111,6 +110,8 @@ public class MainActivity extends ToolbarActivity
     public void onBackPressed() {
         if (mDrawer.isDrawerOpen(GravityCompat.START)) {
             mDrawer.closeDrawer(GravityCompat.START);
+        } else if (JCVideoPlayer.backPress()) {
+            return;
         } else {
             if (System.currentTimeMillis() - mFirstPressBackTime > 1000) {
                 mFirstPressBackTime = System.currentTimeMillis();
@@ -140,13 +141,17 @@ public class MainActivity extends ToolbarActivity
         return true;
     }
 
+<<<<<<< HEAD
+=======
+    //跳转收藏列表
+>>>>>>> llx_master
     public boolean jumpStarList() {
         if (AccountModel.getInstance().getAccount() == null) {
             Utils.Toast("请先登录");
             startActivity(new Intent(this, LoginActivity.class));
             return true;
         }
-        startActivity(new Intent(this, StarJCourseListActivity.class));
+        startActivity(new Intent(this, StarListActivity.class));
         return true;
     }
 
@@ -185,19 +190,17 @@ public class MainActivity extends ToolbarActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.dir) {
+<<<<<<<HEAD
             startActivity(new Intent(this, JavaCourseDirListActivity.class));
+=======
+            startActivity(new Intent(this, CourseDirListActivity.class));
+>>>>>>> llx_master
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @Subscribe
-    public void onEvent(String updateAccountInfoEvent) {
-        if (updateAccountInfoEvent.equals(Config.UPDATE_ACCOUNT_ON_DRAWER)) {
-            updateAccountInfo();
-        }
-    }
-
+    //ViewPage
     class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         private List<Fragment> mFragments;
@@ -230,4 +233,5 @@ public class MainActivity extends ToolbarActivity
             mTitles.add(title);
         }
     }
+
 }

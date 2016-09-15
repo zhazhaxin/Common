@@ -12,9 +12,9 @@ import cn.lemon.jcourse.model.bean.JavaCourse;
 import cn.lemon.view.adapter.BaseViewHolder;
 import cn.lemon.view.adapter.RecyclerAdapter;
 
-class JavaTextAdapter extends RecyclerAdapter<JavaCourse> {
+class TextAdapter extends RecyclerAdapter<JavaCourse> {
 
-    public JavaTextAdapter(Context context) {
+    public TextAdapter(Context context) {
         super(context);
     }
 
@@ -31,7 +31,7 @@ class JavaTextAdapter extends RecyclerAdapter<JavaCourse> {
         private TextView mContent;
 
         public JavaTextViewHolder(ViewGroup parent) {
-            super(parent, R.layout.main_holder_java_text);
+            super(parent, R.layout.java_holder_text);
         }
 
         @Override
@@ -57,7 +57,7 @@ class JavaTextAdapter extends RecyclerAdapter<JavaCourse> {
 
         @Override
         public void onItemViewClick(JavaCourse data) {
-            Intent intent = new Intent(itemView.getContext(), JavaTextDetailActivity.class);
+            Intent intent = new Intent(itemView.getContext(), TextDetailActivity.class);
             intent.putExtra(Config.JAVA_COURSE_DETAIL, data);
             itemView.getContext().startActivity(intent);
         }
