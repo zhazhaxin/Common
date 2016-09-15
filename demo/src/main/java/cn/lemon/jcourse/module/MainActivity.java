@@ -36,7 +36,6 @@ import cn.lemon.jcourse.module.java.StarListActivity;
 import cn.lemon.jcourse.module.java.TextListFragment;
 import cn.lemon.jcourse.module.java.VideoFragment;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import retrofit2.http.HEAD;
 
 public class MainActivity extends ToolbarActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -79,7 +78,7 @@ public class MainActivity extends ToolbarActivity
         mAdapter = new ViewPagerAdapter();
         mAdapter.addFragment(new TextListFragment(), "课程");
         mAdapter.addFragment(new VideoFragment(), "视频");
-        mAdapter.addFragment(new BBSFragment(),"社区");
+        mAdapter.addFragment(new BBSFragment(), "社区");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
@@ -141,10 +140,7 @@ public class MainActivity extends ToolbarActivity
         return true;
     }
 
-<<<<<<< HEAD
-=======
     //跳转收藏列表
->>>>>>> llx_master
     public boolean jumpStarList() {
         if (AccountModel.getInstance().getAccount() == null) {
             Utils.Toast("请先登录");
@@ -190,11 +186,7 @@ public class MainActivity extends ToolbarActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.dir) {
-<<<<<<<HEAD
-            startActivity(new Intent(this, JavaCourseDirListActivity.class));
-=======
             startActivity(new Intent(this, CourseDirListActivity.class));
->>>>>>> llx_master
             return true;
         }
         return super.onOptionsItemSelected(item);
