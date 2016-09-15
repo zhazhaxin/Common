@@ -21,7 +21,10 @@
             android:id="@+id/avatar"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
             tools:src="@mipmap/ic_launcher" />
 
         <EditText
@@ -34,7 +37,9 @@
             android:background="@android:color/transparent"
             android:hint="标题(可选)"
             android:textColor="@color/blackLight"
-            android:textSize="16sp" />
+            android:textColorHint="@color/grey"
+            android:textSize="17sp"
+            android:textStyle="bold" />
 
         <View
             android:layout_width="match_parent"
@@ -52,7 +57,14 @@
         android:background="@android:color/transparent"
         android:gravity="top"
         android:hint="输入内容"
-        android:minHeight="160dp" />
+        android:minHeight="160dp"
+        android:textSize="16sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/avatar"
+        android:background="@color/greyLight" />
 
     <FrameLayout
         android:layout_width="wrap_content"

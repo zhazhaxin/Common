@@ -66,8 +66,9 @@
         <activity
             android:name=".module.AboutActivity"
             android:label="关于" />
-        <activity android:name=".module.bbs.PublishBBSActivity"
-            android:label="发布"/>
+        <activity
+            android:name=".module.bbs.PublishBBSActivity"
+            android:label="发布话题" />
     </application>
 
 </manifest>

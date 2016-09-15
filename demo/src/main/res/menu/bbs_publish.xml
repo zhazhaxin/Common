@@ -4,6 +4,6 @@
 
     <item
         android:id="@+id/publish"
-        android:title="Item"
+        android:title="发布"
         app:showAsAction="always" />
 </menu>

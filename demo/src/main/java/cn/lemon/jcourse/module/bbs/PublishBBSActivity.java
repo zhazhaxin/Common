@@ -7,9 +7,13 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import cn.lemon.common.base.SuperActivity;
+import com.bumptech.glide.Glide;
+
+import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.model.AccountModel;
+import cn.lemon.jcourse.model.net.GlideCircleTransform;
 import cn.lemon.multi.MultiView;
 
 /**
@@ -17,7 +21,7 @@ import cn.lemon.multi.MultiView;
  */
 
 @RequirePresenter(PublishBBSPresenter.class)
-public class PublishBBSActivity extends SuperActivity<PublishBBSPresenter> {
+public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter> {
 
     private ImageView mAvatar;
     private ImageView mAddImage;
@@ -29,12 +33,18 @@ public class PublishBBSActivity extends SuperActivity<PublishBBSPresenter> {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bbs_activity_publish);
+        setToolbarHomeBack(true);
 
         mAvatar = $(R.id.avatar);
         mAddImage = $(R.id.add_img);
         mTitle = $(R.id.title);
         mContent = $(R.id.content);
         mMultiView = $(R.id.multi_view);
+
+        Glide.with(this)
+                .load(AccountModel.getInstance().getAccount().avatar)
+                .transform(new GlideCircleTransform(this))
+                .into(mAvatar);
     }
 
     @Override
