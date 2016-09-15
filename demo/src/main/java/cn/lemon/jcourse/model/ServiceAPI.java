@@ -2,6 +2,7 @@ package cn.lemon.jcourse.model;
 
 
 import cn.lemon.jcourse.model.bean.Account;
+import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JVideo;
@@ -21,15 +22,11 @@ import rx.Observable;
 
 public interface ServiceAPI {
 
-    /**
-     * banner
-     */
+    //banner
     @GET("accounts/banner.php")
     Observable<Banner> getBanner();
 
-    /**
-     * Accounts相关
-     */
+    //Accounts相关
     @FormUrlEncoded
     @POST("accounts/register.php")
     Observable<Info> register(@Field("name") String name, @Field("password") String password);
@@ -79,4 +76,13 @@ public interface ServiceAPI {
     @FormUrlEncoded
     @POST("courses/javaVideoList.php")
     Observable<JVideo[]> getVideoList(@Field("page") int page);
+
+    //社区相关
+    @FormUrlEncoded
+    @POST("bbs/bbsList.php")
+    Observable<BBS[]> getBBSList(@Field("page") int page);
+
+    @FormUrlEncoded
+    @POST("bbs/bbsDetail.php")
+    Observable<BBS> getBBSDetail(@Field("id") int id);
 }

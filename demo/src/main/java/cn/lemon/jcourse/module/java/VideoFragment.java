@@ -11,6 +11,7 @@ import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.bean.JVideo;
 import cn.lemon.view.RefreshRecyclerView;
 import cn.lemon.view.adapter.Action;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by linlongxin on 2016/8/6.
@@ -23,7 +24,7 @@ public class VideoFragment extends SuperFragment<VideoPresenter> {
     private JavaVideoAdapter mAdapter;
 
     public VideoFragment() {
-        super(R.layout.java_fragment_video_course_list,true);
+        super(R.layout.java_fragment_video,true);
     }
 
     @Override
@@ -61,4 +62,9 @@ public class VideoFragment extends SuperFragment<VideoPresenter> {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        JCVideoPlayer.releaseAllVideos();
+    }
 }

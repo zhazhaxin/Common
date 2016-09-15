@@ -2,7 +2,8 @@ package cn.lemon.jcourse.module.java;
 
 import android.content.Context;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.bean.JVideo;
@@ -17,9 +18,11 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 public class JavaVideoAdapter extends RecyclerAdapter<JVideo> {
 
+    private Context mContext;
 
     public JavaVideoAdapter(Context context) {
         super(context);
+        mContext = context;
     }
 
     @Override
@@ -30,8 +33,6 @@ public class JavaVideoAdapter extends RecyclerAdapter<JVideo> {
     class VideoViewHolder extends BaseViewHolder<JVideo>{
 
         private JCVideoPlayerStandard mVideoPlayer;
-        private TextView mTitle;
-        private TextView mSubtitle;
 
         public VideoViewHolder(ViewGroup parent) {
             super(parent, R.layout.java_holder_video);
@@ -41,8 +42,6 @@ public class JavaVideoAdapter extends RecyclerAdapter<JVideo> {
         public void onInitializeView() {
             super.onInitializeView();
             mVideoPlayer = findViewById(R.id.video_player);
-//            mTitle = findViewById(R.id.title);
-//            mSubtitle = findViewById(R.id.subtitle);
         }
 
         @Override
@@ -51,6 +50,9 @@ public class JavaVideoAdapter extends RecyclerAdapter<JVideo> {
             mVideoPlayer.setUp(object.url,
                     JCVideoPlayer.SCREEN_LAYOUT_LIST,
                     object.title + " - " + object.subtitle);
+            Glide.with(mContext)
+                    .load(object.cover)
+                    .into(mVideoPlayer.thumbImageView);
         }
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@id/avatar"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blackLight"
+            tools:text="胖哥sneaker" />
+
+        <TextView
+            android:id="@+id/sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="12sp"
+            tools:text="7楼-5.15 12:09" />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            tools:text="在梳理应用启动流程分析的过程中，在涉及到AMS以及ApplicationThread互相调用的流程中，有不少的方法涉及到了一个参数IBinder token的传递，当时并没有阐述这部分内容" />
+
+        <cn.lemon.multi.MultiView
+            android:id="@+id/multi_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:divideSpace="4dp" />
+    </LinearLayout>
+</RelativeLayout>

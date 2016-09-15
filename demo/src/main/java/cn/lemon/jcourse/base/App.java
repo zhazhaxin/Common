@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.umeng.analytics.MobclickAgent;
 
+import cn.alien95.resthttp.request.RestHttp;
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.model.SuperModel;
 import cn.lemon.jcourse.BuildConfig;
@@ -17,6 +18,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        RestHttp.initialize(this);
         SuperModel.initialize(this);
         Utils.initialize(this);
         if(BuildConfig.DEBUG){

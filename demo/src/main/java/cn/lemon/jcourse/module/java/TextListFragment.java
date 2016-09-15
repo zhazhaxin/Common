@@ -21,7 +21,7 @@ public class TextListFragment extends SuperFragment<TextListPresenter> {
     private JavaTextAdapter mAdapter;
 
     public TextListFragment() {
-        super(R.layout.java_fragment_text_course_list, true);
+        super(R.layout.java_fragment_text, true);
     }
 
     @Override
