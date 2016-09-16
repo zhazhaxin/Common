@@ -61,6 +61,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
     }
 
     public void setBitmaps(List<Bitmap> bitmaps) {
+        mMultiView.clear();
         mMultiView.setBitmaps(bitmaps);
     }
 

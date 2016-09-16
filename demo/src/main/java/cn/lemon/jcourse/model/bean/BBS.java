@@ -7,6 +7,8 @@ package cn.lemon.jcourse.model.bean;
 public class BBS {
     //发布问题的相关信息
     public int id;
+    public int authorId;
+    public long time;
     public String avatar;
     public String name;
     public String sign;

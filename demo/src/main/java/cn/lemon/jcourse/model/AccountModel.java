@@ -10,6 +10,7 @@ import cn.lemon.common.net.SchedulersTransformer;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.Account;
+import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.net.RetrofitModel;
@@ -96,7 +97,7 @@ public class AccountModel extends SuperModel {
     }
 
     public void updateAccountInfo(String name, String sign, String avatar, ServiceResponse<Account> response) {
-        RetrofitModel.getServiceAPI().updateAcconuntInfo(name, sign, avatar)
+        RetrofitModel.getServiceAPI().updateAccountInfo(name, sign, avatar)
                 .compose(new SchedulersTransformer<Account>())
                 .subscribe(response);
     }
@@ -106,6 +107,12 @@ public class AccountModel extends SuperModel {
         MultipartBody.Part part = MultipartBody.Part.createFormData("picture", file.getName(), requestBody);
         RetrofitModel.getServiceAPI().uploadPicture(part)
                 .compose(new SchedulersTransformer<Info>())
+                .subscribe(response);
+    }
+
+    public void getUserBBSList(int id, ServiceResponse<BBS[]> response){
+        RetrofitModel.getServiceAPI().getUserBBSList(id)
+                .compose(new SchedulersTransformer<BBS[]>())
                 .subscribe(response);
     }
 }

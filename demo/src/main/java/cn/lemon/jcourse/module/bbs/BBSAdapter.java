@@ -14,10 +14,12 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import cn.alien95.util.TimeTransform;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.module.account.UserBBSListActivity;
 import cn.lemon.multi.MultiView;
 import cn.lemon.view.adapter.BaseViewHolder;
 import cn.lemon.view.adapter.RecyclerAdapter;
@@ -30,6 +32,7 @@ import cn.lemon.view.adapter.RecyclerAdapter;
 public class BBSAdapter extends RecyclerAdapter<BBS> {
 
     private Context mContext;
+    private boolean isJumpToUserBBSList = true;
 
     public BBSAdapter(Context context) {
         super(context);
@@ -41,6 +44,10 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
         return new BBSViewHolder(parent);
     }
 
+    public void setCancleJumpToUserBBS(){
+        isJumpToUserBBSList = false;
+    }
+
 
     class BBSViewHolder extends BaseViewHolder<BBS> implements View.OnClickListener{
 
@@ -49,7 +56,10 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
         private TextView mSign;
         private TextView mTitle;
         private TextView mContent;
+        private TextView mTime;
         private MultiView mMultiView;
+
+        private BBS mBBS;
 
         public BBSViewHolder(ViewGroup parent) {
             super(parent, R.layout.bbs_holder_list);
@@ -62,12 +72,14 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
             mSign = findViewById(R.id.sign);
             mTitle = findViewById(R.id.title);
             mContent = findViewById(R.id.content);
+            mTime = findViewById(R.id.time);
             mMultiView = findViewById(R.id.multi_view);
         }
 
         @Override
         public void setData(BBS bbs) {
             super.setData(bbs);
+            mBBS = bbs;
             Glide.with(mContext)
                     .load(bbs.avatar)
                     .transform(new GlideCircleTransform(mContext))
@@ -76,17 +88,20 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
             mSign.setText(bbs.sign);
             mTitle.setText(bbs.title);
             mContent.setText(bbs.content);
+            mTime.setText(TimeTransform.getRecentlyDate(bbs.time * 1000));
             if (bbs.pictures.length() > 0) {
                 Gson gson = new Gson();
                 Type listType = new TypeToken<List<String>>() {}.getType();
                 List<String> pics = gson.fromJson(bbs.pictures, listType);
-                mMultiView.removeAllViews();
+                mMultiView.clear();
                 mMultiView.setImages(pics);
             }
 
-            mName.setOnClickListener(this);
-            mSign.setOnClickListener(this);
-            mAvatar.setOnClickListener(this);
+            if(isJumpToUserBBSList){
+                mName.setOnClickListener(this);
+                mSign.setOnClickListener(this);
+                mAvatar.setOnClickListener(this);
+            }
         }
 
         @Override
@@ -98,7 +113,9 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
 
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(mContext, UserBBSListActivity.class);
+            intent.putExtra(Config.USER_BBS_LIST,mBBS.authorId);
+            mContext.startActivity(intent);
         }
     }
 }

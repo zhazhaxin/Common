@@ -40,6 +40,7 @@
                 android:layout_toRightOf="@id/avatar"
                 android:background="@android:color/transparent"
                 android:hint="标题(可选)"
+                android:maxLines="1"
                 android:textColor="@color/blackLight"
                 android:textColorHint="@color/grey"
                 android:textSize="18sp" />
@@ -88,10 +89,9 @@
                     android:id="@+id/add_img"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:layout_below="@id/multi_view"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginTop="4dp"
                     android:src="@drawable/ic_upload" />
 
             </LinearLayout>

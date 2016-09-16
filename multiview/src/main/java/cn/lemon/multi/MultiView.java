@@ -222,22 +222,23 @@ public class MultiView extends ViewGroup {
         mData = data;
         if (data.size() > 9) {
             for (int i = 0; i < 9; i++) {  //添加9个item
-                addView(getImageView(data.get(i), i),i);
+                addView(getImageView(data.get(i), i), i);
             }
             addOverNumView(9);  //添加第10个item，覆盖第9个item
         } else {
             for (int i = 0; i < data.size(); i++) {
-                addView(getImageView(data.get(i), i),i);
+                addView(getImageView(data.get(i), i), i);
             }
         }
     }
-    public void addImage(String url){
+
+    public void addImage(String url) {
         mData.add(url);
         if (mData.size() > 9 && mTextNum != null) {
             mTextNum.setText("+" + (mData.size() - 9));  //添加第10个item，覆盖第9个item
         } else {
             int index = mData.size() - 1;
-            addView(getImageView(mData.get(index), index),index);
+            addView(getImageView(mData.get(index), index), index);
         }
     }
 
@@ -250,13 +251,26 @@ public class MultiView extends ViewGroup {
         mBitmaps = bitmaps;
         if (bitmaps.size() > 9) {
             for (int i = 0; i < 9; i++) {  //添加9个item
-                addView(getImageView(bitmaps.get(i), i),1);
+                addView(getImageView(bitmaps.get(i), i), i);
             }
             addOverNumView(9);  //添加第10个item，覆盖第9个item
         } else {
             for (int i = 0; i < bitmaps.size(); i++) {
-                addView(getImageView(bitmaps.get(i), i),1);
+                addView(getImageView(bitmaps.get(i), i), i);
             }
+        }
+    }
+
+    public void addBitmap(Bitmap bitmap) {
+        if (mBitmaps == null) {
+            mBitmaps = new ArrayList<>();
+        }
+        mBitmaps.add(bitmap);
+        if (mBitmaps.size() > 9 && mTextNum != null) {
+            mTextNum.setText("+" + (mBitmaps.size() - 9));  //添加第10个item，覆盖第9个item
+        } else {
+            int index = mBitmaps.size() - 1;
+            addView(getImageView(mBitmaps.get(index), index), index);
         }
     }
 
@@ -269,14 +283,38 @@ public class MultiView extends ViewGroup {
         mUris = uris;
         if (uris.size() > 9) {
             for (int i = 0; i < 9; i++) {  //添加9个item
-                addView(getImageView(uris.get(i), i),1);
+                addView(getImageView(uris.get(i), i), i);
             }
             addOverNumView(9);  //添加第10个item，覆盖第9个item
         } else {
             for (int i = 0; i < uris.size(); i++) {
-                addView(getImageView(uris.get(i), i),1);
+                addView(getImageView(uris.get(i), i), i);
             }
         }
+    }
+
+    public void addUri(Uri uri) {
+        if (mUris == null) {
+            mUris = new ArrayList<>();
+        }
+        mUris.add(uri);
+        if (mUris.size() > 9 && mTextNum != null) {
+            mTextNum.setText("+" + (mUris.size() - 9));  //添加第10个item，覆盖第9个item
+        } else {
+            int index = mUris.size() - 1;
+            addView(getImageView(mUris.get(index), index), index);
+        }
+    }
+
+    public void clear() {
+        mData.clear();
+        if (mBitmaps != null) {
+            mBitmaps.clear();
+        }
+        if (mUris != null) {
+            mUris.clear();
+        }
+        removeAllViews();
     }
 
     /**

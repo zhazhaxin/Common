@@ -34,6 +34,16 @@
             android:textSize="12sp"
             tools:text="7楼-5.15 12:09" />
 
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/sign"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:textSize="12sp"
+            tools:text="昨天" />
+
 
         <TextView
             android:id="@+id/star"

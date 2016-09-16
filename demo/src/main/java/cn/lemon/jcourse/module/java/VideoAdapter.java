@@ -2,6 +2,7 @@ package cn.lemon.jcourse.module.java;
 
 import android.content.Context;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
@@ -30,7 +31,7 @@ public class VideoAdapter extends RecyclerAdapter<JVideo> {
         return new VideoViewHolder(parent);
     }
 
-    class VideoViewHolder extends BaseViewHolder<JVideo>{
+    class VideoViewHolder extends BaseViewHolder<JVideo> {
 
         private JCVideoPlayerStandard mVideoPlayer;
 
@@ -50,8 +51,10 @@ public class VideoAdapter extends RecyclerAdapter<JVideo> {
             mVideoPlayer.setUp(object.url,
                     JCVideoPlayer.SCREEN_LAYOUT_LIST,
                     object.title + " - " + object.subtitle);
+            mVideoPlayer.thumbImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Glide.with(mContext)
                     .load(object.cover)
+                    .placeholder(R.drawable.ic_place_holder)
                     .into(mVideoPlayer.thumbImageView);
         }
     }

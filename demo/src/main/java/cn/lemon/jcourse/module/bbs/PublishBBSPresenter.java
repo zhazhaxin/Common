@@ -26,6 +26,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
     private int picNum;
 
     public void dealPictures(List<String> paths) {
+        picUrls.clear();
         if (paths.size() > 0) {
             getView().showLoadingDialog();
             //压缩图片

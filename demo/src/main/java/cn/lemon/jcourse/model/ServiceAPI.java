@@ -31,6 +31,8 @@ public interface ServiceAPI {
     @POST("base/uploadPicture.php")
     Observable<Info> uploadPicture(@Part MultipartBody.Part file);
 
+
+
     //Accounts相关
     @FormUrlEncoded
     @POST("accounts/register.php")
@@ -45,11 +47,15 @@ public interface ServiceAPI {
 
     @FormUrlEncoded
     @POST("accounts/updateAccountInfo.php")
-    Observable<Account> updateAcconuntInfo(@Field("name") String name, @Field("sign") String sign, @Field("avatar") String avatar);
+    Observable<Account> updateAccountInfo(@Field("name") String name, @Field("sign") String sign, @Field("avatar") String avatar);
 
-    /**
-     * courses相关
-     */
+    @FormUrlEncoded
+    @POST("accounts/userBBSList.php")
+    Observable<BBS[]> getUserBBSList(@Field("id") int id);
+
+
+
+    //courses相关
     @FormUrlEncoded
     @POST("courses/javaCourseList.php")
     Observable<JavaCourse[]> getTextJavaCourseList(@Field("page") int page);
@@ -77,6 +83,9 @@ public interface ServiceAPI {
     @FormUrlEncoded
     @POST("courses/javaVideoList.php")
     Observable<JVideo[]> getVideoList(@Field("page") int page);
+
+
+
 
     //BBS相关
     @FormUrlEncoded
