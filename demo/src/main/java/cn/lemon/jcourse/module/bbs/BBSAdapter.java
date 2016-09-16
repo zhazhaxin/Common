@@ -57,7 +57,6 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
 
         @Override
         public void onInitializeView() {
-            super.onInitializeView();
             mAvatar = findViewById(R.id.avatar);
             mName = findViewById(R.id.name);
             mSign = findViewById(R.id.sign);
@@ -68,6 +67,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
 
         @Override
         public void setData(BBS bbs) {
+            super.setData(bbs);
             Glide.with(mContext)
                     .load(bbs.avatar)
                     .transform(new GlideCircleTransform(mContext))
@@ -80,6 +80,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
                 Gson gson = new Gson();
                 Type listType = new TypeToken<List<String>>() {}.getType();
                 List<String> pics = gson.fromJson(bbs.pictures, listType);
+                mMultiView.removeAllViews();
                 mMultiView.setImages(pics);
             }
 
@@ -97,9 +98,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
-//                mContext.startActivity(new Intent(mContext, ));
-            }
+
         }
     }
 }

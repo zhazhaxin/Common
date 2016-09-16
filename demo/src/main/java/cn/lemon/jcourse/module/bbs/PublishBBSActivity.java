@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
@@ -56,6 +57,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
                 .transform(new GlideCircleTransform(this))
                 .into(mAvatar);
         mAddImage.setOnClickListener(this);
+        Utils.hideSoftInput(this);
     }
 
     public void setBitmaps(List<Bitmap> bitmaps) {
@@ -76,6 +78,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
     }
 
     public void publish() {
+        Utils.hideSoftInput(this);
         getPresenter().publishBBS(mTitle.getText().toString(), mContent.getText().toString());
     }
 

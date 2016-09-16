@@ -13,8 +13,6 @@
     <cn.lemon.view.RefreshRecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:load_more_able="false"
-        app:refresh_able="false" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

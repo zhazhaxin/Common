@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -15,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +30,8 @@ import cn.lemon.multi.util.Util;
 public class MultiView extends ViewGroup {
 
     private static final String TAG = "MultiView";
+    private int TEXT_NUM_COLOR = 0xffffffff;
+    private int TEXT_NUM_BACKGROUND_COLOR = 0x33000000;
     private static boolean isImageURL = true;
     private static boolean isBitmap = false;
     private static boolean isUri = false;
@@ -45,8 +47,10 @@ public class MultiView extends ViewGroup {
     private List<Bitmap> mBitmaps;
     private List<Uri> mUris;
 
+    private TextView mTextNum;
+
     public MultiView(Context context) {
-        super(context, null);
+        this(context, null);
     }
 
     public MultiView(Context context, AttributeSet attrs) {
@@ -56,6 +60,8 @@ public class MultiView extends ViewGroup {
     public MultiView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         Util.init(context);
+
+        mData = new ArrayList<>();
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MultiView);
         divideSpace = (int) typedArray.getDimension(R.styleable.MultiView_divideSpace, Util.dip2px(2));
@@ -213,16 +219,25 @@ public class MultiView extends ViewGroup {
      */
     public void setImages(List<String> data) {
         isImageURL = true;
-        this.mData = data;
+        mData = data;
         if (data.size() > 9) {
             for (int i = 0; i < 9; i++) {  //添加9个item
-                addView(getImageView(data.get(i), i));
+                addView(getImageView(data.get(i), i),i);
             }
             addOverNumView(9);  //添加第10个item，覆盖第9个item
         } else {
             for (int i = 0; i < data.size(); i++) {
-                addView(getImageView(data.get(i), i));
+                addView(getImageView(data.get(i), i),i);
             }
+        }
+    }
+    public void addImage(String url){
+        mData.add(url);
+        if (mData.size() > 9 && mTextNum != null) {
+            mTextNum.setText("+" + (mData.size() - 9));  //添加第10个item，覆盖第9个item
+        } else {
+            int index = mData.size() - 1;
+            addView(getImageView(mData.get(index), index),index);
         }
     }
 
@@ -235,12 +250,12 @@ public class MultiView extends ViewGroup {
         mBitmaps = bitmaps;
         if (bitmaps.size() > 9) {
             for (int i = 0; i < 9; i++) {  //添加9个item
-                addView(getImageView(bitmaps.get(i), i));
+                addView(getImageView(bitmaps.get(i), i),1);
             }
             addOverNumView(9);  //添加第10个item，覆盖第9个item
         } else {
             for (int i = 0; i < bitmaps.size(); i++) {
-                addView(getImageView(bitmaps.get(i), i));
+                addView(getImageView(bitmaps.get(i), i),1);
             }
         }
     }
@@ -254,12 +269,12 @@ public class MultiView extends ViewGroup {
         mUris = uris;
         if (uris.size() > 9) {
             for (int i = 0; i < 9; i++) {  //添加9个item
-                addView(getImageView(uris.get(i), i));
+                addView(getImageView(uris.get(i), i),1);
             }
             addOverNumView(9);  //添加第10个item，覆盖第9个item
         } else {
             for (int i = 0; i < uris.size(); i++) {
-                addView(getImageView(uris.get(i), i));
+                addView(getImageView(uris.get(i), i),1);
             }
         }
     }
@@ -276,24 +291,23 @@ public class MultiView extends ViewGroup {
      */
     public void addOverNumView(int position) {
 
-        TextView textView = new TextView(getContext());
-        textView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+        mTextNum = new TextView(getContext());
+        mTextNum.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
-        textView.setTextSize(24);
-        textView.setTextColor(Color.parseColor("#ffffff"));
-        textView.setBackgroundColor(Color.parseColor("#33000000"));
-        textView.setGravity(Gravity.CENTER);
+        mTextNum.setTextSize(24);
+        mTextNum.setTextColor(TEXT_NUM_COLOR);
+        mTextNum.setBackgroundColor(TEXT_NUM_BACKGROUND_COLOR);
+        mTextNum.setGravity(Gravity.CENTER);
         if (isImageURL) {
-            textView.setText("+" + (mData.size() - 9));
+            mTextNum.setText("+" + (mData.size() - 9));
         } else if (isBitmap) {
-            textView.setText("+" + (mBitmaps.size() - 9));
+            mTextNum.setText("+" + (mBitmaps.size() - 9));
         } else if (isUri) {
-            textView.setText("+" + (mUris.size() - 9));
+            mTextNum.setText("+" + (mUris.size() - 9));
         } else
-            textView.setText("+" + (mAdapter.getCount() - 9));
+            mTextNum.setText("+" + (mAdapter.getCount() - 9));
 
-
-        addView(textView, position);
+        addView(mTextNum, position);
         Log.i(TAG, "添加最后一个view");
     }
 

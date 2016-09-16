@@ -42,8 +42,7 @@
                 android:hint="标题(可选)"
                 android:textColor="@color/blackLight"
                 android:textColorHint="@color/grey"
-                android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <View
                 android:id="@+id/line1"
@@ -74,10 +73,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_below="@+id/line2"
                 android:layout_alignLeft="@+id/content"
-                android:layout_alignStart="@+id/content">
+                android:layout_alignStart="@+id/content"
+                android:layout_below="@+id/line2"
+                android:layout_marginTop="16dp">
 
                 <cn.lemon.multi.MultiView
                     android:id="@+id/multi_view"
