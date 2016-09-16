@@ -33,10 +33,10 @@
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
             android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".module.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme" />
+        <!-- 图片查看器 -->
+        <activity android:name="cn.lemon.multi.ui.ViewImageActivity" />
+
+        <!-- App -->
         <activity android:name=".module.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,6 +44,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".module.MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".module.java.TextDetailActivity"
             android:label="课程详情" />

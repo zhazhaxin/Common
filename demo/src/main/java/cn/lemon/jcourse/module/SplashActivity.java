@@ -27,6 +27,7 @@ public class SplashActivity extends AppCompatActivity {
 
         mBanner = (ImageView) findViewById(R.id.banner);
 
+        //获取Banner
         AccountModel.getInstance().getBanner(new ServiceResponse<Banner>() {
             @Override
             public void onNext(Banner banner) {
@@ -37,6 +38,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
+        //更新用户信息
         if (AccountModel.getInstance().getAccount() != null) {
             AccountModel.getInstance().prolongToken(new ServiceResponse<Account>() {
                 @Override

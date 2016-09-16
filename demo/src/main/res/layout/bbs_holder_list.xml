@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     android:orientation="vertical">
 
     <ImageView
@@ -13,7 +15,7 @@
         android:layout_height="36dp"
         tools:src="@mipmap/ic_launcher" />
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/linear_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -24,6 +26,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="16sp"
             android:textColor="@color/blackLight"
             tools:text="胖哥sneaker" />
 
@@ -59,4 +62,11 @@
             android:layout_marginTop="8dp"
             app:divideSpace="4dp" />
     </LinearLayout>
+
+    <View
+        android:layout_below="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_height="1dp"
+        android:background="@color/greyLight"/>
 </RelativeLayout>

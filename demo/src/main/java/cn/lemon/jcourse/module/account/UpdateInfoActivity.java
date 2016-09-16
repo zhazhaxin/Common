@@ -33,7 +33,7 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
     private TextInputLayout mSign;
     private ImageView mAvatar;
     private Button mSubmit;
-    private String uploadImageUrl;
+    private String mAvatarUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
 
     public void initData() {
         Glide.with(this)
-                .load(AccountModel.getInstance().getAccount().avatar)
+                .load(mAvatarUrl = AccountModel.getInstance().getAccount().avatar)
                 .placeholder(R.drawable.ic_upload)
                 .into(mAvatar);
         mName.getEditText().setText(AccountModel.getInstance().getAccount().name);
@@ -72,8 +72,17 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
         });
     }
 
-    public void updateAccountInfo(Account account) {
-        AccountModel.getInstance().updateAccountInfo(account.name, account.sign, account.avatar, new ServiceResponse<Account>() {
+    public void updateAccountInfo(String name, String sign, String avatar) {
+        if (TextUtils.isEmpty(name) || TextUtils.isEmpty(sign) || TextUtils.isEmpty(avatar)) {
+            Utils.Toast("信息不能为空");
+            return;
+        }
+        Account account = AccountModel.getInstance().getAccount();
+        if (name.equals(account.name) && sign.equals(account.sign) && avatar.equals(account.avatar)) {
+            Utils.Toast("信息没有更新");
+            return;
+        }
+        AccountModel.getInstance().updateAccountInfo(name, sign, avatar, new ServiceResponse<Account>() {
             @Override
             public void onNext(Account account) {
                 super.onNext(account);
@@ -91,17 +100,9 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
                 selectImage();
                 break;
             case R.id.submit:
-                Account account = AccountModel.getInstance().getAccount();
-                if (!TextUtils.isEmpty(uploadImageUrl)) {
-                    account.avatar = uploadImageUrl;
-                }
-                if (!TextUtils.isEmpty(mName.getEditText().getText().toString())) {
-                    account.name = mName.getEditText().getText().toString();
-                }
-                if (!TextUtils.isEmpty(mSign.getEditText().getText().toString())) {
-                    account.sign = mSign.getEditText().getText().toString();
-                }
-                updateAccountInfo(account);
+                updateAccountInfo(mName.getEditText().getText().toString(),
+                        mSign.getEditText().getText().toString(),
+                        mAvatarUrl);
                 break;
         }
     }
@@ -110,6 +111,7 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri imageUri;
+        //选择图片
         if (requestCode == Config.REQUEST_IMAGE_CODE) {
             if (resultCode == RESULT_OK) {
                 final String image = data.getStringArrayListExtra(MultiImageSelectorActivity.EXTRA_RESULT).get(0);
@@ -119,13 +121,15 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
                         .start(this);
             }
         }
+        //剪切图片
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
                 final Uri resultUri = result.getUri();
                 mAvatar.setImageURI(resultUri);
                 final StringBuilder imagePath = new StringBuilder(String.valueOf(resultUri));
-                imagePath.delete(0,7); //删除file://
+                imagePath.delete(0, 7); //删除file://
+                //上传图片
                 AccountModel.getInstance().updateAvatar(new File(imagePath.toString()), new ServiceResponse<Info>() {
                     @Override
                     public void onStart() {
@@ -138,7 +142,7 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
                         super.onNext(info);
                         dismissLoadingDialog();
                         Utils.Toast("上传成功");
-                        uploadImageUrl = Config.CACEH_IAMGE + new File(imagePath.toString()).getName();
+                        mAvatarUrl = Config.CACEH_IAMGE + new File(imagePath.toString()).getName();
                     }
                 });
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

@@ -81,7 +81,6 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
             @Override
             public void onNext(Account account) {
                 Utils.Toast("登录成功");
-                AccountModel.getInstance().saveAccount(account);
                 finish();
             }
         });

@@ -52,7 +52,7 @@ public class AccountModel extends SuperModel {
     }
 
     //设置请求头 --- UID，token
-    private void setHeaders(Account account) {
+    public void setHeaders(Account account) {
         HeadersInterceptor.UID = account.id + "";
         HeadersInterceptor.TOKEN = account.token;
     }
@@ -90,9 +90,6 @@ public class AccountModel extends SuperModel {
     }
 
     public void prolongToken(ServiceResponse<Account> response) {
-        if (mAccount != null) {
-            setHeaders(mAccount);
-        }
         RetrofitModel.getServiceAPI().prolongToken()
                 .compose(new SchedulersTransformer<Account>())
                 .subscribe(response);
@@ -107,7 +104,7 @@ public class AccountModel extends SuperModel {
     public void updateAvatar(File file, ServiceResponse<Info> response) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/type"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("picture", file.getName(), requestBody);
-        RetrofitModel.getServiceAPI().updateAvatar(part)
+        RetrofitModel.getServiceAPI().uploadPicture(part)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);
     }

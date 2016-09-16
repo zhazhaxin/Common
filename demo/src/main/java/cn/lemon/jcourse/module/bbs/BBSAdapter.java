@@ -6,6 +6,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.bean.BBS;
@@ -68,7 +73,12 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
             mSign.setText(bbs.sign);
             mTitle.setText(bbs.title);
             mContent.setText(bbs.content);
-//            mMultiView.setImages();
+            if (bbs.pictures.length() > 0) {
+                Gson gson = new Gson();
+                Type listType = new TypeToken<List<String>>() {}.getType();
+                List<String> pics = gson.fromJson(bbs.pictures, listType);
+                mMultiView.setImages(pics);
+            }
         }
     }
 }
