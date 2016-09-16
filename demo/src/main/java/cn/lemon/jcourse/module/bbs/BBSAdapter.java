@@ -1,6 +1,8 @@
 package cn.lemon.jcourse.module.bbs;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +15,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.net.GlideCircleTransform;
 import cn.lemon.multi.MultiView;
@@ -39,7 +42,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
     }
 
 
-    class BBSViewHolder extends BaseViewHolder<BBS> {
+    class BBSViewHolder extends BaseViewHolder<BBS> implements View.OnClickListener{
 
         private ImageView mAvatar;
         private TextView mName;
@@ -78,6 +81,24 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
                 Type listType = new TypeToken<List<String>>() {}.getType();
                 List<String> pics = gson.fromJson(bbs.pictures, listType);
                 mMultiView.setImages(pics);
+            }
+
+            mName.setOnClickListener(this);
+            mSign.setOnClickListener(this);
+            mAvatar.setOnClickListener(this);
+        }
+
+        @Override
+        public void onItemViewClick(BBS object) {
+            Intent intent = new Intent(mContext,BBSDetailActivity.class);
+            intent.putExtra(Config.BBS_DETAIL_ID,object.id);
+            mContext.startActivity(intent);
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+//                mContext.startActivity(new Intent(mContext, ));
             }
         }
     }

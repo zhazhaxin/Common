@@ -25,6 +25,7 @@ public class Config {
     public static final String PASSWORD = "password";
     public static final int REQUEST_IMAGE_CODE = 110;
     public static final String JAVA_COURSE_UNIT = "JavaCourseUnitNumber";
+    public static final String BBS_DETAIL_ID = "BBS_detail_id";
 
     /**
      * EventBus
