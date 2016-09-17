@@ -82,7 +82,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
 
     @Override
     public void onClick(View v) {
-        getPresenter().comment(0, mContent.getText().toString());
+        getPresenter().comment(mObjectId, mContent.getText().toString());
     }
 
     public void clearText() {

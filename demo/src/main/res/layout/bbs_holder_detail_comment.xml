@@ -37,25 +37,21 @@
             tools:text="more code,keep heart" />
 
 
-        <ImageView
-            android:id="@+id/comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_toLeftOf="@+id/star"
-            android:src="@drawable/ic_comment" />
-
         <TextView
-            android:id="@+id/star"
+            android:id="@+id/comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="2dp"
-            android:drawableLeft="@drawable/ic_unstar_comment"
-            android:gravity="center"
-            tools:text="12" />
+            android:layout_marginTop="4dp"
+            android:layout_toLeftOf="@+id/star"
+            android:background="@drawable/bg_frame_blue"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:text="评论"
+            android:textColor="@color/blue" />
 
         <TextView
             android:id="@+id/content"

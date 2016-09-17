@@ -20,7 +20,7 @@ public class BBS {
 
     public static class Comment {
         public int id; //评论者id
-        public int objectId;
+        public int objectId; //回复对象的id
         public long time;
         public String content;
         public String name;

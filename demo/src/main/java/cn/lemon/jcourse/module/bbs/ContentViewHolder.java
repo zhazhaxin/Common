@@ -24,6 +24,7 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
     private TextView mContent;
     private ImageView mAvatar;
     private TextView mTime;
+    private TextView mFellow;
 
     private BBS mBBS;
 
@@ -39,6 +40,7 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
         mContent = findViewById(R.id.content);
         mAvatar = findViewById(R.id.avatar);
         mTime = findViewById(R.id.time);
+        mFellow = findViewById(R.id.fellow);
     }
 
     @Override
@@ -58,12 +60,17 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
         mName.setOnClickListener(this);
         mSign.setOnClickListener(this);
         mAvatar.setOnClickListener(this);
+        mFellow.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(itemView.getContext(), UserBBSListActivity.class);
-        intent.putExtra(Config.USER_BBS_LIST, mBBS.authorId);
-        itemView.getContext().startActivity(intent);
+        if (v.getId() == R.id.fellow) {
+
+        } else {
+            Intent intent = new Intent(itemView.getContext(), UserBBSListActivity.class);
+            intent.putExtra(Config.USER_BBS_LIST, mBBS.authorId);
+            itemView.getContext().startActivity(intent);
+        }
     }
 }

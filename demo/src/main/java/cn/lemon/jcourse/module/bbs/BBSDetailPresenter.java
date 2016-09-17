@@ -40,11 +40,24 @@ public class BBSDetailPresenter extends SuperPresenter<BBSDetailActivity> {
         });
     }
 
-    public void comment(final int objectId, final String content) {
+    public void comment(final int objectId, String content) {
         if (TextUtils.isEmpty(content)) {
             Utils.Toast("内容不能为空");
             return;
         }
+        if (objectId > 0) {  //有回复对象
+            StringBuilder sb = new StringBuilder(content);
+            sb.delete(0, getView().mObjectName.length() + 1);
+            content = sb.toString();
+        }
+        final BBS.Comment comment = new BBS.Comment();
+        comment.name = AccountModel.getInstance().getAccount().name;
+        comment.avatar = AccountModel.getInstance().getAccount().avatar;
+        comment.sign = AccountModel.getInstance().getAccount().sign;
+        comment.time = System.currentTimeMillis() / 1000;
+        comment.content = content;
+        comment.objectName = getView().mObjectName;
+        comment.objectId = objectId;
         BBSModel.getInstance().comment(bbsId, objectId, content,
                 new ServiceResponse<Info>() {
                     @Override
@@ -52,14 +65,6 @@ public class BBSDetailPresenter extends SuperPresenter<BBSDetailActivity> {
                         super.onNext(info);
                         Utils.Toast("评论成功");
                         getView().clearText();
-                        BBS.Comment comment = new BBS.Comment();
-                        comment.name = AccountModel.getInstance().getAccount().name;
-                        comment.avatar = AccountModel.getInstance().getAccount().avatar;
-                        comment.sign = AccountModel.getInstance().getAccount().sign;
-                        comment.time = System.currentTimeMillis() / 1000;
-                        comment.content = content;
-                        comment.objectName = getView().mObjectName;
-                        comment.objectId = objectId;
                         getView().addComment(comment);
                     }
 

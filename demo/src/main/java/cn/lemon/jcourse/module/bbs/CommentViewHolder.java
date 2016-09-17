@@ -26,9 +26,8 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
     private TextView mSign;
     private TextView mTime;
     private TextView mContent;
-    private TextView mStar;
     private ImageView mAvatar;
-    private ImageView mCommentBtn;
+    private TextView mCommentBtn;
     public static Context mContext;
 
     private BBS.Comment mComment;
@@ -45,7 +44,6 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
         mContent = findViewById(R.id.content);
         mAvatar = findViewById(R.id.avatar);
         mCommentBtn = findViewById(R.id.comment);
-        mStar = findViewById(R.id.star);
     }
 
     @Override
@@ -67,17 +65,16 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
             mContent.setText(comment.content);
         }
         mCommentBtn.setOnClickListener(this);
-        mStar.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.comment:
-                Utils.showSoftInput(mContext,((BBSDetailActivity)mContext).mContent);
                 ((BBSDetailActivity)mContext).mContent.setText("@" + mComment.name);
                 ((BBSDetailActivity)mContext).mObjectName = mComment.name;
-                ((BBSDetailActivity)mContext).mObjectId = mComment.objectId;
+                ((BBSDetailActivity)mContext).mObjectId = mComment.id;
+                Utils.showSoftInput(mContext,((BBSDetailActivity)mContext).mContent);
                 break;
             case R.id.star:
 
