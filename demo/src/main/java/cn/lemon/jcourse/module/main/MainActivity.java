@@ -27,7 +27,7 @@ import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
-import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
 import cn.lemon.jcourse.module.bbs.BBSFragment;
@@ -94,7 +94,7 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
         if (account != null) {
             Glide.with(MainActivity.this)
                     .load(account.avatar)
-                    .transform(new GlideCircleTransform(this))
+                    .transform(new CircleTransform(this))
                     .into(mAvatar);
             mName.setText(account.name);
             mSign.setText(account.sign);

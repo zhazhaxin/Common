@@ -84,7 +84,8 @@
         <activity
             android:name=".module.main.FeedbackActivity"
             android:label="意见反馈" />
-        <activity android:name=".module.account.FollowListActivity"></activity>
+        <activity android:name=".module.account.FollowListActivity"
+            android:label="我关注的人"/>
     </application>
 
 </manifest>

@@ -18,7 +18,7 @@ import cn.alien95.util.Utils;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.BBS;
-import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.view.adapter.BaseViewHolder;
 
@@ -54,7 +54,7 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
         mComment = comment;
         Glide.with(itemView.getContext())
                 .load(comment.avatar)
-                .transform(new GlideCircleTransform(itemView.getContext()))
+                .transform(new CircleTransform(itemView.getContext()))
                 .into(mAvatar);
         mName.setText(comment.name);
         mSign.setText(comment.sign);

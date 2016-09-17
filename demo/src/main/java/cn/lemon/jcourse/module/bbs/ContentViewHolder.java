@@ -17,7 +17,7 @@ import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.BBSModel;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Info;
-import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UserBBSListActivity;
 import cn.lemon.view.adapter.BaseViewHolder;
@@ -55,7 +55,7 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
         mBBS = bbs;
         Glide.with(itemView.getContext())
                 .load(bbs.avatar)
-                .transform(new GlideCircleTransform(itemView.getContext()))
+                .transform(new CircleTransform(itemView.getContext()))
                 .into(mAvatar);
         mName.setText(bbs.name);
         mSign.setText(bbs.sign);
@@ -67,6 +67,9 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
         mSign.setOnClickListener(this);
         mAvatar.setOnClickListener(this);
         mFollow.setOnClickListener(this);
+        if(AccountModel.getInstance().isLogin() && bbs.isFollow){
+            setFollowGrey();
+        }
     }
 
     @Override
@@ -84,6 +87,7 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
                     public void onNext(Info info) {
                         super.onNext(info);
                         Utils.Toast(info.info);
+                        setFollowGrey();
                     }
                 });
             }
@@ -92,5 +96,12 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
             intent.putExtra(Config.USER_BBS_LIST, mBBS.authorId);
             itemView.getContext().startActivity(intent);
         }
+    }
+
+    public void setFollowGrey(){
+        mFollow.setText("已关注");
+        mFollow.setTextColor(itemView.getResources().getColor(R.color.grey));
+        mFollow.setBackgroundResource(R.drawable.bg_frame_grey);
+        mFollow.setClickable(false);
     }
 }

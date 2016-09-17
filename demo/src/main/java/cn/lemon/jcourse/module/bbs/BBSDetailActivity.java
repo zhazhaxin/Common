@@ -19,7 +19,7 @@ import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.BBS;
-import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.view.RefreshRecyclerView;
 import cn.lemon.view.adapter.Action;
 import cn.lemon.view.adapter.MultiTypeAdapter;
@@ -58,7 +58,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
         if (AccountModel.getInstance().isLogin()) {
             Glide.with(this)
                     .load(AccountModel.getInstance().getAccount().avatar)
-                    .transform(new GlideCircleTransform(this))
+                    .transform(new CircleTransform(this))
                     .into(mAvatar);
         }
         mSend.setOnClickListener(this);

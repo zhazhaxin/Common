@@ -19,6 +19,7 @@ public class FollowListActivity extends ToolbarActivity<FollowListPresenter> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(true);
         setContentView(R.layout.account_activity_followers);
 
         mAdapter = new FollowAdapter(this);
@@ -34,9 +35,14 @@ public class FollowListActivity extends ToolbarActivity<FollowListPresenter> {
         });
     }
 
-    public void setData(Account[] accounts){
+    public void setData(Account[] accounts) {
         mAdapter.clear();
-        mAdapter.addAll(accounts);
         mRecyclerView.dismissSwipeRefresh();
+        if (accounts.length == 0) {
+            showEmpty();
+        } else {
+            mAdapter.addAll(accounts);
+            mRecyclerView.showNoMore();
+        }
     }
 }

@@ -21,7 +21,7 @@ import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
-import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.multi.MultiView;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
@@ -54,7 +54,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
 
         Glide.with(this)
                 .load(AccountModel.getInstance().getAccount().avatar)
-                .transform(new GlideCircleTransform(this))
+                .transform(new CircleTransform(this))
                 .into(mAvatar);
         mAddImage.setOnClickListener(this);
         Utils.hideSoftInput(this);

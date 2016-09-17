@@ -18,7 +18,7 @@ import cn.alien95.util.TimeTransform;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.BBS;
-import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.jcourse.module.account.UserBBSListActivity;
 import cn.lemon.multi.MultiView;
 import cn.lemon.view.adapter.BaseViewHolder;
@@ -84,7 +84,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
             mBBS = bbs;
             Glide.with(mContext)
                     .load(bbs.avatar)
-                    .transform(new GlideCircleTransform(mContext))
+                    .transform(new CircleTransform(mContext))
                     .into(mAvatar);
             mName.setText(bbs.name);
             mSign.setText(bbs.sign);

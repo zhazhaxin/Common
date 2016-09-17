@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.model.net.RotateTransformation;
 import cn.lemon.view.adapter.BaseViewHolder;
 
 public class PictureViewHolder extends BaseViewHolder<String> {
@@ -26,6 +27,7 @@ public class PictureViewHolder extends BaseViewHolder<String> {
         Glide.with(itemView.getContext())
                 .load(object)
                 .placeholder(R.drawable.ic_place_holder)
+                .transform(new RotateTransformation(itemView.getContext()))
                 .into(mPicture);
     }
 }

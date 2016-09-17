@@ -22,7 +22,14 @@ public class FollowListPresenter extends SuperPresenter<FollowListActivity> {
             @Override
             public void onNext(Account[] accounts) {
                 super.onNext(accounts);
+                getView().showContent();
                 getView().setData(accounts);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                getView().showError();
             }
         });
     }

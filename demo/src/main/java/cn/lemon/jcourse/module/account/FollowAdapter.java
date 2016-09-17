@@ -1,6 +1,7 @@
 package cn.lemon.jcourse.module.account;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,10 +13,11 @@ import cn.alien95.util.TimeTransform;
 import cn.alien95.util.Utils;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.BBSModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.Info;
-import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.view.adapter.BaseViewHolder;
 import cn.lemon.view.adapter.RecyclerAdapter;
 
@@ -44,7 +46,7 @@ public class FollowAdapter extends RecyclerAdapter<Account> {
         private Account mAccount;
 
         public FollowerViewHolder(ViewGroup parent) {
-            super(parent, R.layout.account_holder_follower);
+            super(parent, R.layout.account_holder_follow);
         }
 
         @Override
@@ -63,27 +65,37 @@ public class FollowAdapter extends RecyclerAdapter<Account> {
             mAccount = object;
             Glide.with(itemView.getContext())
                     .load(object.avatar)
-                    .transform(new GlideCircleTransform(itemView.getContext()))
+                    .transform(new CircleTransform(itemView.getContext()))
                     .into(mAvatar);
             mName.setText(object.name);
             mSign.setText(object.sign);
-            mTime.setText(TimeTransform.getRecentlyDate(object.time * 1000));
+            mTime.setText(TimeTransform.getRecentlyDate(object.time * 1000) + " 创建");
             mUnfollow.setOnClickListener(this);
+            mName.setOnClickListener(this);
+            mSign.setOnClickListener(this);
+            mAvatar.setOnClickListener(this);
         }
 
         @Override
         public void onClick(final View v) {
-            BBSModel.getInstance().unfollow(mAccount.id, new ServiceResponse<Info>() {
-                @Override
-                public void onNext(Info info) {
-                    super.onNext(info);
-                    Utils.Toast(info.info);
-                    mUnfollow.setTextColor(v.getContext().getResources().getColor(R.color.grey));
-                    mUnfollow.setBackgroundResource(R.drawable.bg_frame_grey);
-                    mUnfollow.setClickable(false);
-                }
+            if(v.getId() == R.id.un_follow){
+                BBSModel.getInstance().unfollow(mAccount.id, new ServiceResponse<Info>() {
+                    @Override
+                    public void onNext(Info info) {
+                        super.onNext(info);
+                        Utils.Toast(info.info);
+                        mUnfollow.setTextColor(v.getContext().getResources().getColor(R.color.grey));
+                        mUnfollow.setBackgroundResource(R.drawable.bg_frame_grey);
+                        mUnfollow.setClickable(false);
+                    }
 
-            });
+                });
+            }else {
+                Intent intent = new Intent(itemView.getContext(), UserBBSListActivity.class);
+                intent.putExtra(Config.USER_BBS_LIST, mAccount.id);
+                itemView.getContext().startActivity(intent);
+            }
+
         }
     }
 }

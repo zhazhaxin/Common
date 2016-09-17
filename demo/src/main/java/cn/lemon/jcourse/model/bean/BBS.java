@@ -10,6 +10,7 @@ public class BBS {
     public int authorId;
     public int commentNum;
     public long time;
+    public boolean isFollow;
     public String avatar;
     public String name;
     public String sign;
