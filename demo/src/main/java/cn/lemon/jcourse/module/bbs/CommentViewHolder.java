@@ -1,43 +1,87 @@
 package cn.lemon.jcourse.module.bbs;
 
+import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import cn.alien95.util.TimeTransform;
+import cn.alien95.util.Utils;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.net.GlideCircleTransform;
 import cn.lemon.view.adapter.BaseViewHolder;
 
-public class CommentViewHolder extends BaseViewHolder<BBS.Comment> {
+public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements View.OnClickListener{
 
-        private TextView mName;
-        private TextView mSign;
-        private TextView mContent;
-        private ImageView mAvatar;
+    private final int COLOR_BLUE = 0xff5677fc;
+    private TextView mName;
+    private TextView mSign;
+    private TextView mTime;
+    private TextView mContent;
+    private TextView mStar;
+    private ImageView mAvatar;
+    private ImageView mCommentBtn;
+    public static Context mContext;
 
-        public CommentViewHolder(ViewGroup parent) {
-            super(parent, R.layout.bbs_holder_detail_comment);
-        }
+    private BBS.Comment mComment;
 
-        @Override
-        public void onInitializeView() {
-            mName = findViewById(R.id.name);
-            mSign = findViewById(R.id.sign);
-            mContent = findViewById(R.id.content);
-            mAvatar = findViewById(R.id.avatar);
-        }
+    public CommentViewHolder(ViewGroup parent) {
+        super(parent, R.layout.bbs_holder_detail_comment);
+    }
 
-        @Override
-        public void setData(BBS.Comment comment) {
-            Glide.with(itemView.getContext())
-                    .load(comment.avatar)
-                    .transform(new GlideCircleTransform(itemView.getContext()))
-                    .into(mAvatar);
-            mName.setText(comment.name);
-            mSign.setText(comment.sign);
+    @Override
+    public void onInitializeView() {
+        mName = findViewById(R.id.name);
+        mSign = findViewById(R.id.sign);
+        mTime = findViewById(R.id.time);
+        mContent = findViewById(R.id.content);
+        mAvatar = findViewById(R.id.avatar);
+        mCommentBtn = findViewById(R.id.comment);
+        mStar = findViewById(R.id.star);
+    }
+
+    @Override
+    public void setData(BBS.Comment comment) {
+        mComment = comment;
+        Glide.with(itemView.getContext())
+                .load(comment.avatar)
+                .transform(new GlideCircleTransform(itemView.getContext()))
+                .into(mAvatar);
+        mName.setText(comment.name);
+        mSign.setText(comment.sign);
+        mTime.setText(TimeTransform.getRecentlyDate(comment.time * 1000));
+
+        if (comment.objectId > 0) {
+            Spannable targetStr = new SpannableString("@" + comment.objectName + ": " + comment.content);
+            targetStr.setSpan(new ForegroundColorSpan(COLOR_BLUE), 0, comment.objectName.length() + 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mContent.setText(targetStr);
+        } else {
             mContent.setText(comment.content);
         }
+        mCommentBtn.setOnClickListener(this);
+        mStar.setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.comment:
+                Utils.showSoftInput(mContext,((BBSDetailActivity)mContext).mContent);
+                ((BBSDetailActivity)mContext).mContent.setText("@" + mComment.name);
+                ((BBSDetailActivity)mContext).mObjectName = mComment.name;
+                ((BBSDetailActivity)mContext).mObjectId = mComment.objectId;
+                break;
+            case R.id.star:
+
+                break;
+        }
+    }
+}

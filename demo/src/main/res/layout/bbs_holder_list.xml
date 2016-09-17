@@ -23,29 +23,14 @@
         android:layout_toRightOf="@id/avatar"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/blackLight"
-                android:textSize="16sp"
-                tools:text="胖哥sneaker" />
-
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="16dp"
-                tools:text="9-16" />
-
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/blackLight"
+            android:textSize="16sp"
+            tools:text="胖哥sneaker" />
 
         <TextView
             android:id="@+id/sign"
@@ -77,6 +62,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                tools:text="9-16" />
+
+            <TextView
+                android:id="@+id/comment_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:drawableLeft="@drawable/ic_comment16"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                tools:text="  20" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <View

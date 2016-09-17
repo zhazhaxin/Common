@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="56dp"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
@@ -26,17 +26,24 @@
         android:text="JCourse V1.0.0"
         android:textColor="@color/blackLight" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/greyLight" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:paddingLeft="16dp"
             android:text="版本更新"
             android:textColor="@color/blackLight"
             android:textSize="16sp" />
@@ -44,26 +51,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:paddingRight="8dp"
             android:text="无新版本" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/greyLight" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:clickable="true">
+        android:clickable="true"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:paddingLeft="16dp"
             android:text="开源代码"
             android:textColor="@color/blackLight"
             android:textSize="16sp" />
@@ -72,13 +81,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autoLink="web"
-            android:padding="16dp"
-            android:text="https://github.com/llxdaxia/Common" />
+            android:drawableRight="@drawable/ic_go"
+            android:paddingRight="8dp"
+            android:text="https://github.com/llxdaxia/Common"
+            android:textColorLink="@color/blue" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/greyLight" />
 
     <LinearLayout
@@ -86,13 +97,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:clickable="true">
+        android:clickable="true"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:paddingLeft="16dp"
             android:text="联系作者"
             android:textColor="@color/blackLight"
             android:textSize="16sp" />
@@ -100,13 +113,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:drawableRight="@drawable/ic_go"
+            android:paddingRight="8dp"
             android:text="18983679028" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="@color/greyLight" />
 
     <TextView
@@ -114,7 +128,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="16dp"
+        android:drawableRight="@drawable/ic_go"
+        android:paddingBottom="12dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="8dp"
+        android:paddingTop="12dp"
         android:text="意见反馈"
         android:textColor="@color/blackLight"
         android:textSize="16sp" />

@@ -15,10 +15,12 @@
     <!-- 颜色列表，按照颜色命名 -->
 
     <color name="white">#ffffff</color>
+    <color name="translucentWhite">#d9ffffff</color> //85%透明度
     <color name="translucentBlack">#ee000000</color>
     <color name="blackLight">#121111</color>
     <color name="red">#f42930</color>
     <color name="redDark">#FFC72127</color>
+    <color name="blue">#ff5677fc</color>
 
 
 

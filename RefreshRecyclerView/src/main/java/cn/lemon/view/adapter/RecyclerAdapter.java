@@ -98,9 +98,9 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     @Override
     public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
         log("onBindViewHolder -- position : " + position);
-        if(position == mViewCount - 1){
+        if (position == mViewCount - 1) {
             return;
-        }else if (!hasHeader && !hasFooter && position < mData.size()) { //没有Header和Footer
+        } else if (!hasHeader && !hasFooter && position < mData.size()) { //没有Header和Footer
             holder.setData(mData.get(position));
         } else if (hasHeader && !hasFooter && position > 0 && position < mViewCount - 1) { //有Header没有Footer
             holder.setData(mData.get(position - 1));
@@ -160,7 +160,17 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                 mNoMoreView.setVisibility(View.VISIBLE);
             }
         });
+    }
 
+    public void openLoadMore() {
+        isShowNoMore = false;
+        mLoadMoreView.post(new Runnable() {
+            @Override
+            public void run() {
+                mLoadMoreView.setVisibility(View.VISIBLE);
+                mNoMoreView.setVisibility(View.GONE);
+            }
+        });
     }
 
     public void setLoadMoreAction(Action action) {
@@ -173,8 +183,8 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             mData.add(object);
             mViewCount++;
             int position = mData.size();
-            if(hasHeader){
-                position ++;
+            if (hasHeader) {
+                position++;
             }
             notifyItemInserted(position);
         }
@@ -206,7 +216,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     }
 
     public void addAll(T[] objects) {
-        if(objects.length == 0){
+        if (objects.length == 0) {
             return;
         }
         addAll(Arrays.asList(objects));

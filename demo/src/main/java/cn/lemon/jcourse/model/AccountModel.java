@@ -1,7 +1,5 @@
 package cn.lemon.jcourse.model;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.File;
 
 import cn.lemon.common.base.model.SuperModel;
@@ -63,7 +61,6 @@ public class AccountModel extends SuperModel {
         clearCacheObject();
         HeadersInterceptor.UID = "";
         HeadersInterceptor.TOKEN = "";
-        EventBus.getDefault().post(Config.UPDATE_ACCOUNT_ON_DRAWER);
     }
 
     public boolean isLogin(){

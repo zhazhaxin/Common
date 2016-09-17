@@ -99,4 +99,8 @@ public interface ServiceAPI {
     @FormUrlEncoded
     @POST("bbs/publishBBS.php")
     Observable<Info> publishBBS(@Field("pictures") String pictures,@Field("title") String title,@Field("content") String content);
+
+    @FormUrlEncoded
+    @POST("bbs/comment.php")
+    Observable<Info> comment(@Field("bbsId") int bbsId,@Field("objectId") int objectId,@Field("content") String content);
 }

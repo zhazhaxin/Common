@@ -57,6 +57,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
         private TextView mTitle;
         private TextView mContent;
         private TextView mTime;
+        private TextView mCommentNum;
         private MultiView mMultiView;
 
         private BBS mBBS;
@@ -73,6 +74,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
             mTitle = findViewById(R.id.title);
             mContent = findViewById(R.id.content);
             mTime = findViewById(R.id.time);
+            mCommentNum = findViewById(R.id.comment_num);
             mMultiView = findViewById(R.id.multi_view);
         }
 
@@ -89,6 +91,7 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
             mTitle.setText(bbs.title);
             mContent.setText(bbs.content);
             mTime.setText(TimeTransform.getRecentlyDate(bbs.time * 1000));
+            mCommentNum.setText(" " + bbs.commentNum);
             if (bbs.pictures.length() > 0) {
                 Gson gson = new Gson();
                 Type listType = new TypeToken<List<String>>() {}.getType();

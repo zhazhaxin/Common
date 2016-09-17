@@ -34,7 +34,7 @@
             android:layout_below="@id/name"
             android:layout_toRightOf="@id/avatar"
             android:textSize="12sp"
-            tools:text="7楼-5.15 12:09" />
+            tools:text="more code,keep heart" />
 
 
         <ImageView
@@ -57,19 +57,33 @@
             android:gravity="center"
             tools:text="12" />
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sign"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/avatar"
+            android:textSize="16sp"
+            tools:text="希望发更多关于android的东西" />
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="16sp"
-        tools:text="希望发更多关于android的东西" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/content"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/avatar"
+            android:textColor="@color/grey"
+            android:textSize="12sp"
+            tools:text="昨天" />
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.3dp"
         android:layout_marginTop="8dp"
         android:background="@color/greyLight" />
 </LinearLayout>

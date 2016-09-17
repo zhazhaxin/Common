@@ -8,6 +8,7 @@ public class BBS {
     //发布问题的相关信息
     public int id;
     public int authorId;
+    public int commentNum;
     public long time;
     public String avatar;
     public String name;
@@ -18,11 +19,13 @@ public class BBS {
     public Comment[] comments;
 
     public static class Comment {
+        public int id; //评论者id
+        public int objectId;
+        public long time;
         public String content;
         public String name;
         public String sign;
         public String avatar;
-        public int objectId;
         public String objectName;
     }
 
