@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".base.App"
@@ -35,7 +36,7 @@
         <activity android:name="cn.lemon.multi.ui.ViewImageActivity" />
 
         <!-- App -->
-        <activity android:name=".module.SplashActivity">
+        <activity android:name=".module.main.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.MainActivity"
+            android:name=".module.main.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme" />
         <activity
@@ -66,16 +67,21 @@
             android:label="Java课程目录" />
         <activity android:name=".module.java.CourseUnitListActivity" />
         <activity
-            android:name=".module.AboutActivity"
+            android:name=".module.main.AboutActivity"
             android:label="关于" />
         <activity
             android:name=".module.bbs.PublishBBSActivity"
             android:label="发布话题" />
         <activity
             android:name=".module.bbs.BBSDetailActivity"
-            android:label="详情" />
-        <activity android:name=".module.account.UserBBSListActivity"
-            android:label="我的话题"/>
+            android:label="详情"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".module.account.UserBBSListActivity"
+            android:label="我的话题"
+            android:launchMode="singleTask" />
+        <activity android:name=".module.main.FeedbackActivity"
+            android:label="意见反馈"/>
     </application>
 
 </manifest>

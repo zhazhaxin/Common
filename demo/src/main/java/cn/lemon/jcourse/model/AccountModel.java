@@ -66,6 +66,14 @@ public class AccountModel extends SuperModel {
         EventBus.getDefault().post(Config.UPDATE_ACCOUNT_ON_DRAWER);
     }
 
+    public boolean isLogin(){
+        if(getAccount() == null){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     public void getBanner(ServiceResponse<Banner> response) {
         RetrofitModel.getServiceAPI().getBanner()
                 .compose(new SchedulersTransformer<Banner>())

@@ -1,4 +1,4 @@
-package cn.lemon.jcourse.module;
+package cn.lemon.jcourse.module.main;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,12 +24,15 @@ import java.util.List;
 
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
+import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.net.GlideCircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
+import cn.lemon.jcourse.module.account.UserBBSListActivity;
 import cn.lemon.jcourse.module.bbs.BBSFragment;
 import cn.lemon.jcourse.module.java.CourseDirListActivity;
 import cn.lemon.jcourse.module.java.StarListActivity;
@@ -37,7 +40,8 @@ import cn.lemon.jcourse.module.java.TextListFragment;
 import cn.lemon.jcourse.module.java.VideoFragment;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
-public class MainActivity extends ToolbarActivity
+@RequirePresenter(MainPresenter.class)
+public class MainActivity extends ToolbarActivity<MainPresenter>
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private ViewPager mViewPager;
@@ -129,6 +133,9 @@ public class MainActivity extends ToolbarActivity
             case R.id.star:
                 jumpStarList();
                 break;
+            case R.id.bbs:
+                jumpBBSList();
+                break;
             case R.id.about:
                 startActivity(new Intent(this, AboutActivity.class));
                 break;
@@ -141,25 +148,25 @@ public class MainActivity extends ToolbarActivity
     }
 
     //跳转收藏列表
-    public boolean jumpStarList() {
-        if (AccountModel.getInstance().getAccount() == null) {
-            Utils.Toast("请先登录");
-            startActivity(new Intent(this, LoginActivity.class));
-            return true;
-        }
+    public void jumpStarList() {
+        getPresenter().checkoutLogin();
         startActivity(new Intent(this, StarListActivity.class));
-        return true;
     }
 
+    public void jumpBBSList(){
+        getPresenter().checkoutLogin();
+        Intent intent = new Intent(this, UserBBSListActivity.class);
+        intent.putExtra(Config.USER_BBS_LIST,AccountModel.getInstance().getAccount().id);
+        startActivity(intent);
+    }
+    //退出登录
     public void loginOut() {
-        if (AccountModel.getInstance().getAccount() == null) {
-            Utils.Toast("请先登录");
-            return;
-        }
+        getPresenter().checkoutLogin();
         showDialog("确定要退出？", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 AccountModel.getInstance().deleteAccount();
+                updateAccountInfo();
                 dismissDialog();
                 Utils.Toast("已退出");
             }
@@ -168,13 +175,16 @@ public class MainActivity extends ToolbarActivity
 
     @Override
     public void onClick(View v) {
-        if (AccountModel.getInstance().getAccount() == null) {
-            startActivity(new Intent(this, LoginActivity.class));
+        if (!AccountModel.getInstance().isLogin()) {
+            startActivity(LoginActivity.class);
             mDrawer.closeDrawer(GravityCompat.START);
         } else {
-            startActivity(new Intent(this, UpdateInfoActivity.class));
+            startActivity(UpdateInfoActivity.class);
         }
+    }
 
+    public void startActivity(Class activity){
+        startActivity(new Intent(this, activity));
     }
 
     @Override

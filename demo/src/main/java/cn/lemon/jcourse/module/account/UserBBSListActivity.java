@@ -23,6 +23,7 @@ public class UserBBSListActivity extends ToolbarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(true);
         setContentView(R.layout.bbs_activity_user_bbslist);
 
         mId = getIntent().getIntExtra(Config.USER_BBS_LIST, 0);
@@ -43,12 +44,14 @@ public class UserBBSListActivity extends ToolbarActivity {
     public void getData() {
         if (mId == 0) {
             Utils.Toast("获取失败");
+            showError();
             return;
         }
         AccountModel.getInstance().getUserBBSList(mId, new ServiceResponse<BBS[]>() {
             @Override
             public void onNext(BBS[] bbses) {
                 super.onNext(bbses);
+                showContent();
                 mRecyclerView.dismissSwipeRefresh();
                 if (bbses.length == 0) {
                     showEmpty();

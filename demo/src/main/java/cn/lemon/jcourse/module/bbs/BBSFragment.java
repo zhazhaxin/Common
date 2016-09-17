@@ -10,6 +10,7 @@ import android.view.View;
 import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.view.RefreshRecyclerView;
 import cn.lemon.view.adapter.Action;
@@ -68,7 +69,17 @@ public class BBSFragment extends SuperFragment<BBSPresenter> implements View.OnC
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_bbs) {
-            startActivity(new Intent(getActivity(), PublishBBSActivity.class));
+            Intent intent = new Intent(getActivity(), PublishBBSActivity.class);
+            startActivityForResult(intent,Config.REQUEST_PUBLISH_BBS);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Config.REQUEST_PUBLISH_BBS && resultCode == Config.RESULT_PUBLISH_BBS){
+            mRecyclerView.showSwipeRefresh();
+            getPresenter().getData(true);
         }
     }
 }

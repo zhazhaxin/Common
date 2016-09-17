@@ -15,7 +15,11 @@
             <item
                 android:id="@+id/star"
                 android:icon="@drawable/ic_menu_star"
-                android:title="收藏" />
+                android:title="我的收藏" />
+            <item
+                android:id="@+id/bbs"
+                android:icon="@drawable/ic_bbs"
+                android:title="我的话题" />
 
             <item
                 android:id="@+id/login_out"

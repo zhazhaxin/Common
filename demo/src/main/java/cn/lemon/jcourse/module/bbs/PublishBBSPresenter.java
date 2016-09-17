@@ -29,7 +29,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
         picUrls.clear();
         if (paths.size() > 0) {
             getView().showLoadingDialog();
-            //压缩图片
+            //批量压缩图片
             ImageUtil.compress(paths, new ImageUtil.ListCallback() {
                 @Override
                 public void callback(List<Bitmap> bitmaps) {
@@ -39,8 +39,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
                 @Override
                 public void callback(List<File> files) {
                     picNum = files.size();
-                    for (final File pic : files) {
-                        //图片上传
+                    for (File pic : files) {
                         uploadPic(pic);
                     }
                 }
@@ -48,6 +47,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
         }
     }
 
+    //上传图片
     public void uploadPic(final File pic) {
         BBSModel.getInstance().uploadPicture(pic, new ServiceResponse<Info>() {
             @Override
@@ -62,6 +62,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
         });
     }
 
+    //发布BBS
     public void publishBBS(String title, String content) {
         Gson gson = new Gson();
         String json = gson.toJson(picUrls);
@@ -69,6 +70,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
             @Override
             public void onNext(Info info) {
                 Utils.Toast("发布成功");
+                getView().setResult(Config.RESULT_PUBLISH_BBS);
                 getView().finish();
             }
         });
