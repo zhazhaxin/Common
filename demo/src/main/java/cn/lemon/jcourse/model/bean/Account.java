@@ -8,9 +8,10 @@ import java.io.Serializable;
 
 public class Account implements Serializable {
     public int id;
+    public long time;
+    public int gender;
     public String name;
     public String avatar;
     public String sign;
-    public int gender;
     public String token;
 }

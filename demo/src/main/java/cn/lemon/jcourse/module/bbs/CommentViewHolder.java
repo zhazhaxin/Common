@@ -1,6 +1,7 @@
 package cn.lemon.jcourse.module.bbs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -15,11 +16,13 @@ import com.bumptech.glide.Glide;
 import cn.alien95.util.TimeTransform;
 import cn.alien95.util.Utils;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.view.adapter.BaseViewHolder;
 
-public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements View.OnClickListener{
+public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements View.OnClickListener {
 
     private final int COLOR_BLUE = 0xff5677fc;
     private TextView mName;
@@ -69,12 +72,17 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.comment:
-                ((BBSDetailActivity)mContext).mContent.setText("@" + mComment.name);
-                ((BBSDetailActivity)mContext).mObjectName = mComment.name;
-                ((BBSDetailActivity)mContext).mObjectId = mComment.id;
-                Utils.showSoftInput(mContext,((BBSDetailActivity)mContext).mContent);
+                if (!AccountModel.getInstance().isLogin()) {
+                    Utils.Toast("请先登录");
+                    v.getContext().startActivity(new Intent(v.getContext(), LoginActivity.class));
+                    return;
+                }
+                ((BBSDetailActivity) mContext).mContent.setText("@" + mComment.name);
+                ((BBSDetailActivity) mContext).mObjectName = mComment.name;
+                ((BBSDetailActivity) mContext).mObjectId = mComment.id;
+                Utils.showSoftInput(mContext, ((BBSDetailActivity) mContext).mContent);
                 break;
             case R.id.star:
 

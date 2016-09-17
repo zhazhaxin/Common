@@ -36,7 +36,8 @@
         <activity android:name="cn.lemon.multi.ui.ViewImageActivity" />
 
         <!-- App -->
-        <activity android:name=".module.main.SplashActivity">
+        <activity android:name=".module.main.SplashActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -80,8 +81,10 @@
             android:name=".module.account.UserBBSListActivity"
             android:label="我的话题"
             android:launchMode="singleTask" />
-        <activity android:name=".module.main.FeedbackActivity"
-            android:label="意见反馈"/>
+        <activity
+            android:name=".module.main.FeedbackActivity"
+            android:label="意见反馈" />
+        <activity android:name=".module.account.FollowListActivity"></activity>
     </application>
 
 </manifest>

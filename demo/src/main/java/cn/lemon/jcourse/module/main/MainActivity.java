@@ -1,6 +1,5 @@
 package cn.lemon.jcourse.module.main;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -26,16 +25,13 @@ import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
-import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.net.GlideCircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
-import cn.lemon.jcourse.module.account.UserBBSListActivity;
 import cn.lemon.jcourse.module.bbs.BBSFragment;
 import cn.lemon.jcourse.module.java.CourseDirListActivity;
-import cn.lemon.jcourse.module.java.StarListActivity;
 import cn.lemon.jcourse.module.java.TextListFragment;
 import cn.lemon.jcourse.module.java.VideoFragment;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
@@ -131,47 +127,27 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
             case R.id.java:
                 break;
             case R.id.star:
-                jumpStarList();
+                getPresenter().jumpStarList();
                 break;
             case R.id.bbs:
-                jumpBBSList();
+                getPresenter().jumpBBSList();
+                break;
+            case R.id.follow:
+                getPresenter().jumpFollowList();
                 break;
             case R.id.about:
                 startActivity(new Intent(this, AboutActivity.class));
                 break;
             case R.id.login_out:
-                loginOut();
+                getPresenter().loginOut();
                 break;
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    //跳转收藏列表
-    public void jumpStarList() {
-        getPresenter().checkoutLogin();
-        startActivity(new Intent(this, StarListActivity.class));
-    }
 
-    public void jumpBBSList(){
-        getPresenter().checkoutLogin();
-        Intent intent = new Intent(this, UserBBSListActivity.class);
-        intent.putExtra(Config.USER_BBS_LIST,AccountModel.getInstance().getAccount().id);
-        startActivity(intent);
-    }
-    //退出登录
-    public void loginOut() {
-        getPresenter().checkoutLogin();
-        showDialog("确定要退出？", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                AccountModel.getInstance().deleteAccount();
-                updateAccountInfo();
-                dismissDialog();
-                Utils.Toast("已退出");
-            }
-        }, null);
-    }
+
 
     @Override
     public void onClick(View v) {

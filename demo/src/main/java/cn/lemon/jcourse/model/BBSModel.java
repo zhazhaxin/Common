@@ -54,4 +54,14 @@ public class BBSModel extends SuperModel {
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);
     }
+    public void follow(int id,ServiceResponse<Info> response){
+        RetrofitModel.getServiceAPI().follow(id)
+                .compose(new SchedulersTransformer<Info>())
+                .subscribe(response);
+    }
+    public void unfollow(int id,ServiceResponse<Info> response){
+        RetrofitModel.getServiceAPI().unfollow(id)
+                .compose(new SchedulersTransformer<Info>())
+                .subscribe(response);
+    }
 }

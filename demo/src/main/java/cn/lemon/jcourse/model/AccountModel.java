@@ -120,4 +120,10 @@ public class AccountModel extends SuperModel {
                 .compose(new SchedulersTransformer<BBS[]>())
                 .subscribe(response);
     }
+
+    public void getFollowList(ServiceResponse<Account[]> response){
+        RetrofitModel.getServiceAPI().getFollowList()
+                .compose(new SchedulersTransformer<Account[]>())
+                .subscribe(response);
+    }
 }

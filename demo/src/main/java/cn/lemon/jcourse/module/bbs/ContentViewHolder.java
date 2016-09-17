@@ -9,10 +9,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import cn.alien95.util.TimeTransform;
+import cn.alien95.util.Utils;
+import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
+import cn.lemon.jcourse.model.AccountModel;
+import cn.lemon.jcourse.model.BBSModel;
 import cn.lemon.jcourse.model.bean.BBS;
+import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UserBBSListActivity;
 import cn.lemon.view.adapter.BaseViewHolder;
 
@@ -24,7 +30,7 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
     private TextView mContent;
     private ImageView mAvatar;
     private TextView mTime;
-    private TextView mFellow;
+    private TextView mFollow;
 
     private BBS mBBS;
 
@@ -40,7 +46,7 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
         mContent = findViewById(R.id.content);
         mAvatar = findViewById(R.id.avatar);
         mTime = findViewById(R.id.time);
-        mFellow = findViewById(R.id.fellow);
+        mFollow = findViewById(R.id.follow);
     }
 
     @Override
@@ -60,13 +66,27 @@ public class ContentViewHolder extends BaseViewHolder<BBS> implements View.OnCli
         mName.setOnClickListener(this);
         mSign.setOnClickListener(this);
         mAvatar.setOnClickListener(this);
-        mFellow.setOnClickListener(this);
+        mFollow.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.fellow) {
-
+        if (v.getId() == R.id.follow) {
+            if (!AccountModel.getInstance().isLogin()) {
+                Utils.Toast("请先登录");
+                v.getContext().startActivity(new Intent(v.getContext(), LoginActivity.class));
+            } else {
+                if (AccountModel.getInstance().getAccount().id == mBBS.authorId) {
+                    return;
+                }
+                BBSModel.getInstance().follow(mBBS.authorId, new ServiceResponse<Info>() {
+                    @Override
+                    public void onNext(Info info) {
+                        super.onNext(info);
+                        Utils.Toast(info.info);
+                    }
+                });
+            }
         } else {
             Intent intent = new Intent(itemView.getContext(), UserBBSListActivity.class);
             intent.putExtra(Config.USER_BBS_LIST, mBBS.authorId);

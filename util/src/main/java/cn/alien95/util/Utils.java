@@ -403,6 +403,12 @@ public class Utils {
         activity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
     }
 
+    //跳到拨号界面
+    public static void jumpDialUI(Activity activity,String phoneNumber){
+        Intent intent = new Intent(Intent.ACTION_DIAL,Uri.parse("tel:" + phoneNumber));
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.startActivity(intent);
+    }
     /**
      * 跳转至拨号界面
      */

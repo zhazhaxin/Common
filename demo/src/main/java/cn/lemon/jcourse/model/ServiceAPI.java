@@ -53,6 +53,9 @@ public interface ServiceAPI {
     @POST("accounts/userBBSList.php")
     Observable<BBS[]> getUserBBSList(@Field("id") int id);
 
+    @GET("accounts/followList.php")
+    Observable<Account[]> getFollowList();
+
 
 
     //courses相关
@@ -103,4 +106,12 @@ public interface ServiceAPI {
     @FormUrlEncoded
     @POST("bbs/comment.php")
     Observable<Info> comment(@Field("bbsId") int bbsId,@Field("objectId") int objectId,@Field("content") String content);
+
+    @FormUrlEncoded
+    @POST("bbs/follow.php")
+    Observable<Info> follow(@Field("id") int followId);
+
+    @FormUrlEncoded
+    @POST("bbs/unfollow.php")
+    Observable<Info> unfollow(@Field("id") int followId);
 }

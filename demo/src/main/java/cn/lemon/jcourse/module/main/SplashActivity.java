@@ -1,8 +1,8 @@
 package cn.lemon.jcourse.module.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,7 +16,7 @@ import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.Banner;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends Activity {
 
     private ImageView mBanner;
 
@@ -24,7 +24,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_splash);
-
         mBanner = (ImageView) findViewById(R.id.banner);
 
         //获取Banner

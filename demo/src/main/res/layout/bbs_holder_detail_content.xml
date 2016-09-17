@@ -47,7 +47,7 @@
             tools:text="7楼-5.15 12:09" />
 
         <TextView
-            android:id="@+id/fellow"
+            android:id="@+id/follow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
