@@ -389,8 +389,8 @@ public class Utils {
     /**
      * 拨打电话
      */
-    public static void call(String phoneNumber) {
-        if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+    public static void call(Activity activity,String phoneNumber) {
+        if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -400,7 +400,7 @@ public class Utils {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        mContext.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
+        activity.startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
     }
 
     /**
