@@ -56,7 +56,9 @@ public interface ServiceAPI {
     @GET("accounts/followList.php")
     Observable<Account[]> getFollowList();
 
-
+    @FormUrlEncoded
+    @POST("accounts/group.php")
+    Observable<BBS[]> group(@Field("page") int page);
 
     //courses相关
     @FormUrlEncoded

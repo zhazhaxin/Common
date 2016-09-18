@@ -36,7 +36,8 @@
         <activity android:name="cn.lemon.multi.ui.ViewImageActivity" />
 
         <!-- App -->
-        <activity android:name=".module.main.SplashActivity"
+        <activity
+            android:name=".module.main.SplashActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -84,8 +85,9 @@
         <activity
             android:name=".module.main.FeedbackActivity"
             android:label="意见反馈" />
-        <activity android:name=".module.account.FollowListActivity"
-            android:label="我关注的人"/>
+        <activity
+            android:name=".module.account.FollowListActivity"
+            android:label="关注的人" />
     </application>
 
 </manifest>

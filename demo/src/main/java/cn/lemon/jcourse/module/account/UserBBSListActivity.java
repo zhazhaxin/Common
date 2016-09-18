@@ -7,6 +7,7 @@ import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.module.bbs.BBSAdapter;
@@ -25,7 +26,15 @@ public class UserBBSListActivity extends ToolbarActivity {
         useStatusPages(true);
         setContentView(R.layout.bbs_activity_user_bbslist);
 
-        mId = AccountModel.getInstance().getAccount().id;
+        mId = getIntent().getIntExtra(Config.USER_BBS_LIST, 0);
+        if(mId == 0){
+            mId = AccountModel.getInstance().getAccount().id;
+        }else {
+            if (mId != AccountModel.getInstance().getAccount().id) {
+                setTitle("他的话题");
+            }
+        }
+
         mAdapter = new BBSAdapter(this);
         mAdapter.setCancleJumpToUserBBS();
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);

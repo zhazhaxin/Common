@@ -55,7 +55,7 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     }
 
     public SuperFragment(@LayoutRes int layoutResID) {
-        this.mLayoutResId = layoutResID;
+        this(layoutResID,false);
     }
 
     public SuperFragment(@LayoutRes int layoutResID, boolean isUseStatusPages) {

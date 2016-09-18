@@ -23,7 +23,8 @@ public class Config {
     public static final int REQUEST_IMAGE_CODE = 123;
     public static final int REQUEST_PUBLISH_BBS = 321;
     public static final int RESULT_PUBLISH_BBS = 132;
-    public static final int REQUEST_CALL_PHONE = 234;
+    public static final int REQUEST_LOGIN_CODE = 222;
+    public static final int RESULT_LOGIN_CODE = 223;
 
     public static final String JAVA_COURSE_DETAIL = "JavaCourseDetail";
     public static final String NAME = "name";

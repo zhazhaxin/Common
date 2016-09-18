@@ -83,6 +83,17 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
                 Utils.Toast("登录成功");
                 finish();
             }
+
+            @Override
+            public void onError(Throwable e) {
+                Utils.Toast("用户名或密码错误");
+            }
         });
+    }
+
+    @Override
+    public void finish() {
+        setResult(Config.RESULT_LOGIN_CODE);
+        super.finish();
     }
 }

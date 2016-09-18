@@ -37,6 +37,7 @@ public class MainPresenter extends SuperPresenter<MainActivity> {
                 public void onClick(DialogInterface dialog, int which) {
                     AccountModel.getInstance().deleteAccount();
                     getView().updateAccountInfo();
+                    getView().updateGroupStatus();
                     getView().dismissDialog();
                     Utils.Toast("已退出");
                 }

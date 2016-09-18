@@ -28,6 +28,7 @@ import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.net.CircleTransform;
+import cn.lemon.jcourse.module.account.GroupFragment;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
 import cn.lemon.jcourse.module.bbs.BBSFragment;
@@ -38,7 +39,8 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 @RequirePresenter(MainPresenter.class)
 public class MainActivity extends ToolbarActivity<MainPresenter>
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        View.OnClickListener, ViewPager.OnPageChangeListener{
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -76,11 +78,13 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mAdapter = new ViewPagerAdapter();
+        mAdapter.addFragment(new GroupFragment(),"圈子");
         mAdapter.addFragment(new TextListFragment(), "课程");
         mAdapter.addFragment(new VideoFragment(), "视频");
         mAdapter.addFragment(new BBSFragment(), "社区");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.addOnPageChangeListener(this);
     }
 
     @Override
@@ -102,6 +106,12 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
             mAvatar.setImageResource(R.drawable.ic_avatar);
             mName.setText("昵称");
             mSign.setText("个性签名");
+        }
+    }
+
+    public void updateGroupStatus(){
+        if(mViewPager.getCurrentItem() == 0 && mAdapter.getItem(0) instanceof GroupFragment){
+            ((GroupFragment) mAdapter.getItem(0)).checkLogin();
         }
     }
 
@@ -146,9 +156,6 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
         return true;
     }
 
-
-
-
     @Override
     public void onClick(View v) {
         if (!AccountModel.getInstance().isLogin()) {
@@ -176,6 +183,23 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if(position == 0 && mAdapter.getItem(0) instanceof GroupFragment){
+            ((GroupFragment) mAdapter.getItem(0)).checkLogin();
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     //ViewPage

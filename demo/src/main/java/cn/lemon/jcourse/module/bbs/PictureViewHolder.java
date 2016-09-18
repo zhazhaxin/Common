@@ -26,8 +26,8 @@ public class PictureViewHolder extends BaseViewHolder<String> {
     public void setData(String object) {
         Glide.with(itemView.getContext())
                 .load(object)
-                .placeholder(R.drawable.ic_place_holder)
                 .transform(new RotateTransformation(itemView.getContext()))
+                .placeholder(R.drawable.ic_place_holder)
                 .into(mPicture);
     }
 }
