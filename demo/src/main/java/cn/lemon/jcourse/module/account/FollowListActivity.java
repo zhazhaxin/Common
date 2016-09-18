@@ -20,7 +20,7 @@ public class FollowListActivity extends ToolbarActivity<FollowListPresenter> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         useStatusPages(true);
-        setContentView(R.layout.account_activity_followers);
+        setContentView(R.layout.account_activity_follow);
 
         mAdapter = new FollowAdapter(this);
         mRecyclerView = $(R.id.recycler_view);
