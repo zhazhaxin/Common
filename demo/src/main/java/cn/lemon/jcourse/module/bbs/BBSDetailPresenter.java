@@ -1,5 +1,6 @@
 package cn.lemon.jcourse.module.bbs;
 
+import android.content.Intent;
 import android.text.TextUtils;
 
 import cn.alien95.util.Utils;
@@ -10,6 +11,7 @@ import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.BBSModel;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Info;
+import cn.lemon.jcourse.module.account.LoginActivity;
 
 /**
  * Created by linlongxin on 2016/9/16.
@@ -43,6 +45,11 @@ public class BBSDetailPresenter extends SuperPresenter<BBSDetailActivity> {
     public void comment(final int objectId, String content) {
         if (TextUtils.isEmpty(content)) {
             Utils.Toast("内容不能为空");
+            return;
+        }
+        if (!AccountModel.getInstance().isLogin()) {
+            Utils.Toast("请先登录");
+            getView().startActivity(new Intent(getView(), LoginActivity.class));
             return;
         }
         if (objectId > 0) {  //有回复对象

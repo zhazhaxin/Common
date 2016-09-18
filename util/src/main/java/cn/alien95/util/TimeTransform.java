@@ -69,53 +69,43 @@ public class TimeTransform {
     public static String getRecentlyDate(long milliseconds) {
         long currentMilliseconds = System.currentTimeMillis();
         long timeDistance = currentMilliseconds - milliseconds;
-        if (timeDistance < 1000) {
+        SimpleDateFormat dateFormat;
+        if (timeDistance > 0 && timeDistance < 1000) { //一秒内
             return "刚刚";
-        } else if (timeDistance > 0) {  //过去的时间
+            //过去不超过3天的时间
+        } else if (timeDistance > 1000 && timeDistance <= DAY_OF_MILLISECONDS * 3) {
             if (timeDistance / 1000 < 60) {
                 return timeDistance / 1000 + "秒前";
-            }
-            if (timeDistance / MINUTES_OF_MILLISECONDS < 60) {
+            } else if (timeDistance / MINUTES_OF_MILLISECONDS < 60) {
                 return timeDistance / MINUTES_OF_MILLISECONDS + "分钟前";
-            } else {
-                if (timeDistance / HOUR_OF_MILLISECONDS < 24) {
-                    return timeDistance / HOUR_OF_MILLISECONDS + "小时前";
-                } else {
-                    if (timeDistance / DAY_OF_MILLISECONDS < 3) {
-                        return timeDistance / DAY_OF_MILLISECONDS + "天前";
-                    }
-                }
+            } else if (timeDistance / HOUR_OF_MILLISECONDS < 24) {
+                return timeDistance / HOUR_OF_MILLISECONDS + "小时前";
+            } else if (timeDistance / DAY_OF_MILLISECONDS <= 3) {
+                return timeDistance / DAY_OF_MILLISECONDS + "天前";
             }
-
-        } else {
+            //将来不超过三天时间
+        } else if (timeDistance < 0 && timeDistance >= DAY_OF_MILLISECONDS * -3) {
             timeDistance = timeDistance * -1;
             if (timeDistance / 1000 < 60) {
                 return timeDistance / 1000 + "秒后";
-            }
-            if (timeDistance / MINUTES_OF_MILLISECONDS < 60) {
+            } else if (timeDistance / MINUTES_OF_MILLISECONDS < 60) {
                 return timeDistance / MINUTES_OF_MILLISECONDS + "分钟后";
-            } else {
-                if (timeDistance / HOUR_OF_MILLISECONDS < 24) {
-                    return timeDistance / HOUR_OF_MILLISECONDS + "小时后";
-                } else {
-                    if (timeDistance / DAY_OF_MILLISECONDS < 3) {
-                        return timeDistance / DAY_OF_MILLISECONDS + "天后";
-                    }
-                }
+            } else if (timeDistance / HOUR_OF_MILLISECONDS < 24) {
+                return timeDistance / HOUR_OF_MILLISECONDS + "小时后";
+            } else if (timeDistance / DAY_OF_MILLISECONDS <= 3) {
+                return timeDistance / DAY_OF_MILLISECONDS + "天后";
             }
+            //过去或将来超过3天，但小于一年
+        } else if (Math.abs(timeDistance) < YEAR_OF_MILLISECONDS) {
+            dateFormat = new SimpleDateFormat("MM-dd");
+            return dateFormat.format(new Date(milliseconds));
         }
-        SimpleDateFormat simpleDateFormat;
-        if (timeDistance < YEAR_OF_MILLISECONDS) {
-            simpleDateFormat = new SimpleDateFormat("MM/dd");
-        } else {
-            simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        }
-
-        return simpleDateFormat.format(new Date(milliseconds));
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(new Date(milliseconds));
     }
 
     public static String getSimple(long milliseconds) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM-dd");
         return simpleDateFormat.format(new Date(milliseconds));
     }
 

@@ -209,8 +209,14 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                 startPosition++;
             }
             mData.addAll(data);
-            mViewCount += data.size();
-            notifyItemRangeChanged(startPosition, data.size());
+
+            if(mViewCount == 1 || (hasHeader && mViewCount == 2)){
+                mViewCount += data.size();
+                notifyDataSetChanged();
+            }else {
+                mViewCount += data.size();
+                notifyItemRangeInserted(startPosition, data.size());
+            }
             log("addAll : startPosition : " + startPosition + "  itemCount : " + data.size());
         }
     }

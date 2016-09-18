@@ -60,6 +60,7 @@ public class TextListPresenter extends SuperPresenter<TextListFragment> {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
+                getView().showError();
             }
         });
     }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="148dp"
+            android:layout_height="83dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/ic_place_holder" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_toRightOf="@id/cover"
+            android:textColor="@color/blackLight"
+            android:textSize="16sp"
+            tools:text="java多态" />
+
+        <TextView
+            android:id="@+id/intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/subtitle"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/cover"
+            android:maxLines="3"
+            android:textColor="@color/grey"
+            tools:text="苹果金秋新品发布会是科技界的“春晚”，年复一年地重复，难免会让人产生审美疲劳，但每逢中国教师节前后，全球的科技人士和媒体还是会" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

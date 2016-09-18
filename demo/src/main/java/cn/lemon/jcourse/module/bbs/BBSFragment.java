@@ -7,11 +7,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import cn.alien95.util.Utils;
 import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
+import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.BBS;
+import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.view.RefreshRecyclerView;
 import cn.lemon.view.adapter.Action;
 
@@ -69,8 +72,14 @@ public class BBSFragment extends SuperFragment<BBSPresenter> implements View.OnC
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_bbs) {
-            Intent intent = new Intent(getActivity(), PublishBBSActivity.class);
-            startActivityForResult(intent,Config.REQUEST_PUBLISH_BBS);
+            if(AccountModel.getInstance().isLogin()){
+                Intent intent = new Intent(getActivity(), PublishBBSActivity.class);
+                startActivityForResult(intent,Config.REQUEST_PUBLISH_BBS);
+            }else {
+                Utils.Toast("请先登录");
+                startActivity(new Intent(getActivity(), LoginActivity.class));
+            }
+
         }
     }
 

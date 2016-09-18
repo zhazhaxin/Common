@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -18,9 +16,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.base.presenter.RequirePresenter;
@@ -31,16 +26,13 @@ import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.jcourse.module.account.GroupFragment;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
-import cn.lemon.jcourse.module.bbs.BBSFragment;
 import cn.lemon.jcourse.module.java.CourseDirListActivity;
-import cn.lemon.jcourse.module.java.TextListFragment;
-import cn.lemon.jcourse.module.java.VideoFragment;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 @RequirePresenter(MainPresenter.class)
 public class MainActivity extends ToolbarActivity<MainPresenter>
         implements NavigationView.OnNavigationItemSelectedListener,
-        View.OnClickListener{
+        View.OnClickListener {
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -77,11 +69,11 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        mAdapter = new ViewPagerAdapter();
-        mAdapter.addFragment(new GroupFragment(),"圈子");
-        mAdapter.addFragment(new TextListFragment(), "课程");
-        mAdapter.addFragment(new VideoFragment(), "视频");
-        mAdapter.addFragment(new BBSFragment(), "社区");
+        mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        mAdapter.addTitle("圈子");
+        mAdapter.addTitle("课程");
+        mAdapter.addTitle("视频");
+        mAdapter.addTitle("社区");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
@@ -108,8 +100,8 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
         }
     }
 
-    public void updateGroupStatus(){
-        if(mViewPager.getCurrentItem() == 0 && mAdapter.getItem(0) instanceof GroupFragment){
+    public void updateGroupStatus() {
+        if (mViewPager.getCurrentItem() == 0 && mAdapter.getItem(0) instanceof GroupFragment) {
             ((GroupFragment) mAdapter.getItem(0)).checkLogin();
         }
     }
@@ -165,7 +157,7 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
         }
     }
 
-    public void startActivity(Class activity){
+    public void startActivity(Class activity) {
         startActivity(new Intent(this, activity));
     }
 
@@ -183,39 +175,4 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
         }
         return super.onOptionsItemSelected(item);
     }
-
-    //ViewPage
-    class ViewPagerAdapter extends FragmentStatePagerAdapter {
-
-        private List<Fragment> mFragments;
-        private List<String> mTitles;
-
-        public ViewPagerAdapter() {
-            super(getSupportFragmentManager());
-            mFragments = new ArrayList<>();
-            mTitles = new ArrayList<>();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragments.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            return mTitles.get(position);
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragments.add(fragment);
-            mTitles.add(title);
-        }
-    }
-
 }
