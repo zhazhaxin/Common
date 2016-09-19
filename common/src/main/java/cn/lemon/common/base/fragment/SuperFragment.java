@@ -25,9 +25,9 @@ import cn.lemon.common.base.widget.MaterialDialog;
 /**
  * Fragment顶级父类 : 添加各种状态(数据错误，数据为空，数据加载中)页的展示，
  * 自定义的MaterialDialog的显示，进度条dialog显示
- *
+ * <p>
  * MVP模型中把Fragment作为view层，可通过getPresenter()调用对应的presenter实例
- *
+ * <p>
  * Created by linlongxin on 2016/8/6.
  */
 
@@ -35,6 +35,7 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     private final String TAG = "SuperFragment";
     private boolean isUseStatusPages = false;
+    private boolean isShowingContent = false;
     private int mLayoutResId;
     private View mView;
 
@@ -55,7 +56,7 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     }
 
     public SuperFragment(@LayoutRes int layoutResID) {
-        this(layoutResID,false);
+        this(layoutResID, false);
     }
 
     public SuperFragment(@LayoutRes int layoutResID, boolean isUseStatusPages) {
@@ -153,8 +154,8 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
         mCurrentShowView = mLoadingPage;
     }
 
-    public <T extends View> T findViewById(@IdRes int resId) {
-        return (T) mView.findViewById(resId);
+    public <V extends View> V findViewById(@IdRes int resId) {
+        return (V) mView.findViewById(resId);
     }
 
     public void showEmpty() {
@@ -170,7 +171,12 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     }
 
     public void showContent() {
-        showView(mContent);
+        if (isShowingContent) {
+            return;
+        } else {
+            isShowingContent = true;
+            showView(mContent);
+        }
     }
 
     public void showView(View view) {

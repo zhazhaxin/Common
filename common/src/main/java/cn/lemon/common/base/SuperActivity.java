@@ -25,15 +25,16 @@ import cn.lemon.common.base.widget.MaterialDialog;
 /**
  * Activity顶级父类 : 添加各种状态(数据错误，数据为空，数据加载中)页的展示，
  * 自定义的MaterialDialog的显示，进度条dialog显示
- *
+ * <p>
  * MVP模型中把Activity作为view层，可通过getPresenter()调用对应的presenter实例
- *
+ * <p>
  * Created by linlongxin on 2016/8/3.
  */
 
 public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
     private boolean isUseStatusPages = false;
+    private boolean isShowingContent = false;
 
     protected TextView mEmptyPage;
     protected TextView mErrorPage;
@@ -150,7 +151,12 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     }
 
     public void showContent() {
-        showView(mContent);
+        if (isShowingContent) {
+            return;
+        } else {
+            isShowingContent = true;
+            showView(mContent);
+        }
     }
 
     public void showView(View view) {

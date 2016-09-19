@@ -6,6 +6,7 @@ import cn.lemon.common.base.model.SuperModel;
 import cn.lemon.common.net.SchedulersTransformer;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.model.bean.BBS;
+import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.net.RetrofitModel;
 import okhttp3.MediaType;
@@ -62,6 +63,11 @@ public class BBSModel extends SuperModel {
     public void unfollow(int id,ServiceResponse<Info> response){
         RetrofitModel.getServiceAPI().unfollow(id)
                 .compose(new SchedulersTransformer<Info>())
+                .subscribe(response);
+    }
+    public void getBannerList(ServiceResponse<Banner[]> response) {
+        RetrofitModel.getServiceAPI().getBannerList()
+                .compose(new SchedulersTransformer<Banner[]>())
                 .subscribe(response);
     }
 }

@@ -29,6 +29,8 @@ class TextAdapter extends RecyclerAdapter<JavaCourse> {
         private TextView mTitle;
         private TextView mSubtitle;
         private TextView mContent;
+        private TextView mStarNum;
+        private TextView mVisitNum;
 
         public JavaTextViewHolder(ViewGroup parent) {
             super(parent, R.layout.java_holder_text);
@@ -40,6 +42,8 @@ class TextAdapter extends RecyclerAdapter<JavaCourse> {
             mSubtitle = findViewById(R.id.subtitle);
             mCover = findViewById(R.id.cover);
             mContent = findViewById(R.id.content);
+            mStarNum = findViewById(R.id.star_num);
+            mVisitNum = findViewById(R.id.visit_num);
         }
 
         @Override
@@ -48,6 +52,9 @@ class TextAdapter extends RecyclerAdapter<JavaCourse> {
             mTitle.setText(object.title);
             mSubtitle.setText(object.subtitle);
             mContent.setText(object.content);
+            mStarNum.setText(" " + object.starNum);
+            mVisitNum.setText(" " + object.visitNum);
+
             Glide.with(mTitle.getContext())
                     .load(object.cover)
                     .placeholder(R.drawable.ic_place_holder)

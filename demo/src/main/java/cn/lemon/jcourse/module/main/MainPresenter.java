@@ -2,8 +2,11 @@ package cn.lemon.jcourse.module.main;
 
 import android.content.DialogInterface;
 
+import org.greenrobot.eventbus.EventBus;
+
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.presenter.SuperPresenter;
+import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.module.account.FollowListActivity;
 import cn.lemon.jcourse.module.account.LoginActivity;
@@ -35,15 +38,14 @@ public class MainPresenter extends SuperPresenter<MainActivity> {
             getView().showDialog("确定要退出？", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    Utils.Toast("已退出");
+                    getView().dismissDialog();
                     AccountModel.getInstance().deleteAccount();
                     getView().updateAccountInfo();
-                    getView().updateGroupStatus();
-                    getView().dismissDialog();
-                    Utils.Toast("已退出");
+                    EventBus.getDefault().post(Config.CHECK_STATUS_FOR_GROUPFRAGMENT);
                 }
             }, null);
         }
-
     }
 
     //跳转收藏列表

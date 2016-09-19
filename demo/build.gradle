@@ -64,6 +64,9 @@ dependencies {
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.theartofdev.edmodo:android-image-cropper:2.2.5'
     compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
+
+    compile 'com.jude:rollviewpager:1.4.5'
+
     //    compile 'fm.jiecao:jiecaovideoplayer:4.6.5'
     compile 'com.umeng.analytics:analytics:latest.integration'
     //required, enough for most devices.
@@ -74,5 +77,6 @@ dependencies {
     compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.6.0'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.6.0'
-//    compile 'org.greenrobot:eventbus:3.0.0'
+
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

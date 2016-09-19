@@ -28,7 +28,7 @@ public class TextDetailPresenter extends SuperPresenter<TextDetailActivity> {
         mData = (JavaCourse) getView().getIntent().getSerializableExtra(Config.JAVA_COURSE_DETAIL);
         getView().setData(mData);
         setIsStar(mData.id);
-
+        visit(mData.id);
     }
 
     public void setIsStar(int id) {
@@ -58,6 +58,7 @@ public class TextDetailPresenter extends SuperPresenter<TextDetailActivity> {
                 public void onNext(Info info) {
                     super.onNext(info);
                     Utils.Toast("取消收藏");
+                    getView().setStarNumDec();
                     getView().getStarView().setImageResource(R.drawable.ic_unstar);
                     isStar = false;
                 }
@@ -68,10 +69,15 @@ public class TextDetailPresenter extends SuperPresenter<TextDetailActivity> {
                 public void onNext(Info info) {
                     super.onNext(info);
                     Utils.Toast("收藏成功");
+                    getView().setStarNumAdd();
                     getView().getStarView().setImageResource(R.drawable.ic_star);
                     isStar = true;
                 }
             });
         }
+    }
+
+    public void visit(int id){
+        JavaCourseModel.getInstance().visit(id);
     }
 }

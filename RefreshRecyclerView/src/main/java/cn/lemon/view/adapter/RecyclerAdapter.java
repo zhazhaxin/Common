@@ -199,7 +199,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     }
 
     public void addAll(List<T> data) {
-        if (!isShowNoMore) {
+        if (!isShowNoMore && data.size() > 0) {
             isLoadingMore = false;
             if (data.size() == 0) {
                 return;
@@ -209,11 +209,10 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                 startPosition++;
             }
             mData.addAll(data);
-
-            if(mViewCount == 1 || (hasHeader && mViewCount == 2)){
+            if (mViewCount == 1 || (hasHeader && mViewCount == 2)) {
                 mViewCount += data.size();
                 notifyDataSetChanged();
-            }else {
+            } else {
                 mViewCount += data.size();
                 notifyItemRangeInserted(startPosition, data.size());
             }
@@ -222,9 +221,6 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     }
 
     public void addAll(T[] objects) {
-        if (objects.length == 0) {
-            return;
-        }
         addAll(Arrays.asList(objects));
     }
 
@@ -277,6 +273,14 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     public void setHeader(@LayoutRes int res) {
         setHeader(LayoutInflater.from(mContext).inflate(res, null));
+    }
+
+    public View getHeader() {
+        return headerView;
+    }
+
+    public View getFooter() {
+        return footerView;
     }
 
     public void setFooter(View footer) {

@@ -17,7 +17,8 @@ public class ServiceResponse<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
-        Utils.Toast(e.getMessage());
+//        Utils.Toast(e.getMessage());
+        Utils.Toast("网络错误");
     }
 
     @Override

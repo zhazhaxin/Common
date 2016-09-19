@@ -26,6 +26,9 @@ public interface ServiceAPI {
     @GET("accounts/banner.php")
     Observable<Banner> getBanner();
 
+    @GET("bbs/bannerList.php")
+    Observable<Banner[]> getBannerList();
+
     //上传图片
     @Multipart
     @POST("base/uploadPicture.php")
@@ -60,6 +63,13 @@ public interface ServiceAPI {
     @POST("accounts/group.php")
     Observable<BBS[]> group(@Field("page") int page);
 
+    @FormUrlEncoded
+    @POST("accounts/feedback.php")
+    Observable<Info> feedback(@Field("content") String content,@Field("relation") String relation);
+
+
+
+
     //courses相关
     @FormUrlEncoded
     @POST("courses/javaCourseList.php")
@@ -89,6 +99,9 @@ public interface ServiceAPI {
     @POST("courses/javaVideoList.php")
     Observable<JVideo[]> getVideoList(@Field("page") int page);
 
+    @FormUrlEncoded
+    @POST("courses/visit.php")
+    Observable<Info> visit(@Field("id") int id);
 
 
 

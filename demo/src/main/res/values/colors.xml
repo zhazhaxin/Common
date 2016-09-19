@@ -19,6 +19,7 @@
     <color name="translucentBlack">#ee000000</color>
     <color name="blackLight">#121111</color>
     <color name="red">#f42930</color>
+    <color name="redLight">#f44247</color>
     <color name="redDark">#FFC72127</color>
     <color name="blue">#ff5677fc</color>
 

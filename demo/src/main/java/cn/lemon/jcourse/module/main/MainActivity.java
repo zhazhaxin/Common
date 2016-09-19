@@ -23,7 +23,6 @@ import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.net.CircleTransform;
-import cn.lemon.jcourse.module.account.GroupFragment;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
 import cn.lemon.jcourse.module.java.CourseDirListActivity;
@@ -97,12 +96,6 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
             mAvatar.setImageResource(R.drawable.ic_avatar);
             mName.setText("昵称");
             mSign.setText("个性签名");
-        }
-    }
-
-    public void updateGroupStatus() {
-        if (mViewPager.getCurrentItem() == 0 && mAdapter.getItem(0) instanceof GroupFragment) {
-            ((GroupFragment) mAdapter.getItem(0)).checkLogin();
         }
     }
 

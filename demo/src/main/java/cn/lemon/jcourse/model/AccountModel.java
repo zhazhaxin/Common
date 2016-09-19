@@ -132,4 +132,9 @@ public class AccountModel extends SuperModel {
                 .compose(new SchedulersTransformer<BBS[]>())
                 .subscribe(response);
     }
+    public void feedback(String content,String relation,ServiceResponse<Info> response){
+        RetrofitModel.getServiceAPI().feedback(content,relation)
+                .compose(new SchedulersTransformer<Info>())
+                .subscribe(response);
+    }
 }

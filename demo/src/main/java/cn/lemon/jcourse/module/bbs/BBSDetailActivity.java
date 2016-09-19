@@ -38,6 +38,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(true);
         setContentView(R.layout.bbs_activity_detail);
 
         mAvatar = $(R.id.avatar);
@@ -65,6 +66,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
     }
 
     public void setData(BBS bbs) {
+        showContent();
         Gson gson = new Gson();
         Type listType = new TypeToken<List<String>>() {
         }.getType();
@@ -99,6 +101,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        PictureViewHolder.clearPictures();
         CommentViewHolder.mContext = null;
     }
 }

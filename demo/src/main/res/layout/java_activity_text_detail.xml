@@ -24,16 +24,20 @@
                 android:layout_margin="16dp"
                 android:padding="8dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="4dp"
                     android:gravity="center_vertical">
 
                     <TextView
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/blackLight"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         tools:text="第一章" />
@@ -42,10 +46,13 @@
                         android:id="@+id/subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@+id/title"
+                        android:textSize="16sp"
                         tools:text="java简介" />
 
-                </LinearLayout>
+                </RelativeLayout>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -58,8 +65,8 @@
                     android:id="@+id/cover"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
                     android:layout_margin="8dp"
+                    android:adjustViewBounds="true"
                     android:scaleType="centerCrop" />
             </android.support.v7.widget.CardView>
 
@@ -69,12 +76,65 @@
                 android:layout_margin="16dp"
                 android:padding="8dp">
 
-                <TextView
-                    android:id="@+id/content"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    tools:text="- AppBarLayout：其继承于LinearLayout，使用AppBarLayout可以让包含在其中的子控件能响应被标记了ScrollingViewBehavior的的滚动事件（要与CoordinatorLayout 一起使用），利用它我们可以很容易的去实现视差滚动效果，这样所你可能还是不太懂，千言万语不如一张图来的直接爽快（这样图还是来源于网上，其蓝色的部分就是AppBarLayout，内容区就是被标记了ScrollingViewBehavior的，可以看到效果是不是挺不错的）" />
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/visit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_text_fill"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/white"
+                        android:text="浏览" />
+
+                    <TextView
+                        android:id="@+id/visit_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/visit"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="100" />
+
+                    <TextView
+                        android:id="@+id/star_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/star_num"
+                        android:background="@drawable/bg_text_fill"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="4dp"
+                        android:paddingRight="4dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/white"
+                        android:text="收藏" />
+
+                    <TextView
+                        android:id="@+id/star_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="8dp"
+                        android:paddingTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="100" />
+
+                    <TextView
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/visit_num"
+                        android:layout_marginTop="16dp"
+                        tools:text="- AppBarLayout：其继承于LinearLayout，使用AppBarLayout可以让包含在其中的子控件能响应被标记了ScrollingViewBehavior的的滚动事件（要与CoordinatorLayout 一起使用），利用它我们可以很容易的去实现视差滚动效果，这样所你可能还是不太懂，千言万语不如一张图来的直接爽快（这样图还是来源于网上，其蓝色的部分就是AppBarLayout，内容区就是被标记了ScrollingViewBehavior的，可以看到效果是不是挺不错的）" />
+                </RelativeLayout>
+
 
             </android.support.v7.widget.CardView>
         </LinearLayout>

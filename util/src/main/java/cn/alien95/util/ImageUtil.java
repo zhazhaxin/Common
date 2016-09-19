@@ -199,11 +199,13 @@ public class ImageUtil {
             }
         });
     }
+
     public static void compress(final List<String> paths,
                                 final ListCallback callback,
                                 final ListPathCallback listPathCallback) {
-        compress(paths,200,200,callback,listPathCallback);
+        compress(paths, 200, 200, callback, listPathCallback);
     }
+
     //压缩到目标文件并回调压缩的Bitmap
     public static void compress(final File resource,
                                 final File target,
@@ -242,7 +244,8 @@ public class ImageUtil {
 
             int scale = 1;
             if (o.outHeight > width && o.outWidth > height) {
-                scale = (int) Math.pow(2, (int) Math.round(Math.log(200 / (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
+                int max = width > height ? width : height;
+                scale = (int) Math.pow(2, (int) Math.round(Math.log(max / (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
             }
 
             BitmapFactory.Options o2 = new BitmapFactory.Options();
@@ -293,6 +296,7 @@ public class ImageUtil {
     public static void compress(final String filePath, final Callback callback) {
         compress(filePath, 200, 200, callback);
     }
+
     //uri --> bitmap 把uri对应的图片压缩后转换成Bitmap
     public static void compress(final Uri uri, final int width, final int height, final Callback callback) {
         String filePath = new StringBuilder(String.valueOf(uri)).delete(0, 7).toString(); //删除file://

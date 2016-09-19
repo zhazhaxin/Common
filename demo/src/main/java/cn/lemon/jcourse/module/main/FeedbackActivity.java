@@ -1,23 +1,29 @@
 package cn.lemon.jcourse.module.main;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
+import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.model.AccountModel;
+import cn.lemon.jcourse.model.bean.Info;
 
 public class FeedbackActivity extends ToolbarActivity {
 
-    private EditText mFeedback;
+    private EditText mFeedContent;
+    private EditText mRelation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_feedback);
-        mFeedback = (EditText) findViewById(R.id.feedback);
+        mFeedContent = (EditText) findViewById(R.id.feed_content);
+        mRelation = (EditText) findViewById(R.id.relation);
     }
 
     @Override
@@ -29,9 +35,23 @@ public class FeedbackActivity extends ToolbarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.submit) {
-            Utils.Toast("我们会好好考虑你宝贵的意见");
-            finish();
+            feedback(mFeedContent.getText().toString(),mRelation.getText().toString());
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void feedback(String content,String relation){
+        if(TextUtils.isEmpty(content)){
+            Utils.Toast("意见不能为空");
+            return;
+        }
+        AccountModel.getInstance().feedback(content,relation,new ServiceResponse<Info>(){
+            @Override
+            public void onNext(Info info) {
+                super.onNext(info);
+                Utils.Toast(info.info);
+                finish();
+            }
+        });
     }
 }

@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:clickable="false"
         android:gravity="center"
         android:scaleType="centerCrop"
         android:textColor="@color/colorAccent"
@@ -42,8 +43,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="4dp"
         android:gravity="center_horizontal"
         android:text="CoryRight\@2016  Lemon" />
 

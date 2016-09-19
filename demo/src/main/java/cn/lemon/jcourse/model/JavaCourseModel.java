@@ -59,4 +59,10 @@ public class JavaCourseModel extends SuperModel {
                 .compose(new SchedulersTransformer<JVideo[]>())
                 .subscribe(response);
     }
+
+    public void visit(int id){
+        RetrofitModel.getServiceAPI().visit(id)
+                .compose(new SchedulersTransformer<Info>())
+                .subscribe();
+    }
 }

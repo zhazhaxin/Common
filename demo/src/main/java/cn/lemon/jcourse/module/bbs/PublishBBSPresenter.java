@@ -30,7 +30,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
         if (paths.size() > 0) {
             getView().showLoadingDialog();
             //批量压缩图片
-            ImageUtil.compress(paths, new ImageUtil.ListCallback() {
+            ImageUtil.compress(paths, 350, 350, new ImageUtil.ListCallback() {
                 @Override
                 public void callback(List<Bitmap> bitmaps) {
                     getView().setBitmaps(bitmaps);

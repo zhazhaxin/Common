@@ -89,6 +89,8 @@
         <activity
             android:name=".module.account.FollowListActivity"
             android:label="关注的人" />
+        <activity android:name=".module.main.WebActivity"
+            android:label="Banner"/>
     </application>
 
 </manifest>

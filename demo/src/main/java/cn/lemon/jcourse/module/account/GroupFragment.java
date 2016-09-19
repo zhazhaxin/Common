@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import cn.alien95.util.Utils;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
@@ -38,6 +40,7 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         mAdapter = new BBSAdapter(getContext());
     }
 
@@ -62,10 +65,10 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
                 getData(false);
             }
         });
-        checkLogin();
+        checkStatus();
     }
 
-    public void checkLogin() {
+    public void checkStatus() {
         showContent();
         if (!AccountModel.getInstance().isLogin()) {
             mRecyclerView.setVisibility(View.GONE);
@@ -105,15 +108,13 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivityForResult(intent, Config.REQUEST_LOGIN_CODE);
+        startActivity(intent);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Config.RESULT_LOGIN_CODE) {
-            Utils.Log("GroupFragment--onActivityResult : 检查状态");
-            checkLogin();
+    @Subscribe
+    public void onEvent(String checkStatus){
+        if(checkStatus.equals(Config.CHECK_STATUS_FOR_GROUPFRAGMENT)){
+            checkStatus();
         }
     }
 }

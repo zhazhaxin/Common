@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.common.base.ToolbarActivity;
+import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 
@@ -32,6 +32,8 @@ public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> imp
     private TextView mTitle;
     private TextView mSubtitle;
     private TextView mContent;
+    private TextView mStarNum;
+    private TextView mVisitNum;
     private ScrollView mScrollView;
     private FloatingActionButton mStar;
 
@@ -49,10 +51,12 @@ public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> imp
         setContentView(R.layout.java_activity_text_detail);
         setToolbarHomeBack(true);
 
-        mCover = (ImageView) findViewById(R.id.cover);
-        mTitle = (TextView) findViewById(R.id.title);
-        mSubtitle = (TextView) findViewById(R.id.subtitle);
-        mContent = (TextView) findViewById(R.id.content);
+        mCover = $(R.id.cover);
+        mTitle = $(R.id.title);
+        mSubtitle = $(R.id.subtitle);
+        mContent = $(R.id.content);
+        mStarNum = $(R.id.star_num);
+        mVisitNum = $(R.id.visit_num);
         mScrollView = (ScrollView) findViewById(R.id.scroll_view);
         mStar = (FloatingActionButton) findViewById(star);
         mStar.setOnClickListener(this);
@@ -70,10 +74,20 @@ public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> imp
         mTitle.setText(data.title);
         mSubtitle.setText(data.subtitle);
         mContent.setText(data.content);
+        mStarNum.setText(data.starNum + "");
+        mVisitNum.setText(data.visitNum + "");
     }
 
     public ImageView getStarView() {
         return mStar;
+    }
+    public void setStarNumDec(){
+        String num = mStarNum.getText().toString();
+        mStarNum.setText(Integer.parseInt(num) - 1 + "");
+    }
+    public void setStarNumAdd(){
+        String num = mStarNum.getText().toString();
+        mStarNum.setText(Integer.parseInt(num) + 1 + "");
     }
 
     @Override

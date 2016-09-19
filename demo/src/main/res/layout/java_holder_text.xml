@@ -24,14 +24,47 @@
             android:layout_height="168dp"
             android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            tools:text="第一章" />
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:textColor="@color/blackLight"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="第一章" />
+
+            <TextView
+                android:id="@+id/visit_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/ic_visit_red"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                tools:text="20" />
+
+            <TextView
+                android:id="@+id/star_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="8dp"
+                android:drawableLeft="@drawable/ic_star_red"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                tools:text="20" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/subtitle"
