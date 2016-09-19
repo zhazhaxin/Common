@@ -67,4 +67,12 @@ public class VideoFragment extends SuperFragment<VideoPresenter> {
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden){
+            JCVideoPlayer.releaseAllVideos();
+        }
+    }
 }

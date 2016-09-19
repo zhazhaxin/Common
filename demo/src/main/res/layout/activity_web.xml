@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:max="100"
-        android:progress="50"
-        android:progressTint="@color/colorAccent" />
+        android:progressTint="@color/colorAccent"
+        tools:progress="50" />
 
     <WebView
         android:id="@+id/web_view"

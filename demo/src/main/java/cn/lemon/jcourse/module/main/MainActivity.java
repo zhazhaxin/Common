@@ -31,7 +31,7 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 @RequirePresenter(MainPresenter.class)
 public class MainActivity extends ToolbarActivity<MainPresenter>
         implements NavigationView.OnNavigationItemSelectedListener,
-        View.OnClickListener {
+        View.OnClickListener,ViewPager.OnPageChangeListener {
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -75,6 +75,7 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
         mAdapter.addTitle("社区");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.addOnPageChangeListener(this);
     }
 
     @Override
@@ -167,5 +168,22 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if(position != 2){
+            JCVideoPlayer.releaseAllVideos();
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }
