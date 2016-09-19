@@ -16,10 +16,12 @@ import com.bumptech.glide.Glide;
 import cn.alien95.util.TimeTransform;
 import cn.alien95.util.Utils;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
+import cn.lemon.jcourse.module.account.UserBBSListActivity;
 import cn.lemon.view.adapter.BaseViewHolder;
 
 public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements View.OnClickListener {
@@ -51,6 +53,7 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
 
     @Override
     public void setData(BBS.Comment comment) {
+        super.setData(comment);
         mComment = comment;
         Glide.with(itemView.getContext())
                 .load(comment.avatar)
@@ -68,6 +71,9 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
             mContent.setText(comment.content);
         }
         mCommentBtn.setOnClickListener(this);
+        mAvatar.setOnClickListener(this);
+        mName.setOnClickListener(this);
+        mSign.setOnClickListener(this);
     }
 
     @Override
@@ -79,13 +85,25 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
                     v.getContext().startActivity(new Intent(v.getContext(), LoginActivity.class));
                     return;
                 }
-                ((BBSDetailActivity) mContext).mContent.setText("@" + mComment.name);
+                ((BBSDetailActivity) mContext).mCommentContent.setText("@" + mComment.name);
                 ((BBSDetailActivity) mContext).mObjectName = mComment.name;
-                ((BBSDetailActivity) mContext).mObjectId = mComment.id;
-                Utils.showSoftInput(mContext, ((BBSDetailActivity) mContext).mContent);
+                if (mComment.id == 0) { //连续评论自己刚添加的评论bug
+                    ((BBSDetailActivity) mContext).mObjectId = AccountModel.getInstance().getAccount().id;
+                } else {
+                    ((BBSDetailActivity) mContext).mObjectId = mComment.id;
+                }
+                Utils.showSoftInput(mContext, ((BBSDetailActivity) mContext).mCommentContent);
                 break;
-            case R.id.star:
-
+            case R.id.avatar:
+            case R.id.name:
+            case R.id.sign:
+                if (AccountModel.getInstance().isLogin() && mComment.id == 0) {
+                    mComment.id = AccountModel.getInstance().getAccount().id;
+                } else {
+                    Intent intent = new Intent(itemView.getContext(), UserBBSListActivity.class);
+                    intent.putExtra(Config.USER_BBS_LIST, mComment.id);
+                    itemView.getContext().startActivity(intent);
+                }
                 break;
         }
     }

@@ -37,7 +37,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
     private ImageView mAvatar;
     private ImageView mAddImage;
     private EditText mTitle;
-    private EditText mContent;
+    private EditText mBBSContent;
     private MultiView mMultiView;
 
     @Override
@@ -49,7 +49,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
         mAvatar = $(R.id.avatar);
         mAddImage = $(R.id.add_img);
         mTitle = $(R.id.title);
-        mContent = $(R.id.content);
+        mBBSContent = $(R.id.bbs_content);
         mMultiView = $(R.id.multi_view);
 
         Glide.with(this)
@@ -80,7 +80,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
 
     public void publish() {
         Utils.hideSoftInput(this);
-        getPresenter().publishBBS(mTitle.getText().toString(), mContent.getText().toString());
+        getPresenter().publishBBS(mTitle.getText().toString(), mBBSContent.getText().toString());
     }
 
     @Override

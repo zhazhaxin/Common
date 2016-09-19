@@ -51,8 +51,8 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
             linearLayout.addView(mToolbar);
 
             getLayoutInflater().inflate(R.layout.base_status_page, linearLayout, true);
-            mContent = (FrameLayout) linearLayout.findViewById(R.id.content);
-            mContent.addView(mLayoutView);
+            mSuperRealContent = (FrameLayout) linearLayout.findViewById(R.id.super_real_content);
+            mSuperRealContent.addView(mLayoutView);
             mDecorContent.addView(linearLayout);
             initStatusPages(linearLayout);
         } else {
@@ -75,7 +75,7 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
     @Override
     public View findViewById(int id) {
         if (isUseStatusPages()) {
-            return mContent.findViewById(id);
+            return mSuperRealContent.findViewById(id);
         } else {
             return super.findViewById(id);
         }

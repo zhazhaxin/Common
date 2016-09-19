@@ -42,7 +42,7 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     private TextView mEmptyPage;
     private TextView mErrorPage;
     private LinearLayout mLoadingPage;
-    private FrameLayout mContent;
+    private FrameLayout mSuperRealContent;  //命名为了避免其子类中有相同
     private View mCurrentShowView;
     private MaterialDialog mDialog;
 
@@ -145,8 +145,8 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     private void addStatusPage(LayoutInflater inflater, @Nullable ViewGroup container) {
         mView = inflater.inflate(R.layout.base_status_page, null);
         mView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mContent = (FrameLayout) mView.findViewById(R.id.content);
-        inflater.inflate(mLayoutResId, mContent, true);
+        mSuperRealContent = (FrameLayout) mView.findViewById(R.id.super_real_content);
+        inflater.inflate(mLayoutResId, mSuperRealContent, true);
 
         mEmptyPage = findViewById(R.id.empty_page);
         mErrorPage = findViewById(R.id.error_page);
@@ -175,7 +175,7 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
             return;
         } else {
             isShowingContent = true;
-            showView(mContent);
+            showView(mSuperRealContent);
         }
     }
 

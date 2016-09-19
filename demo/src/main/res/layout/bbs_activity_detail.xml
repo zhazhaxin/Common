@@ -43,7 +43,7 @@
                 android:src="@drawable/ic_avatar" />
 
             <EditText
-                android:id="@+id/content"
+                android:id="@+id/comment_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

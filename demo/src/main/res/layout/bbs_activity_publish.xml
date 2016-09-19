@@ -53,7 +53,7 @@
                 android:background="@color/greyLight" />
 
             <EditText
-                android:id="@id/content"
+                android:id="@+id/bbs_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/line1"
@@ -68,14 +68,14 @@
                 android:id="@+id/line2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/content"
+                android:layout_below="@+id/bbs_content"
                 android:background="@color/greyLight" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/content"
-                android:layout_alignStart="@+id/content"
+                android:layout_alignLeft="@+id/bbs_content"
+                android:layout_alignStart="@+id/bbs_content"
                 android:layout_below="@+id/line2"
                 android:layout_marginTop="16dp">
 

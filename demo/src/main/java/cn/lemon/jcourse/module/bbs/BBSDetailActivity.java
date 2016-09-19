@@ -31,7 +31,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
     private MultiTypeAdapter mAdapter;
     private ImageView mAvatar;
     private ImageView mSend;
-    public EditText mContent;
+    public EditText mCommentContent;
     public String mObjectName = "";
     public int mObjectId = 0;
 
@@ -42,7 +42,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
         setContentView(R.layout.bbs_activity_detail);
 
         mAvatar = $(R.id.avatar);
-        mContent = $(R.id.content);
+        mCommentContent = $(R.id.comment_content);
         mSend = $(R.id.send);
         mRecyclerView = $(R.id.recycler_view);
 
@@ -84,11 +84,11 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
 
     @Override
     public void onClick(View v) {
-        getPresenter().comment(mObjectId, mContent.getText().toString());
+        getPresenter().comment(mObjectId, mCommentContent.getText().toString());
     }
 
     public void clearText() {
-        mContent.setText("");
+        mCommentContent.setText("");
         Utils.hideSoftInput(this);
     }
 
@@ -96,6 +96,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
         mAdapter.openLoadMore();
         mAdapter.add(CommentViewHolder.class, comment);
         mAdapter.showNoMore();
+        CommentViewHolder.mContext = this;
     }
 
     @Override

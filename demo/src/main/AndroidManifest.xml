@@ -77,12 +77,11 @@
             android:label="发布话题" />
         <activity
             android:name=".module.bbs.BBSDetailActivity"
-            android:label="详情"
-            android:launchMode="singleTask" />
+            android:label="话题详情" />
         <activity
             android:name=".module.account.UserBBSListActivity"
             android:label="我的话题"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"/>
         <activity
             android:name=".module.main.FeedbackActivity"
             android:label="意见反馈" />

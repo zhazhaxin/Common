@@ -27,12 +27,11 @@ public class UserBBSListActivity extends ToolbarActivity {
         setContentView(R.layout.bbs_activity_user_bbslist);
 
         mId = getIntent().getIntExtra(Config.USER_BBS_LIST, 0);
-        if(mId == 0){
+        if (mId == 0) {
             mId = AccountModel.getInstance().getAccount().id;
-        }else {
-            if (mId != AccountModel.getInstance().getAccount().id) {
-                setTitle("他的话题");
-            }
+        } else if (!AccountModel.getInstance().isLogin() ||
+                (mId != AccountModel.getInstance().getAccount().id)) {
+            setTitle("他的话题");
         }
 
         mAdapter = new BBSAdapter(this);

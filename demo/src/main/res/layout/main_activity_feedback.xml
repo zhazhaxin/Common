@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/bg_frame_edit"
+        android:background="@color/white"
         android:gravity="top"
         android:hint="电话(QQ)"
         android:padding="8dp" />

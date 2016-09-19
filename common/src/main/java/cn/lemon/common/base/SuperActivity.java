@@ -39,7 +39,7 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     protected TextView mEmptyPage;
     protected TextView mErrorPage;
     protected LinearLayout mLoadingPage;
-    protected FrameLayout mContent;
+    protected FrameLayout mSuperRealContent; //命名为了避免其子类中有相同
     protected View mCurrentShowView;
 
     private MaterialDialog mDialog;
@@ -125,8 +125,8 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     private void addStatusPage(@LayoutRes int contentID) {
         FrameLayout mDecorContent = (FrameLayout) getWindow().getDecorView().findViewById(android.R.id.content);
         getLayoutInflater().inflate(R.layout.base_status_page, mDecorContent, true);
-        mContent = (FrameLayout) mDecorContent.findViewById(R.id.content); //Activity的content
-        getLayoutInflater().inflate(contentID, mContent, true); //把activity要显示的xml加载到mContent布局里
+        mSuperRealContent = (FrameLayout) mDecorContent.findViewById(R.id.super_real_content); //Activity的content
+        getLayoutInflater().inflate(contentID, mSuperRealContent, true); //把activity要显示的xml加载到mContent布局里
 
         mEmptyPage = (TextView) mDecorContent.findViewById(R.id.empty_page); //事实说明view状态时GONE也可以findViewById()
         mErrorPage = (TextView) mDecorContent.findViewById(R.id.error_page);
@@ -155,7 +155,7 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
             return;
         } else {
             isShowingContent = true;
-            showView(mContent);
+            showView(mSuperRealContent);
         }
     }
 
