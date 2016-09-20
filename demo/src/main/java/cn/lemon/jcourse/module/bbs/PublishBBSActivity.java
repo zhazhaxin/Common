@@ -70,8 +70,9 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
         showDialog("请选择图片", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MultiImageSelector.create(PublishBBSActivity.this)
+                MultiImageSelector.create()
                         .count(20)
+                        .multi()
                         .start(PublishBBSActivity.this, Config.REQUEST_IMAGE_CODE);
                 dismissDialog();
             }

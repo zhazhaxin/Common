@@ -64,7 +64,7 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
         showDialog("请选择图片", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                MultiImageSelector.create(UpdateInfoActivity.this)
+                MultiImageSelector.create()
                         .single()
                         .start(UpdateInfoActivity.this, Config.REQUEST_IMAGE_CODE);
                 dismissDialog();
