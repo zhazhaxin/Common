@@ -18,11 +18,11 @@ public class TextListPresenter extends SuperPresenter<TextListFragment> {
         getData(true);
     }
 
-    public void loadMore(){
+    public void loadMore() {
         getData(false);
     }
 
-    public void refreshData(){
+    public void refreshData() {
         getData(true);
     }
 
@@ -40,12 +40,8 @@ public class TextListPresenter extends SuperPresenter<TextListFragment> {
                     getView().getAdapter().clear();
                     getView().getRecyclerView().dismissSwipeRefresh();
                 }
-                if (javaCourses.length == 0) {
-                    if(mPage == 0){
-                        getView().showEmpty();
-                    }else {
-                        getView().getRecyclerView().showNoMore();
-                    }
+                if (javaCourses.length == 0 && mPage == 0) {
+                    getView().showEmpty();
                 }
                 getView().showContent();
                 getView().getAdapter().addAll(javaCourses);

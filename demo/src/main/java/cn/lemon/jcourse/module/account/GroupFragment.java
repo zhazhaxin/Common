@@ -91,18 +91,30 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
                 super.onNext(bbses);
                 if (bbses.length == 0 && isRefresh) {
                     showEmpty();
-                }
-                if (isRefresh) {
+                } else if (isRefresh) {
                     mAdapter.clear();
                     mRecyclerView.dismissSwipeRefresh();
                 }
+                showContent();
                 mAdapter.addAll(bbses);
                 if (bbses.length < 10) {
                     mAdapter.showNoMore();
                 }
                 mPage++;
             }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                showError();
+            }
         });
+    }
+
+    @Override
+    public void onClickErrorLoadData(View v) {
+        super.onClickErrorLoadData(v);
+        getData(true);
     }
 
     @Override

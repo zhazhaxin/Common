@@ -67,9 +67,16 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
 
     public void initStatusPages(LinearLayout parent) {
         mEmptyPage = (TextView) parent.findViewById(R.id.empty_page);
-        mErrorPage = (TextView) parent.findViewById(R.id.error_page);
+        mLoadDataButton = (TextView) parent.findViewById(R.id.error_to_load_button);
+        mErrorPage = (LinearLayout) parent.findViewById(R.id.error_page);
         mLoadingPage = (LinearLayout) parent.findViewById(R.id.loading_page);
         mCurrentShowView = mLoadingPage;
+        mLoadDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickErrorLoadData(v);
+            }
+        });
     }
 
     @Override

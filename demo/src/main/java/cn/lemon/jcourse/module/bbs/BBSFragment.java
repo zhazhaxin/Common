@@ -135,6 +135,12 @@ public class BBSFragment extends SuperFragment implements View.OnClickListener {
     }
 
     @Override
+    public void onClickErrorLoadData(View v) {
+        super.onClickErrorLoadData(v);
+        getData(true);
+    }
+
+    @Override
     public void onClick(View v) {
         if (v.getId() == R.id.add_bbs) {
             if (AccountModel.getInstance().isLogin()) {

@@ -36,11 +36,13 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     private final String TAG = "SuperFragment";
     private boolean isUseStatusPages = false;
     private boolean isShowingContent = false;
+    private boolean isShowingError = false;
     private int mLayoutResId;
     private View mView;
 
     private TextView mEmptyPage;
-    private TextView mErrorPage;
+    private TextView mLoadDataButton;
+    private LinearLayout mErrorPage;
     private LinearLayout mLoadingPage;
     private FrameLayout mSuperRealContent;  //命名为了避免其子类中有相同
     private View mCurrentShowView;
@@ -149,9 +151,20 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
         inflater.inflate(mLayoutResId, mSuperRealContent, true);
 
         mEmptyPage = findViewById(R.id.empty_page);
+        mLoadDataButton = findViewById(R.id.error_to_load_button);
         mErrorPage = findViewById(R.id.error_page);
         mLoadingPage = findViewById(R.id.loading_page);
         mCurrentShowView = mLoadingPage;
+
+        mLoadDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickErrorLoadData(v);
+            }
+        });
+    }
+
+    public void onClickErrorLoadData(View v) {
     }
 
     public <V extends View> V findViewById(@IdRes int resId) {
@@ -163,7 +176,12 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     }
 
     public void showError() {
-        showView(mErrorPage);
+        if (!isShowingError) {
+            showView(mErrorPage);
+            isShowingError = true;
+            isShowingContent = false;
+        }
+
     }
 
     public void showLoading() {
@@ -171,11 +189,10 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     }
 
     public void showContent() {
-        if (isShowingContent) {
-            return;
-        } else {
-            isShowingContent = true;
+        if (!isShowingContent) {
             showView(mSuperRealContent);
+            isShowingContent = true;
+            isShowingError = false;
         }
     }
 

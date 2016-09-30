@@ -35,9 +35,11 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
     private boolean isUseStatusPages = false;
     private boolean isShowingContent = false;
+    private boolean isShowingError = false;
 
     protected TextView mEmptyPage;
-    protected TextView mErrorPage;
+    protected TextView mLoadDataButton;
+    protected LinearLayout mErrorPage;
     protected LinearLayout mLoadingPage;
     protected FrameLayout mSuperRealContent; //命名为了避免其子类中有相同
     protected View mCurrentShowView;
@@ -129,13 +131,24 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
         getLayoutInflater().inflate(contentID, mSuperRealContent, true); //把activity要显示的xml加载到mContent布局里
 
         mEmptyPage = (TextView) mDecorContent.findViewById(R.id.empty_page); //事实说明view状态时GONE也可以findViewById()
-        mErrorPage = (TextView) mDecorContent.findViewById(R.id.error_page);
+        mLoadDataButton = (TextView) mDecorContent.findViewById(R.id.error_to_load_button);
+        mErrorPage = (LinearLayout) mDecorContent.findViewById(R.id.error_page);
         mLoadingPage = (LinearLayout) mDecorContent.findViewById(R.id.loading_page);
         mCurrentShowView = mLoadingPage;
+
+        mLoadDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickErrorLoadData(v);
+            }
+        });
     }
 
     public boolean isUseStatusPages() {
         return isUseStatusPages;
+    }
+
+    public void onClickErrorLoadData(View v) {
     }
 
     public void showEmpty() {
@@ -143,7 +156,11 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     }
 
     public void showError() {
-        showView(mErrorPage);
+        if(!isShowingError){
+            showView(mErrorPage);
+            isShowingError = true;
+            isShowingError = false;
+        }
     }
 
     public void showLoading() {
@@ -151,11 +168,10 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     }
 
     public void showContent() {
-        if (isShowingContent) {
-            return;
-        } else {
-            isShowingContent = true;
+        if (!isShowingContent) {
             showView(mSuperRealContent);
+            isShowingContent = true;
+            isShowingError = false;
         }
     }
 

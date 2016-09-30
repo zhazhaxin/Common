@@ -45,6 +45,12 @@ public class TextListFragment extends SuperFragment<TextListPresenter> {
         });
     }
 
+    @Override
+    public void onClickErrorLoadData(View v) {
+        super.onClickErrorLoadData(v);
+        getPresenter().getData(true);
+    }
+
     public TextAdapter getAdapter() {
         return mAdapter;
     }
