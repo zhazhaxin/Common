@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,6 +49,12 @@ public class CourseUnitListActivity extends ToolbarActivity<CourseUnitListPresen
                 getPresenter().getData(false);
             }
         });
+    }
+
+    @Override
+    public void onClickErrorLoadData(View v) {
+        super.onClickErrorLoadData(v);
+        getPresenter().getData(true);
     }
 
     public JavaDirAdapter getAdapter() {

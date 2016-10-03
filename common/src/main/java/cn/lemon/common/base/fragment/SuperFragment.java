@@ -35,6 +35,7 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     private final String TAG = "SuperFragment";
     private boolean isUseStatusPages = false;
+    private boolean isShowLoading = true;
     private boolean isShowingContent = false;
     private boolean isShowingError = false;
     private int mLayoutResId;
@@ -165,6 +166,7 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     }
 
     public void onClickErrorLoadData(View v) {
+        showLoading();
     }
 
     public <V extends View> V findViewById(@IdRes int resId) {
@@ -173,6 +175,9 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     public void showEmpty() {
         showView(mEmptyPage);
+        isShowingError = false;
+        isShowingContent = false;
+        isShowLoading = false;
     }
 
     public void showError() {
@@ -180,12 +185,18 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
             showView(mErrorPage);
             isShowingError = true;
             isShowingContent = false;
+            isShowLoading = false;
         }
 
     }
 
     public void showLoading() {
-        showView(mLoadingPage);
+        if (!isShowLoading) {
+            showView(mLoadingPage);
+            isShowingError = false;
+            isShowingContent = false;
+            isShowLoading = true;
+        }
     }
 
     public void showContent() {
@@ -193,6 +204,7 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
             showView(mSuperRealContent);
             isShowingContent = true;
             isShowingError = false;
+            isShowLoading = false;
         }
     }
 

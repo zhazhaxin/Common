@@ -34,6 +34,7 @@ import cn.lemon.common.base.widget.MaterialDialog;
 public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
     private boolean isUseStatusPages = false;
+    private boolean isShowLoading = true;
     private boolean isShowingContent = false;
     private boolean isShowingError = false;
 
@@ -149,22 +150,32 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     }
 
     public void onClickErrorLoadData(View v) {
+        showLoading();
     }
 
     public void showEmpty() {
         showView(mEmptyPage);
+        isShowingError = false;
+        isShowingContent = false;
+        isShowLoading = false;
     }
 
     public void showError() {
-        if(!isShowingError){
+        if (!isShowingError) {
             showView(mErrorPage);
             isShowingError = true;
             isShowingError = false;
+            isShowLoading = false;
         }
     }
 
     public void showLoading() {
-        showView(mLoadingPage);
+        if (!isShowLoading) {
+            showView(mLoadingPage);
+            isShowingContent = false;
+            isShowingError = false;
+            isShowLoading = true;
+        }
     }
 
     public void showContent() {
@@ -172,6 +183,7 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
             showView(mSuperRealContent);
             isShowingContent = true;
             isShowingError = false;
+            isShowLoading = false;
         }
     }
 

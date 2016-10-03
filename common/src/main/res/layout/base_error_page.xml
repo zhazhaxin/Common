@@ -7,23 +7,23 @@
     android:orientation="vertical"
     android:visibility="gone">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="数据加载错误( ^_^ )"
-        android:textColor="@color/grey"
-        android:textSize="18sp" />
-
     <TextView android:id="@+id/error_to_load_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
+        android:textColor="@color/grey"
         android:background="@drawable/bg_frame_button"
         android:text="重新加载" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="数据加载错误(ಥ _ ಥ)"
+        android:textColor="@color/grey" />
 
 </LinearLayout>
