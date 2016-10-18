@@ -7,14 +7,14 @@ package cn.lemon.jcourse.config;
 public class Config {
 
     //服务器
-    public static final String BASE_URL = "http://115.29.107.20/course/v1/";
+    public static final String BASE_URL = "http://123.207.114.32/course/v1/";
 
     //服务器存放图片路径
-    public static final String CACEH_IAMGE = "http://115.29.107.20/image/";
+    public static final String CACEH_IAMGE = "http://123.207.114.32/image/";
 
     //网络日志tag
     public static final String NET_LOG_TAG = "JCourse";
-    //
+
     public static final String ACCOUNT = "Account";
 
     /**
@@ -36,5 +36,5 @@ public class Config {
      * EventBus
      */
     //更新圈子的状态
-    public static final String CHECK_STATUS_FOR_GROUPFRAGMENT = "check_status";
+    public static final String CHECK_STATUS_FOR_GROUP_FRAGMENT = "check_status";
 }

@@ -125,7 +125,7 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
 
     @Subscribe
     public void onEvent(String checkStatus){
-        if(checkStatus.equals(Config.CHECK_STATUS_FOR_GROUPFRAGMENT)){
+        if(checkStatus.equals(Config.CHECK_STATUS_FOR_GROUP_FRAGMENT)){
             checkStatus();
         }
     }

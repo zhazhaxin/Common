@@ -83,7 +83,7 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
             @Override
             public void onNext(Account account) {
                 Utils.Toast("登录成功");
-                EventBus.getDefault().post(Config.CHECK_STATUS_FOR_GROUPFRAGMENT);
+                EventBus.getDefault().post(Config.CHECK_STATUS_FOR_GROUP_FRAGMENT);
                 finish();
             }
 

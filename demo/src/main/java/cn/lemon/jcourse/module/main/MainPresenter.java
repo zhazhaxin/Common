@@ -42,7 +42,7 @@ public class MainPresenter extends SuperPresenter<MainActivity> {
                     getView().dismissDialog();
                     AccountModel.getInstance().deleteAccount();
                     getView().updateAccountInfo();
-                    EventBus.getDefault().post(Config.CHECK_STATUS_FOR_GROUPFRAGMENT);
+                    EventBus.getDefault().post(Config.CHECK_STATUS_FOR_GROUP_FRAGMENT);
                 }
             }, null);
         }
