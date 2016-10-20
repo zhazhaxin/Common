@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,9 @@ import android.widget.TextView;
 
 import java.lang.annotation.Annotation;
 
-import cn.alien95.util.Utils;
 import cn.lemon.common.R;
-import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.presenter.RequirePresenter;
+import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.widget.MaterialDialog;
 
 /**
@@ -53,6 +53,8 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     private ObjectAnimator mHideAnimator;
 
     private T mPresenter;
+
+    public SuperFragment(){}
 
     public SuperFragment(View fragment) {
         mView = fragment;
@@ -99,10 +101,10 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
                         mPresenter.attachView(this);
                     } catch (java.lang.InstantiationException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperFragment : " + e.getMessage());
+                        Log.i(TAG,"SuperFragment : " + e.getMessage());
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperFragment : " + e.getMessage());
+                        Log.i(TAG,"SuperFragment : " + e.getMessage());
                     }
                 }
             }

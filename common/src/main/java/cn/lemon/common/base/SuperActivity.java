@@ -8,6 +8,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -16,10 +17,9 @@ import android.widget.TextView;
 
 import java.lang.annotation.Annotation;
 
-import cn.alien95.util.Utils;
 import cn.lemon.common.R;
-import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.presenter.RequirePresenter;
+import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.widget.MaterialDialog;
 
 /**
@@ -33,6 +33,7 @@ import cn.lemon.common.base.widget.MaterialDialog;
 
 public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
+    private final String TAG = "SuperActivity";
     private boolean isUseStatusPages = false;
     private boolean isShowLoading = true;
     private boolean isShowingContent = false;
@@ -98,10 +99,10 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
                         mPresenter.attachView(this);
                     } catch (InstantiationException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperActivity : " + e.getMessage());
+                        Log.i(TAG, "SuperActivity : " + e.getMessage());
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperActivity : " + e.getMessage());
+                        Log.i(TAG, "SuperActivity : " + e.getMessage());
                     }
                 }
             }
@@ -233,7 +234,7 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     public void showLoadingDialog() {
         if (mLoadingDialog == null) {
             ProgressBar progressBar = new ProgressBar(this);
-            progressBar.setPadding(Utils.dip2px(16), Utils.dip2px(16), Utils.dip2px(16), Utils.dip2px(16));
+            progressBar.setPadding(dp2px(16), dp2px(16), dp2px(16), dp2px(16));
             progressBar.setBackgroundResource(android.R.color.transparent);
             mLoadingDialog = new AlertDialog.Builder(this)
                     .setView(progressBar)
@@ -310,6 +311,10 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
             mPresenter.onDestroy();
         }
         mPresenter = null;
+    }
 
+    public int dp2px(float dpValue) {
+        final float scale = getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }
