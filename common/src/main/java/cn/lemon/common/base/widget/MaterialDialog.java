@@ -150,7 +150,7 @@ public class MaterialDialog extends AppCompatDialog {
 
         public MaterialDialog create() {
             MaterialDialog dialog = new MaterialDialog(mContext);
-            View dialogContent = LayoutInflater.from(mContext).inflate(R.layout.view_material_dialog, null);
+            View dialogContent = LayoutInflater.from(mContext).inflate(R.layout.dialog_material, null);
 
             dialog.mTitle = (TextView) dialogContent.findViewById(R.id.title);
             dialog.mContent = (TextView) dialogContent.findViewById(R.id.content);

@@ -18,7 +18,7 @@ public class CourseDirListActivity extends ToolbarActivity<CourseDirListPresente
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.java_activity_course_dir_list);
+        setContentView(R.layout.java_activity_course_dirs);
 
         mOne = (Button) findViewById(R.id.one);
         mTwo = (Button) findViewById(R.id.two);

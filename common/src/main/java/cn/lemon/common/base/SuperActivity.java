@@ -8,6 +8,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -16,29 +17,33 @@ import android.widget.TextView;
 
 import java.lang.annotation.Annotation;
 
-import cn.alien95.util.Utils;
 import cn.lemon.common.R;
-import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.presenter.RequirePresenter;
+import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.widget.MaterialDialog;
 
 /**
  * Activity顶级父类 : 添加各种状态(数据错误，数据为空，数据加载中)页的展示，
  * 自定义的MaterialDialog的显示，进度条dialog显示
- *
+ * <p>
  * MVP模型中把Activity作为view层，可通过getPresenter()调用对应的presenter实例
- *
+ * <p>
  * Created by linlongxin on 2016/8/3.
  */
 
 public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
+    private final String TAG = "SuperActivity";
     private boolean isUseStatusPages = false;
+    private boolean isShowLoading = true;
+    private boolean isShowingContent = false;
+    private boolean isShowingError = false;
 
     protected TextView mEmptyPage;
-    protected TextView mErrorPage;
+    protected TextView mLoadDataButton;
+    protected LinearLayout mErrorPage;
     protected LinearLayout mLoadingPage;
-    protected FrameLayout mContent;
+    protected FrameLayout mSuperRealContent; //命名为了避免其子类中有相同
     protected View mCurrentShowView;
 
     private MaterialDialog mDialog;
@@ -94,10 +99,10 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
                         mPresenter.attachView(this);
                     } catch (InstantiationException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperActivity : " + e.getMessage());
+                        Log.i(TAG, "SuperActivity : " + e.getMessage());
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperActivity : " + e.getMessage());
+                        Log.i(TAG, "SuperActivity : " + e.getMessage());
                     }
                 }
             }
@@ -124,33 +129,63 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     private void addStatusPage(@LayoutRes int contentID) {
         FrameLayout mDecorContent = (FrameLayout) getWindow().getDecorView().findViewById(android.R.id.content);
         getLayoutInflater().inflate(R.layout.base_status_page, mDecorContent, true);
-        mContent = (FrameLayout) mDecorContent.findViewById(R.id.content); //Activity的content
-        getLayoutInflater().inflate(contentID, mContent, true); //把activity要显示的xml加载到mContent布局里
+        mSuperRealContent = (FrameLayout) mDecorContent.findViewById(R.id.super_real_content); //Activity的content
+        getLayoutInflater().inflate(contentID, mSuperRealContent, true); //把activity要显示的xml加载到mContent布局里
 
         mEmptyPage = (TextView) mDecorContent.findViewById(R.id.empty_page); //事实说明view状态时GONE也可以findViewById()
-        mErrorPage = (TextView) mDecorContent.findViewById(R.id.error_page);
+        mLoadDataButton = (TextView) mDecorContent.findViewById(R.id.error_to_load_button);
+        mErrorPage = (LinearLayout) mDecorContent.findViewById(R.id.error_page);
         mLoadingPage = (LinearLayout) mDecorContent.findViewById(R.id.loading_page);
         mCurrentShowView = mLoadingPage;
+
+        mLoadDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickErrorLoadData(v);
+            }
+        });
     }
 
     public boolean isUseStatusPages() {
         return isUseStatusPages;
     }
 
+    public void onClickErrorLoadData(View v) {
+        showLoading();
+    }
+
     public void showEmpty() {
         showView(mEmptyPage);
+        isShowingError = false;
+        isShowingContent = false;
+        isShowLoading = false;
     }
 
     public void showError() {
-        showView(mErrorPage);
+        if (!isShowingError) {
+            showView(mErrorPage);
+            isShowingError = true;
+            isShowingError = false;
+            isShowLoading = false;
+        }
     }
 
     public void showLoading() {
-        showView(mLoadingPage);
+        if (!isShowLoading) {
+            showView(mLoadingPage);
+            isShowingContent = false;
+            isShowingError = false;
+            isShowLoading = true;
+        }
     }
 
     public void showContent() {
-        showView(mContent);
+        if (!isShowingContent) {
+            showView(mSuperRealContent);
+            isShowingContent = true;
+            isShowingError = false;
+            isShowLoading = false;
+        }
     }
 
     public void showView(View view) {
@@ -199,7 +234,7 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     public void showLoadingDialog() {
         if (mLoadingDialog == null) {
             ProgressBar progressBar = new ProgressBar(this);
-            progressBar.setPadding(Utils.dip2px(16), Utils.dip2px(16), Utils.dip2px(16), Utils.dip2px(16));
+            progressBar.setPadding(dp2px(16), dp2px(16), dp2px(16), dp2px(16));
             progressBar.setBackgroundResource(android.R.color.transparent);
             mLoadingDialog = new AlertDialog.Builder(this)
                     .setView(progressBar)
@@ -276,6 +311,10 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
             mPresenter.onDestroy();
         }
         mPresenter = null;
+    }
 
+    public int dp2px(float dpValue) {
+        final float scale = getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

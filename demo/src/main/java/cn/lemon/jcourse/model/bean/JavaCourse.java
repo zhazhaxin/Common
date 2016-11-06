@@ -8,6 +8,8 @@ import java.io.Serializable;
 
 public class JavaCourse implements Serializable{
     public int id;
+    public int starNum;
+    public int visitNum;
     public String title;
     public String subtitle;
     public String cover;

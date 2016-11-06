@@ -5,10 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".base.App"
@@ -17,7 +17,6 @@
         android:label="深入浅出"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="57c3fd24e0f55a756700263e" />
@@ -28,16 +27,24 @@
         <!-- 图片剪切 -->
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat" />
         <!-- 相册图片选择 -->
         <activity
             android:name="me.nereo.multi_image_selector.MultiImageSelectorActivity"
-            android:configChanges="orientation|screenSize" />
+            android:configChanges="orientation|screenSize"
+            android:label="图片选择"
+            android:screenOrientation="portrait" />
+        <!-- 图片查看器 -->
         <activity
-            android:name=".module.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".module.SplashActivity">
+            android:name="cn.lemon.multi.ui.ViewImageActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- App -->
+        <activity
+            android:name=".module.main.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,30 +52,66 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".module.main.MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".module.java.TextDetailActivity"
-            android:label="课程详情" />
+            android:label="课程详情"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.account.RegisterActivity"
-            android:label="注册" />
+            android:label="注册"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.account.LoginActivity"
-            android:label="登录" />
+            android:label="登录"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.account.UpdateInfoActivity"
-            android:label="个人信息" />
+            android:label="个人信息"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.java.StarListActivity"
-            android:label="我的收藏" />
+            android:label="我的收藏"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.java.CourseDirListActivity"
-            android:label="Java课程目录" />
-        <activity android:name=".module.java.CourseUnitListActivity" />
+            android:label="课程目录"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".module.AboutActivity"
-            android:label="关于" />
+            android:name=".module.java.CourseUnitListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.main.AboutActivity"
+            android:label="关于"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".module.bbs.PublishBBSActivity"
-            android:label="发布话题" />
+            android:label="发布话题"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.bbs.BBSDetailActivity"
+            android:label="话题详情"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.account.UserBBSListActivity"
+            android:label="我的话题"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.main.FeedbackActivity"
+            android:label="意见反馈"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.account.FollowListActivity"
+            android:label="关注的人"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".module.main.WebActivity"
+            android:label="Banner"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

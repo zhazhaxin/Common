@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,10 +51,17 @@ public class CourseUnitListActivity extends ToolbarActivity<CourseUnitListPresen
         });
     }
 
-    public JavaDirAdapter getAdapter(){
+    @Override
+    public void onClickErrorLoadData(View v) {
+        super.onClickErrorLoadData(v);
+        getPresenter().getData(true);
+    }
+
+    public JavaDirAdapter getAdapter() {
         return mAdapter;
     }
-    public RefreshRecyclerView getRecyclerView(){
+
+    public RefreshRecyclerView getRecyclerView() {
         return mRecyclerView;
     }
 
@@ -72,17 +80,19 @@ public class CourseUnitListActivity extends ToolbarActivity<CourseUnitListPresen
     class JavaDirViewHolder extends BaseViewHolder<JavaCourse> {
 
         private ImageView mCover;
-        private TextView mSubitle;
+        private TextView mSubtitle;
+        private TextView mIntro;
 
         public JavaDirViewHolder(ViewGroup parent) {
-            super(parent, R.layout.java_holder_dir);
+            super(parent, R.layout.java_holder_unit);
         }
 
         @Override
         public void onInitializeView() {
             super.onInitializeView();
             mCover = findViewById(R.id.cover);
-            mSubitle = findViewById(R.id.subtitle);
+            mSubtitle = findViewById(R.id.subtitle);
+            mIntro = findViewById(R.id.intro);
         }
 
         @Override
@@ -90,8 +100,10 @@ public class CourseUnitListActivity extends ToolbarActivity<CourseUnitListPresen
             super.setData(object);
             Glide.with(itemView.getContext())
                     .load(object.cover)
+                    .placeholder(R.drawable.ic_place_holder)
                     .into(mCover);
-            mSubitle.setText(object.subtitle);
+            mSubtitle.setText(object.subtitle);
+            mIntro.setText(object.content);
         }
 
         @Override

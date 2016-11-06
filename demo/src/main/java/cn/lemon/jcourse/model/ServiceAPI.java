@@ -26,6 +26,16 @@ public interface ServiceAPI {
     @GET("accounts/banner.php")
     Observable<Banner> getBanner();
 
+    @GET("bbs/bannerList.php")
+    Observable<Banner[]> getBannerList();
+
+    //上传图片
+    @Multipart
+    @POST("base/uploadPicture.php")
+    Observable<Info> uploadPicture(@Part MultipartBody.Part file);
+
+
+
     //Accounts相关
     @FormUrlEncoded
     @POST("accounts/register.php")
@@ -40,15 +50,27 @@ public interface ServiceAPI {
 
     @FormUrlEncoded
     @POST("accounts/updateAccountInfo.php")
-    Observable<Account> updateAcconuntInfo(@Field("name") String name, @Field("sign") String sign, @Field("avatar") String avatar);
+    Observable<Account> updateAccountInfo(@Field("name") String name, @Field("sign") String sign, @Field("avatar") String avatar);
 
-    @Multipart
-    @POST("accounts/updateAvatar.php")
-    Observable<Info> updateAvatar(@Part MultipartBody.Part file);
+    @FormUrlEncoded
+    @POST("accounts/userBBSList.php")
+    Observable<BBS[]> getUserBBSList(@Field("id") int id);
 
-    /**
-     * courses相关
-     */
+    @GET("accounts/followList.php")
+    Observable<Account[]> getFollowList();
+
+    @FormUrlEncoded
+    @POST("accounts/group.php")
+    Observable<BBS[]> group(@Field("page") int page);
+
+    @FormUrlEncoded
+    @POST("accounts/feedback.php")
+    Observable<Info> feedback(@Field("content") String content,@Field("relation") String relation);
+
+
+
+
+    //courses相关
     @FormUrlEncoded
     @POST("courses/javaCourseList.php")
     Observable<JavaCourse[]> getTextJavaCourseList(@Field("page") int page);
@@ -77,7 +99,13 @@ public interface ServiceAPI {
     @POST("courses/javaVideoList.php")
     Observable<JVideo[]> getVideoList(@Field("page") int page);
 
-    //社区相关
+    @FormUrlEncoded
+    @POST("courses/visit.php")
+    Observable<Info> visit(@Field("id") int id);
+
+
+
+    //BBS相关
     @FormUrlEncoded
     @POST("bbs/bbsList.php")
     Observable<BBS[]> getBBSList(@Field("page") int page);
@@ -85,4 +113,20 @@ public interface ServiceAPI {
     @FormUrlEncoded
     @POST("bbs/bbsDetail.php")
     Observable<BBS> getBBSDetail(@Field("id") int id);
+
+    @FormUrlEncoded
+    @POST("bbs/publishBBS.php")
+    Observable<Info> publishBBS(@Field("pictures") String pictures,@Field("title") String title,@Field("content") String content);
+
+    @FormUrlEncoded
+    @POST("bbs/comment.php")
+    Observable<Info> comment(@Field("bbsId") int bbsId,@Field("objectId") int objectId,@Field("content") String content);
+
+    @FormUrlEncoded
+    @POST("bbs/follow.php")
+    Observable<Info> follow(@Field("id") int followId);
+
+    @FormUrlEncoded
+    @POST("bbs/unfollow.php")
+    Observable<Info> unfollow(@Field("id") int followId);
 }

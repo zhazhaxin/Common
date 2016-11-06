@@ -53,6 +53,7 @@ public class VideoFragment extends SuperFragment<VideoPresenter> {
             mAdapter.clear();
             mRecyclerView.dismissSwipeRefresh();
         }
+        showContent();
         mAdapter.addAll(data);
         if(data.length == 0 && isRefresh){
             showEmpty();
@@ -63,8 +64,22 @@ public class VideoFragment extends SuperFragment<VideoPresenter> {
     }
 
     @Override
+    public void onClickErrorLoadData(View v) {
+        super.onClickErrorLoadData(v);
+        getPresenter().getData(true);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         JCVideoPlayer.releaseAllVideos();
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden){
+            JCVideoPlayer.releaseAllVideos();
+        }
     }
 }

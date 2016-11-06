@@ -7,6 +7,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,18 +17,17 @@ import android.widget.TextView;
 
 import java.lang.annotation.Annotation;
 
-import cn.alien95.util.Utils;
 import cn.lemon.common.R;
-import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.presenter.RequirePresenter;
+import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.widget.MaterialDialog;
 
 /**
  * Fragment顶级父类 : 添加各种状态(数据错误，数据为空，数据加载中)页的展示，
  * 自定义的MaterialDialog的显示，进度条dialog显示
- *
+ * <p>
  * MVP模型中把Fragment作为view层，可通过getPresenter()调用对应的presenter实例
- *
+ * <p>
  * Created by linlongxin on 2016/8/6.
  */
 
@@ -35,13 +35,17 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     private final String TAG = "SuperFragment";
     private boolean isUseStatusPages = false;
+    private boolean isShowLoading = true;
+    private boolean isShowingContent = false;
+    private boolean isShowingError = false;
     private int mLayoutResId;
     private View mView;
 
     private TextView mEmptyPage;
-    private TextView mErrorPage;
+    private TextView mLoadDataButton;
+    private LinearLayout mErrorPage;
     private LinearLayout mLoadingPage;
-    private FrameLayout mContent;
+    private FrameLayout mSuperRealContent;  //命名为了避免其子类中有相同
     private View mCurrentShowView;
     private MaterialDialog mDialog;
 
@@ -50,12 +54,14 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     private T mPresenter;
 
+    public SuperFragment(){}
+
     public SuperFragment(View fragment) {
         mView = fragment;
     }
 
     public SuperFragment(@LayoutRes int layoutResID) {
-        this.mLayoutResId = layoutResID;
+        this(layoutResID, false);
     }
 
     public SuperFragment(@LayoutRes int layoutResID, boolean isUseStatusPages) {
@@ -95,10 +101,10 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
                         mPresenter.attachView(this);
                     } catch (java.lang.InstantiationException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperFragment : " + e.getMessage());
+                        Log.i(TAG,"SuperFragment : " + e.getMessage());
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
-                        Utils.Log("SuperFragment : " + e.getMessage());
+                        Log.i(TAG,"SuperFragment : " + e.getMessage());
                     }
                 }
             }
@@ -144,33 +150,64 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
     private void addStatusPage(LayoutInflater inflater, @Nullable ViewGroup container) {
         mView = inflater.inflate(R.layout.base_status_page, null);
         mView.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mContent = (FrameLayout) mView.findViewById(R.id.content);
-        inflater.inflate(mLayoutResId, mContent, true);
+        mSuperRealContent = (FrameLayout) mView.findViewById(R.id.super_real_content);
+        inflater.inflate(mLayoutResId, mSuperRealContent, true);
 
         mEmptyPage = findViewById(R.id.empty_page);
+        mLoadDataButton = findViewById(R.id.error_to_load_button);
         mErrorPage = findViewById(R.id.error_page);
         mLoadingPage = findViewById(R.id.loading_page);
         mCurrentShowView = mLoadingPage;
+
+        mLoadDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickErrorLoadData(v);
+            }
+        });
     }
 
-    public <T extends View> T findViewById(@IdRes int resId) {
-        return (T) mView.findViewById(resId);
+    public void onClickErrorLoadData(View v) {
+        showLoading();
+    }
+
+    public <V extends View> V findViewById(@IdRes int resId) {
+        return (V) mView.findViewById(resId);
     }
 
     public void showEmpty() {
         showView(mEmptyPage);
+        isShowingError = false;
+        isShowingContent = false;
+        isShowLoading = false;
     }
 
     public void showError() {
-        showView(mErrorPage);
+        if (!isShowingError) {
+            showView(mErrorPage);
+            isShowingError = true;
+            isShowingContent = false;
+            isShowLoading = false;
+        }
+
     }
 
     public void showLoading() {
-        showView(mLoadingPage);
+        if (!isShowLoading) {
+            showView(mLoadingPage);
+            isShowingError = false;
+            isShowingContent = false;
+            isShowLoading = true;
+        }
     }
 
     public void showContent() {
-        showView(mContent);
+        if (!isShowingContent) {
+            showView(mSuperRealContent);
+            isShowingContent = true;
+            isShowingError = false;
+            isShowLoading = false;
+        }
     }
 
     public void showView(View view) {

@@ -6,6 +6,11 @@ package cn.lemon.jcourse.model.bean;
 
 public class BBS {
     //发布问题的相关信息
+    public int id;
+    public int authorId;
+    public int commentNum;
+    public long time;
+    public boolean isFollow;
     public String avatar;
     public String name;
     public String sign;
@@ -14,23 +19,16 @@ public class BBS {
     public String pictures;
     public Comment[] comments;
 
-    class Comment {
-        public Commenter commenter;
-        public Objecter object;
-    }
-
-    //评论者
-    class Commenter {
-        public String avator;
-        public String name;
-        public String sign;
+    public static class Comment {
+        public int id; //评论者id
+        public int objectId; //回复对象的id
+        public long time;
         public String content;
-    }
-
-    //回复对象
-    class Objecter {
-        public String avator;
         public String name;
         public String sign;
+        public String avatar;
+        public String objectName;
     }
+
+
 }

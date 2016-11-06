@@ -1,7 +1,6 @@
 package cn.lemon.common.net;
 
 
-import cn.alien95.util.Utils;
 import rx.Subscriber;
 
 /**
@@ -17,7 +16,6 @@ public class ServiceResponse<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
-        Utils.Toast(e.getMessage());
     }
 
     @Override

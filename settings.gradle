@@ -1,1 +1,1 @@
-include ':demo', ':common', ':RefreshRecyclerView', ':jiecaovideoplayer-4.6.5', ':multiview'
+include ':demo', ':common', ':RefreshRecyclerView', ':multiview', ':util'

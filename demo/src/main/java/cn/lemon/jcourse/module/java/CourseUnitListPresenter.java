@@ -30,7 +30,6 @@ public class CourseUnitListPresenter extends SuperPresenter<CourseUnitListActivi
         } else {
             mPage++;
         }
-
         JavaCourseModel.getInstance().getJavaCourseFromDir(mUnit, mPage, new ServiceResponse<JavaCourse[]>() {
             @Override
             public void onNext(JavaCourse[] javaCourses) {
@@ -47,9 +46,13 @@ public class CourseUnitListPresenter extends SuperPresenter<CourseUnitListActivi
                         getView().getRecyclerView().showNoMore();
                     }
                 }
-                if (getView().getRecyclerView().getSwipeRefreshLayout().isRefreshing()) {
-                    getView().getRecyclerView().getSwipeRefreshLayout().setRefreshing(false);
-                }
+                getView().getRecyclerView().dismissSwipeRefresh();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                getView().showError();
             }
         });
     }

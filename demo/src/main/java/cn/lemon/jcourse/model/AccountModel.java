@@ -1,7 +1,5 @@
 package cn.lemon.jcourse.model;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.File;
 
 import cn.lemon.common.base.model.SuperModel;
@@ -10,6 +8,7 @@ import cn.lemon.common.net.SchedulersTransformer;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.Account;
+import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.net.RetrofitModel;
@@ -52,7 +51,7 @@ public class AccountModel extends SuperModel {
     }
 
     //设置请求头 --- UID，token
-    private void setHeaders(Account account) {
+    public void setHeaders(Account account) {
         HeadersInterceptor.UID = account.id + "";
         HeadersInterceptor.TOKEN = account.token;
     }
@@ -62,7 +61,14 @@ public class AccountModel extends SuperModel {
         clearCacheObject();
         HeadersInterceptor.UID = "";
         HeadersInterceptor.TOKEN = "";
-        EventBus.getDefault().post(Config.UPDATE_ACCOUNT_ON_DRAWER);
+    }
+
+    public boolean isLogin(){
+        if(getAccount() == null){
+            return false;
+        }else {
+            return true;
+        }
     }
 
     public void getBanner(ServiceResponse<Banner> response) {
@@ -90,16 +96,13 @@ public class AccountModel extends SuperModel {
     }
 
     public void prolongToken(ServiceResponse<Account> response) {
-        if (mAccount != null) {
-            setHeaders(mAccount);
-        }
         RetrofitModel.getServiceAPI().prolongToken()
                 .compose(new SchedulersTransformer<Account>())
                 .subscribe(response);
     }
 
     public void updateAccountInfo(String name, String sign, String avatar, ServiceResponse<Account> response) {
-        RetrofitModel.getServiceAPI().updateAcconuntInfo(name, sign, avatar)
+        RetrofitModel.getServiceAPI().updateAccountInfo(name, sign, avatar)
                 .compose(new SchedulersTransformer<Account>())
                 .subscribe(response);
     }
@@ -107,7 +110,30 @@ public class AccountModel extends SuperModel {
     public void updateAvatar(File file, ServiceResponse<Info> response) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/type"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("picture", file.getName(), requestBody);
-        RetrofitModel.getServiceAPI().updateAvatar(part)
+        RetrofitModel.getServiceAPI().uploadPicture(part)
+                .compose(new SchedulersTransformer<Info>())
+                .subscribe(response);
+    }
+
+    public void getUserBBSList(int id, ServiceResponse<BBS[]> response){
+        RetrofitModel.getServiceAPI().getUserBBSList(id)
+                .compose(new SchedulersTransformer<BBS[]>())
+                .subscribe(response);
+    }
+
+    public void getFollowList(ServiceResponse<Account[]> response){
+        RetrofitModel.getServiceAPI().getFollowList()
+                .compose(new SchedulersTransformer<Account[]>())
+                .subscribe(response);
+    }
+
+    public void group(int page,ServiceResponse<BBS[]> response){
+        RetrofitModel.getServiceAPI().group(page)
+                .compose(new SchedulersTransformer<BBS[]>())
+                .subscribe(response);
+    }
+    public void feedback(String content,String relation,ServiceResponse<Info> response){
+        RetrofitModel.getServiceAPI().feedback(content,relation)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);
     }

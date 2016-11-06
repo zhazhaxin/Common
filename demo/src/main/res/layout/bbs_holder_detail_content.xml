@@ -3,7 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:background="@drawable/bg_item"
+    android:clickable="true"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -26,6 +30,16 @@
             tools:text="胖哥sneaker" />
 
         <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@+id/name"
+            android:textSize="12sp"
+            tools:text="昨天" />
+
+        <TextView
             android:id="@+id/sign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,28 +48,29 @@
             android:textSize="12sp"
             tools:text="7楼-5.15 12:09" />
 
-
-        <ImageView
-            android:id="@+id/comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_toLeftOf="@+id/star"
-            android:src="@drawable/ic_comment" />
-
         <TextView
-            android:id="@+id/star"
+            android:id="@+id/follow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:layout_marginTop="2dp"
-            android:drawableLeft="@drawable/ic_unstar_comment"
+            android:background="@drawable/bg_frame_red"
             android:gravity="center"
-            tools:text="12" />
+            android:padding="4dp"
+            android:text="+关注"
+            android:textColor="@color/colorAccent" />
 
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/blackLight"
+        android:textSize="18sp"
+        tools:text="容易理解，不愧是深" />
 
     <TextView
         android:id="@+id/content"
@@ -64,4 +79,11 @@
         android:layout_marginTop="16dp"
         android:textSize="16sp"
         tools:text="希望发更多关于android的东西" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/greyLight" />
+
 </LinearLayout>

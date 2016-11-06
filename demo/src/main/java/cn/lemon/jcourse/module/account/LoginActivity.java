@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.net.ServiceResponse;
@@ -81,8 +83,13 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
             @Override
             public void onNext(Account account) {
                 Utils.Toast("登录成功");
-                AccountModel.getInstance().saveAccount(account);
+                EventBus.getDefault().post(Config.CHECK_STATUS_FOR_GROUP_FRAGMENT);
                 finish();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Utils.Toast("用户名或密码错误");
             }
         });
     }

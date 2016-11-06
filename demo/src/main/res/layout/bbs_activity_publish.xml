@@ -7,80 +7,96 @@
 
     <include layout="@layout/include_toolbar" />
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:layout_height="wrap_content">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/greyLight" />
-
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="8dp"
-            tools:src="@mipmap/ic_launcher" />
-
-        <EditText
-            android:id="@+id/title"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/avatar"
-            android:layout_alignTop="@id/avatar"
-            android:layout_toRightOf="@id/avatar"
-            android:background="@android:color/transparent"
-            android:hint="标题(可选)"
-            android:textColor="@color/blackLight"
-            android:textColorHint="@color/grey"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="8dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/avatar"
-            android:background="@color/greyLight" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/greyLight" />
 
-    </RelativeLayout>
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="8dp"
+                tools:src="@mipmap/ic_launcher" />
 
-    <EditText
-        android:id="@id/content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@android:color/transparent"
-        android:gravity="top"
-        android:hint="输入内容"
-        android:minHeight="160dp"
-        android:textSize="16sp" />
+            <EditText
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/avatar"
+                android:layout_alignTop="@id/avatar"
+                android:layout_toRightOf="@id/avatar"
+                android:background="@android:color/transparent"
+                android:hint="标题(可选)"
+                android:maxLines="1"
+                android:textColor="@color/blackLight"
+                android:textColorHint="@color/blackLight"
+                android:textSize="18sp" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/avatar"
-        android:background="@color/greyLight" />
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/avatar"
+                android:background="@color/greyLight" />
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+            <EditText
+                android:id="@+id/bbs_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/line1"
+                android:layout_margin="16dp"
+                android:background="@android:color/transparent"
+                android:gravity="top"
+                android:hint="输入内容"
+                android:minHeight="160dp"
+                android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/add_img"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:src="@drawable/ic_upload" />
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/bbs_content"
+                android:background="@color/greyLight" />
 
-        <cn.lemon.multi.MultiView
-            android:id="@+id/multi_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/bbs_content"
+                android:layout_alignStart="@+id/bbs_content"
+                android:layout_below="@+id/line2"
+                android:layout_marginTop="16dp">
+
+                <cn.lemon.multi.MultiView
+                    android:id="@+id/multi_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/add_img"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="16dp"
+                    android:src="@drawable/ic_upload" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
 
 </LinearLayout>

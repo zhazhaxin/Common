@@ -1,12 +1,9 @@
-package cn.lemon.jcourse.module;
+package cn.lemon.jcourse.module.main;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -19,26 +16,22 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
+import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
-import cn.lemon.jcourse.model.net.GlideCircleTransform;
+import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.jcourse.module.account.LoginActivity;
 import cn.lemon.jcourse.module.account.UpdateInfoActivity;
-import cn.lemon.jcourse.module.bbs.BBSFragment;
 import cn.lemon.jcourse.module.java.CourseDirListActivity;
-import cn.lemon.jcourse.module.java.StarListActivity;
-import cn.lemon.jcourse.module.java.TextListFragment;
-import cn.lemon.jcourse.module.java.VideoFragment;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
-public class MainActivity extends ToolbarActivity
-        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+@RequirePresenter(MainPresenter.class)
+public class MainActivity extends ToolbarActivity<MainPresenter>
+        implements NavigationView.OnNavigationItemSelectedListener,
+        View.OnClickListener,ViewPager.OnPageChangeListener {
 
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
@@ -75,12 +68,14 @@ public class MainActivity extends ToolbarActivity
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        mAdapter = new ViewPagerAdapter();
-        mAdapter.addFragment(new TextListFragment(), "课程");
-        mAdapter.addFragment(new VideoFragment(), "视频");
-        mAdapter.addFragment(new BBSFragment(), "社区");
+        mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        mAdapter.addTitle("圈子");
+        mAdapter.addTitle("课程");
+        mAdapter.addTitle("视频");
+        mAdapter.addTitle("社区");
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.addOnPageChangeListener(this);
     }
 
     @Override
@@ -94,7 +89,7 @@ public class MainActivity extends ToolbarActivity
         if (account != null) {
             Glide.with(MainActivity.this)
                     .load(account.avatar)
-                    .transform(new GlideCircleTransform(this))
+                    .transform(new CircleTransform(this))
                     .into(mAvatar);
             mName.setText(account.name);
             mSign.setText(account.sign);
@@ -127,54 +122,37 @@ public class MainActivity extends ToolbarActivity
             case R.id.java:
                 break;
             case R.id.star:
-                jumpStarList();
+                getPresenter().jumpStarList();
+                break;
+            case R.id.bbs:
+                getPresenter().jumpBBSList();
+                break;
+            case R.id.follow:
+                getPresenter().jumpFollowList();
                 break;
             case R.id.about:
                 startActivity(new Intent(this, AboutActivity.class));
                 break;
             case R.id.login_out:
-                loginOut();
+                getPresenter().loginOut();
                 break;
         }
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
-    //跳转收藏列表
-    public boolean jumpStarList() {
-        if (AccountModel.getInstance().getAccount() == null) {
-            Utils.Toast("请先登录");
-            startActivity(new Intent(this, LoginActivity.class));
-            return true;
-        }
-        startActivity(new Intent(this, StarListActivity.class));
-        return true;
-    }
-
-    public void loginOut() {
-        if (AccountModel.getInstance().getAccount() == null) {
-            Utils.Toast("请先登录");
-            return;
-        }
-        showDialog("确定要退出？", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                AccountModel.getInstance().deleteAccount();
-                dismissDialog();
-                Utils.Toast("已退出");
-            }
-        }, null);
-    }
-
     @Override
     public void onClick(View v) {
-        if (AccountModel.getInstance().getAccount() == null) {
-            startActivity(new Intent(this, LoginActivity.class));
+        if (!AccountModel.getInstance().isLogin()) {
+            startActivity(LoginActivity.class);
             mDrawer.closeDrawer(GravityCompat.START);
         } else {
-            startActivity(new Intent(this, UpdateInfoActivity.class));
+            startActivity(UpdateInfoActivity.class);
         }
+    }
 
+    public void startActivity(Class activity) {
+        startActivity(new Intent(this, activity));
     }
 
     @Override
@@ -192,38 +170,20 @@ public class MainActivity extends ToolbarActivity
         return super.onOptionsItemSelected(item);
     }
 
-    //ViewPage
-    class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        private List<Fragment> mFragments;
-        private List<String> mTitles;
+    }
 
-        public ViewPagerAdapter() {
-            super(getSupportFragmentManager());
-            mFragments = new ArrayList<>();
-            mTitles = new ArrayList<>();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragments.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-
-            return mTitles.get(position);
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragments.add(fragment);
-            mTitles.add(title);
+    @Override
+    public void onPageSelected(int position) {
+        if(position != 2){
+            JCVideoPlayer.releaseAllVideos();
         }
     }
 
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
 }
