@@ -7,10 +7,10 @@ package cn.lemon.jcourse.config;
 public class Config {
 
     //服务器
-    public static final String BASE_URL = "http://123.207.114.32/course/v1/";
+    public static final String BASE_URL = "http://139.199.19.141/course/v1/";
 
     //服务器存放图片路径
-    public static final String CACEH_IAMGE = "http://123.207.114.32/image/";
+    public static final String CACEH_IAMGE = "http://139.199.19.141/image/";
 
     //网络日志tag
     public static final String NET_LOG_TAG = "JCourse";
