@@ -37,11 +37,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_item"
+            android:background="@drawable/bg_button"
             android:gravity="center"
             android:padding="8dp"
             android:text="取消"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/green"
             android:textSize="16sp" />
 
         <TextView
@@ -50,12 +50,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/bg_item"
+            android:background="@drawable/bg_button"
             android:clickable="true"
             android:gravity="center"
             android:padding="8dp"
             android:text="确定"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/green"
             android:textSize="16sp" />
     </LinearLayout>
 </LinearLayout>
