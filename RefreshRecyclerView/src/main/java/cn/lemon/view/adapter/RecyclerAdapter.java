@@ -21,7 +21,7 @@ import cn.lemon.view.R;
 /**
  * Created by linlongxin on 2015/12/19.
  */
-public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
+public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
 
     private static final String TAG = "RecyclerAdapter";
     private boolean allowLog = true;  //改成false关闭日志
@@ -37,7 +37,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     public boolean isLoadingMore = false; //正在加载
     public boolean isShowNoMore = false;//停止加载
     public boolean isLoadEnd = false;  //是否加载到底部
-    public boolean loadMoreAble = false; //是够可加载更多
+    public boolean loadMoreAble = false; //是否可加载更多
 
     protected Action mLoadMoreAction;
 
@@ -81,7 +81,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     }
 
     @Override
-    public BaseViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         log("onCreateViewHolder -- viewType : " + viewType);
         if (viewType == HEADER_TYPE) {
             return new BaseViewHolder(headerView);
@@ -96,7 +96,7 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     public abstract BaseViewHolder<T> onCreateBaseViewHolder(ViewGroup parent, int viewType);
 
     @Override
-    public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
+    public void onBindViewHolder(BaseViewHolder holder, int position) {
         log("onBindViewHolder -- position : " + position);
         if (position == mViewCount - 1) {
             return;
@@ -111,8 +111,9 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
                 holder.setData(mData.get(position - 1));
             }
         }
+
         //加载到最后一个Item，显示加载更多
-        if (position == mViewCount - 2 && !isShowNoMore) {
+        if (loadMoreAble && position == mViewCount - 2 && !isShowNoMore) {
             if (hasHeader && !hasFooter && position != 0) { //有header，没有footer
                 mLoadMoreView.setVisibility(View.VISIBLE);
             } else if (hasFooter && !hasHeader && position != 0) { //有footer，没有header
@@ -239,11 +240,12 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
             return;
         }
         isLoadingMore = false;
+        int position = mData.indexOf(object);
         mData.remove(object);
         if (hasHeader) {
-            notifyItemRemoved(mData.indexOf(object) + 1);
+            notifyItemRemoved(position + 1);
         } else {
-            notifyItemRemoved(mData.indexOf(object));
+            notifyItemRemoved(position);
         }
         mViewCount--;
     }
@@ -325,6 +327,14 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         if (hasFooter) {
             hasFooter = false;
         }
+    }
+
+    public List<T> getData(){
+        return mData;
+    }
+
+    public Context getContext(){
+        return mContext;
     }
 
     public void log(String content) {

@@ -31,6 +31,7 @@ public class LoginActivity extends ToolbarActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(false);
         setContentView(R.layout.account_activity_login);
         setToolbarHomeBack(true);
 

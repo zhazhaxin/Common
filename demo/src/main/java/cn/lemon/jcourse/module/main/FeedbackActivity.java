@@ -21,6 +21,7 @@ public class FeedbackActivity extends ToolbarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(false);
         setContentView(R.layout.main_activity_feedback);
         mFeedContent = (EditText) findViewById(R.id.feed_content);
         mRelation = (EditText) findViewById(R.id.relation);

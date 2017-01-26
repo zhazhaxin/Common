@@ -30,7 +30,6 @@ public class CourseUnitListActivity extends ToolbarActivity<CourseUnitListPresen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(true);
         setContentView(R.layout.java_activity_course_unit_list);
 
         mAdapter = new JavaDirAdapter(this);

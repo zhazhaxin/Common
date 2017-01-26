@@ -2,21 +2,25 @@ package cn.lemon.jcourse.module.java;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import cn.alien95.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
+import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.JavaCourse;
 
 import static cn.lemon.jcourse.R.id.star;
@@ -34,7 +38,7 @@ public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> imp
     private TextView mContent;
     private TextView mStarNum;
     private TextView mVisitNum;
-    private ScrollView mScrollView;
+    private Button mExercise;
     private FloatingActionButton mStar;
 
     private float mStartY;
@@ -47,6 +51,7 @@ public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> imp
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(false);
 
         setContentView(R.layout.java_activity_text_detail);
         setToolbarHomeBack(true);
@@ -57,10 +62,13 @@ public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> imp
         mContent = $(R.id.content);
         mStarNum = $(R.id.star_num);
         mVisitNum = $(R.id.visit_num);
-        mScrollView = (ScrollView) findViewById(R.id.scroll_view);
-        mStar = (FloatingActionButton) findViewById(star);
+        mExercise = $(R.id.exercise);
+        ScrollView mScrollView = (ScrollView) findViewById(R.id.scroll_view);
+        mStar = $(star);
         mStar.setOnClickListener(this);
+        mExercise.setOnClickListener(this);
         mGestureDetector = new GestureDetector(this, this);
+        assert mScrollView != null;
         mScrollView.setOnTouchListener(this);
 
     }
@@ -93,9 +101,19 @@ public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> imp
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case star:
+            case R.id.star:
                 getPresenter().starViewClick();
                 break;
+            case R.id.exercise:
+                Intent intent = new Intent(this,ExerciseActivity.class);
+                int courseId = getPresenter().getCourseId();
+                if(courseId != -1){
+                    intent.putExtra(Config.EXERCISE_ID,courseId);
+                    startActivity(intent);
+                }else {
+                    Utils.Toast("无习题练习");
+                }
+
         }
     }
 

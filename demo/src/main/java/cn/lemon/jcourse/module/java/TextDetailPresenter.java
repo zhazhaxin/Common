@@ -77,7 +77,15 @@ public class TextDetailPresenter extends SuperPresenter<TextDetailActivity> {
         }
     }
 
-    public void visit(int id){
+    private void visit(int id){
         JavaCourseModel.getInstance().visit(id);
+    }
+
+    public int getCourseId(){
+        if(mData != null){
+            return mData.id;
+        }else {
+            return -1;
+        }
     }
 }

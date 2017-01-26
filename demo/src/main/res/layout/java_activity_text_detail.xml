@@ -90,8 +90,8 @@
                         android:paddingLeft="4dp"
                         android:paddingRight="4dp"
                         android:paddingTop="2dp"
-                        android:textColor="@color/white"
-                        android:text="浏览" />
+                        android:text="浏览"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/visit_num"
@@ -113,8 +113,8 @@
                         android:paddingLeft="4dp"
                         android:paddingRight="4dp"
                         android:paddingTop="2dp"
-                        android:textColor="@color/white"
-                        android:text="收藏" />
+                        android:text="收藏"
+                        android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/star_num"
@@ -137,6 +137,15 @@
 
 
             </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/exercise"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_button_login"
+                android:text="习题练习"
+                android:textColor="@color/white" />
         </LinearLayout>
     </ScrollView>
 

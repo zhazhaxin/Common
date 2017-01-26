@@ -3,6 +3,7 @@ package cn.lemon.jcourse.model;
 import cn.lemon.common.base.model.SuperModel;
 import cn.lemon.common.net.SchedulersTransformer;
 import cn.lemon.common.net.ServiceResponse;
+import cn.lemon.jcourse.model.bean.Exercise;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JVideo;
 import cn.lemon.jcourse.model.bean.JavaCourse;
@@ -64,5 +65,11 @@ public class JavaCourseModel extends SuperModel {
         RetrofitModel.getServiceAPI().visit(id)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe();
+    }
+
+    public void getExerciseList(int id,ServiceResponse<Exercise[]> response){
+        RetrofitModel.getServiceAPI().getExerciseList(id)
+                .compose(new SchedulersTransformer<Exercise[]>())
+                .subscribe(response);
     }
 }

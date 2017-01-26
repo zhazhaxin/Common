@@ -38,7 +38,6 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(true);
         setContentView(R.layout.bbs_activity_detail);
 
         mAvatar = $(R.id.avatar);

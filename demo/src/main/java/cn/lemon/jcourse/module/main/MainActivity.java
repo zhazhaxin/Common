@@ -47,8 +47,10 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbarHomeBack(false);
+        useStatusPages(false);
+
         setContentView(R.layout.main_activity);
+        setToolbarHomeBack(false);
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,7 +72,7 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mAdapter.addTitle("圈子");
-        mAdapter.addTitle("课程");
+        mAdapter.addTitle("推荐");
         mAdapter.addTitle("视频");
         mAdapter.addTitle("社区");
         mViewPager.setAdapter(mAdapter);

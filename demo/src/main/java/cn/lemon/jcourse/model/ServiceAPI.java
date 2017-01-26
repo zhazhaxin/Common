@@ -4,6 +4,7 @@ package cn.lemon.jcourse.model;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Banner;
+import cn.lemon.jcourse.model.bean.Exercise;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JVideo;
 import cn.lemon.jcourse.model.bean.JavaCourse;
@@ -103,6 +104,9 @@ public interface ServiceAPI {
     @POST("courses/visit.php")
     Observable<Info> visit(@Field("id") int id);
 
+    @FormUrlEncoded
+    @POST("courses/exerciseList.php")
+    Observable<Exercise[]> getExerciseList(@Field("id") int id);
 
 
     //BBS相关

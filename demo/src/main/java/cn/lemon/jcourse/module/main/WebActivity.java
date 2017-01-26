@@ -23,7 +23,6 @@ public class WebActivity extends ToolbarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(true);
         setContentView(R.layout.activity_web);
 
         mBanner = (Banner) getIntent().getSerializableExtra(Config.WEB_VIEW_BANNER);

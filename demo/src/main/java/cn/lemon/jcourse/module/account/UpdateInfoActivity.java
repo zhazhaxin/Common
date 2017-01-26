@@ -38,6 +38,7 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(false);
         setContentView(R.layout.account_activity_update_info);
 
         mAvatar = (ImageView) findViewById(R.id.avatar);

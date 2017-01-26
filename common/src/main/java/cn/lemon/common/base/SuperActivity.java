@@ -34,7 +34,7 @@ import cn.lemon.common.base.widget.MaterialDialog;
 public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
     private final String TAG = "SuperActivity";
-    private boolean isUseStatusPages = false;
+    private boolean isUseStatusPages = true;
     private boolean isShowLoading = true;
     private boolean isShowingContent = false;
     private boolean isShowingError = false;
@@ -54,7 +54,12 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
     private P mPresenter;
 
-    //在setContentView()之前调用，如果activity的toolbar功能会受到其他view影响则不能使用状态页，如：带DrawLayout的toolbar
+    /**
+     * 在setContentView()之前调用，如果activity的toolbar功能会受到其他view影响则不能使用状态页。
+     * 如：DrawerLayout的ToolBar
+     * 默认：显示状态页
+     */
+
     public void useStatusPages(boolean show) {
         isUseStatusPages = show;
     }
