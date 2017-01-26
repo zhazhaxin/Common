@@ -1,6 +1,8 @@
 package cn.lemon.jcourse.module.java;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,9 +31,11 @@ import cn.lemon.view.adapter.RecyclerAdapter;
  * Created by linlongxin on 2017.1.22.
  */
 
-public class ExerciseAdapter extends RecyclerAdapter implements CompoundButton.OnCheckedChangeListener {
+public class ExerciseAdapter extends RecyclerAdapter {
 
+    private final String TAG = "ExerciseAdapter";
     private final int TYPE_SUBMIT = 999;
+    private boolean isCommitAnswer = false;
 
     ExerciseAdapter(Context context) {
         super(context);
@@ -58,15 +62,17 @@ public class ExerciseAdapter extends RecyclerAdapter implements CompoundButton.O
             int dpLength = Utils.dip2px(16);
             params.setMargins(dpLength, dpLength, dpLength, dpLength);
             button.setLayoutParams(params);
-            return new ButtonViewHolder(button);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    isCommitAnswer = true;
+                    notifyDataSetChanged();
+                    Log.i(TAG, "ButtonViewHolder -- onItemViewClick");
+                }
+            });
+            return new BaseViewHolder(button);
         }
         return new ExerciseViewHolder(parent);
-    }
-
-
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
     }
 
     /**
@@ -76,6 +82,7 @@ public class ExerciseAdapter extends RecyclerAdapter implements CompoundButton.O
 
         private TextView mTitle;
         private RadioGroup mRadioGroup;
+        private RadioButton A, B, C, D;
 
         ExerciseViewHolder(ViewGroup parent) {
             super(parent, R.layout.java_item_exercise);
@@ -86,29 +93,80 @@ public class ExerciseAdapter extends RecyclerAdapter implements CompoundButton.O
             super.onInitializeView();
             mRadioGroup = findViewById(R.id.radio_group);
             mTitle = findViewById(R.id.title);
+            A = findViewById(R.id.radio_a);
+            B = findViewById(R.id.radio_b);
+            C = findViewById(R.id.radio_c);
+            D = findViewById(R.id.radio_d);
         }
 
         @Override
-        public void setData(Exercise object) {
+        public void setData(final Exercise object) {
             super.setData(object);
             mTitle.setText(object.title);
-            addRadioButtons(mRadioGroup, object, object.isMultipleChoice == 1);
-        }
-    }
-
-    /**
-     * 提交答案Item
-     */
-    private class ButtonViewHolder extends BaseViewHolder {
-
-        public ButtonViewHolder(View itemView) {
-            super(itemView);
-        }
-
-        @Override
-        public void onItemViewClick(Object object) {
-            super.onItemViewClick(object);
-            notifyDataSetChanged();
+            List<String> contentList = parseContent(object.contentList);
+            A.setText(contentList.get(0));
+            B.setText(contentList.get(1));
+            C.setText(contentList.get(2));
+            D.setText(contentList.get(3));
+            mRadioGroup.clearCheck();
+            if (object.choice != null && object.choice.size() > 0) {
+                switch (object.choice.get(0)) {
+                    case 0:
+                        A.setChecked(true);
+                        break;
+                    case 1:
+                        B.setChecked(true);
+                        break;
+                    case 2:
+                        C.setChecked(true);
+                        break;
+                    case 3:
+                        D.setChecked(true);
+                        break;
+                }
+            }
+            int answer = parseAnswer(object.answer).get(0);
+            if (isCommitAnswer) {
+                switch (answer) {
+                    case 0:
+                        A.setTextColor(Config.Color.BLUE);
+                        break;
+                    case 1:
+                        B.setTextColor(Config.Color.BLUE);
+                        break;
+                    case 2:
+                        C.setTextColor(Config.Color.BLUE);
+                        break;
+                    case 3:
+                        D.setTextColor(Config.Color.BLUE);
+                        break;
+                }
+            }
+            mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup group, int checkedId) {
+                    if (object.choice == null) {
+                        object.choice = new ArrayList<>();
+                    }
+                    if (object.choice.size() > 0) {
+                        object.choice.remove(0);
+                    }
+                    switch (checkedId) {
+                        case R.id.radio_a:
+                            object.choice.add(0);
+                            break;
+                        case R.id.radio_b:
+                            object.choice.add(1);
+                            break;
+                        case R.id.radio_c:
+                            object.choice.add(2);
+                            break;
+                        case R.id.radio_d:
+                            object.choice.add(3);
+                            break;
+                    }
+                }
+            });
         }
     }
 
@@ -132,13 +190,25 @@ public class ExerciseAdapter extends RecyclerAdapter implements CompoundButton.O
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         int dpLength = Utils.dip2px(8);
         params.setMargins(dpLength, dpLength, dpLength, dpLength);
+        //复用
+        boolean isReuse = parent.getChildCount() > 0;
         //多选
-        boolean isRecycle = parent.getChildCount() > 0;
         if (isMultiple) {
+            CheckBox[] checkBoxes = null;
+            if (isReuse) {
+                checkBoxes = new CheckBox[4];
+                parent.clearCheck();
+                for (int i = 0; i < 4; i++) {
+                    CheckBox ch = (CheckBox) parent.getChildAt(i);
+                    ch.setTextColor(Color.BLACK);
+                    checkBoxes[i] = ch;
+                }
+                parent.removeAllViews();
+            }
             for (int i = 0; i < num; i++) {
                 CheckBox checkBox;
-                if (isRecycle) {
-                    checkBox = (CheckBox) parent.getChildAt(i);
+                if (isReuse) {
+                    checkBox = checkBoxes[i];
                 } else {
                     checkBox = new CheckBox(context);
                     checkBox.setLayoutParams(params);
@@ -172,36 +242,44 @@ public class ExerciseAdapter extends RecyclerAdapter implements CompoundButton.O
                     }
                 }
             }
-        } else
+        } else {
+            //单选
+            RadioButton[] buttons = null;
+            //复用
+            if (isReuse) {
+                buttons = new RadioButton[4];
+                for (int i = 0; i < 4; i++) {
+                    RadioButton ra = (RadioButton) parent.getChildAt(i);
+                    ra.setChecked(false);
+                    ra.setTextColor(Color.BLACK);
+                    parent.setOnCheckedChangeListener(null);
+                    buttons[i] = ra;
+                }
+                parent.removeAllViews();
+            }
+            int answer = parseAnswer(exercise.answer).get(0);
             for (int i = 0; i < num; i++) {
                 RadioButton button;
-                if (isRecycle) {
-                    button = (RadioButton) parent.getChildAt(i);
+                if (isReuse) {
+                    button = buttons[i];
                 } else {
                     button = new RadioButton(context);
                     button.setLayoutParams(params);
                 }
                 button.setText(data.get(i));
                 parent.addView(button);
-                final int finalI = i;
-                button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            exercise.choice.add(0, finalI);
-                        }
-                    }
-                });
-                if (exercise.choice == null) {
-                    exercise.choice = new ArrayList<>();
-                } else if (exercise.choice.size() > 0) {
+                if (exercise.choice != null) {
                     if (exercise.choice.get(0) == i) {
+                        Log.i(TAG, "choice : " + exercise.choice.get(0));
                         button.setChecked(true);
-                    } else if (exercise.choice.get(0) != i && parseAnswer(exercise.answer).get(0) == i) {
+                    }
+                    if (answer == i && isCommitAnswer) {
                         button.setTextColor(Config.Color.BLUE);
                     }
                 }
+                parent.setOnCheckedChangeListener(new ChangeListener(i, exercise));
             }
+        }
     }
 
     private List<Integer> parseAnswer(String answer) {
@@ -212,5 +290,36 @@ public class ExerciseAdapter extends RecyclerAdapter implements CompoundButton.O
             return gson.fromJson(answer, listType);
         } else
             return null;
+    }
+
+    private class ChangeListener implements RadioGroup.OnCheckedChangeListener {
+
+        private int mChoice;
+        private Exercise mExercise;
+
+        public ChangeListener(int mChoice, Exercise mExercise) {
+            this.mChoice = mChoice;
+            this.mExercise = mExercise;
+        }
+
+
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            Log.i(TAG, "onCheckedChanged");
+            if (mExercise.choice == null) {
+                mExercise.choice = new ArrayList<>();
+            }
+            int childCount = group.getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                int id = group.getChildAt(i).getId();
+                Log.i(TAG, "checkedId : " + id);
+                if (checkedId == id) {
+                    if (mExercise.choice.size() > 0) {
+                        mExercise.choice.remove(0);
+                    }
+                    mExercise.choice.add(mChoice);
+                }
+            }
+        }
     }
 }
