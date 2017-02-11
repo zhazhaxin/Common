@@ -1,4 +1,4 @@
-#通用技术 --- Android
+#MVP框架&通用基类
 
 > - 开发中的顶级父类，如：SuperActivity,SuperFragment,SuperModel,SuperPresenter
 > - 网络当然也是必不可少的，在OkHttp下添加日志拦截器LogInterceptor，添加请求头的拦截器HeadersInterceptor，还有一些用法不好封装成通用，详细看demo
