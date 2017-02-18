@@ -85,7 +85,7 @@ public class CommentViewHolder extends BaseViewHolder<BBS.Comment> implements Vi
                     v.getContext().startActivity(new Intent(v.getContext(), LoginActivity.class));
                     return;
                 }
-                ((BBSDetailActivity) mContext).mCommentContent.setText("@" + mComment.name);
+                ((BBSDetailActivity) mContext).mCommentContent.setHint("回复：" + mComment.name);
                 ((BBSDetailActivity) mContext).mObjectName = mComment.name;
                 if (mComment.id == 0) { //连续评论自己刚添加的评论bug
                     ((BBSDetailActivity) mContext).mObjectId = AccountModel.getInstance().getAccount().id;

@@ -29,8 +29,6 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
 
     private RefreshRecyclerView mRecyclerView;
     private MultiTypeAdapter mAdapter;
-    private ImageView mAvatar;
-    private ImageView mSend;
     public EditText mCommentContent;
     public String mObjectName = "";
     public int mObjectId = 0;
@@ -40,9 +38,9 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bbs_activity_detail);
 
-        mAvatar = $(R.id.avatar);
+        ImageView mAvatar = $(R.id.avatar);
         mCommentContent = $(R.id.comment_content);
-        mSend = $(R.id.send);
+        ImageView mSend = $(R.id.send);
         mRecyclerView = $(R.id.recycler_view);
 
         mAdapter = new MultiTypeAdapter(this);
