@@ -86,6 +86,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
 
     public void clearText() {
         mCommentContent.setText("");
+        mCommentContent.setHint("评论");
         Utils.hideSoftInput(this);
     }
 
