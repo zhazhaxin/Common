@@ -1,8 +1,9 @@
-#MVP框架&通用基类
+#MVP 框架 & 通用模块
 
-> - 开发中的顶级父类，如：SuperActivity,SuperFragment,SuperModel,SuperPresenter
-> - 网络当然也是必不可少的，在OkHttp下添加日志拦截器LogInterceptor，添加请求头的拦截器HeadersInterceptor，还有一些用法不好封装成通用，详细看demo
-> - UI设计尽量遵循Material Design
+> - 开发中的顶级父类组件，如：SuperActivity,SuperFragment,SuperModel,SuperPresenter
+> - 网络当然也是必不可少，给 OkHttp 添加日志拦截器 LogInterceptor，添加请求头的拦截器 HeadersInterceptor ，还有一些用法不好封装成通用，详细看 demo module
+> - UI设计尽量遵循 Material Design
+> - **使用请依赖 [common module](https://github.com/llxdaxia/Common/tree/dev/common)**
 
 ##SuperFragment & SuperActivity
 

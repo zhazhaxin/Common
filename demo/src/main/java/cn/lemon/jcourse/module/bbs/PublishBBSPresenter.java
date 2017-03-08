@@ -52,7 +52,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
         BBSModel.getInstance().uploadPicture(pic, new ServiceResponse<Info>() {
             @Override
             public void onNext(Info info) {
-                picUrls.add(Config.CACEH_IAMGE + pic.getName());
+                picUrls.add(Config.CACHE_IMAGE + pic.getName());
                 picNum--;
                 if (picNum == 0) {
                     getView().dismissLoadingDialog();
