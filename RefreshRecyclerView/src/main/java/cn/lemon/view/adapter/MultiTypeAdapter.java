@@ -2,6 +2,7 @@ package cn.lemon.view.adapter;
 
 import android.content.Context;
 import android.util.Log;
+import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -9,12 +10,10 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * 复杂的数据类型列表Adapter，这里没有Header,Footer的概念，所有的item都对应一个ViewHolder
+ * 复杂的数据类型列表 Adapter , 没有 Header , Footer 的概念，所有的 item 都对应一个 ViewHolder
  * Created by linlongxin on 2016/8/22.
  */
 
@@ -22,13 +21,13 @@ public class MultiTypeAdapter extends RecyclerAdapter {
 
     private final String TAG = "MultiTypeAdapter";
     private List<Object> mViewsData;
-    private Map<Integer, Integer> mPositionViewType;  //position --> ViewType
+    private SparseIntArray mPositionViewType;  //position --> ViewType
     private ViewHolderManager mViewHolderManager;
 
     public MultiTypeAdapter(Context context) {
         super(context);
         mViewsData = new ArrayList<>();
-        mPositionViewType = new HashMap<>();
+        mPositionViewType = new SparseIntArray();
         mViewHolderManager = new ViewHolderManager();
     }
 
@@ -36,13 +35,13 @@ public class MultiTypeAdapter extends RecyclerAdapter {
         if (isShowNoMore) {
             return;
         }
-        isLoadingMore = false;
         mViewsData.add(data);
         mViewHolderManager.addViewHolder(viewHolder);
         int viewType = mViewHolderManager.getViewType(viewHolder);
         mPositionViewType.put(mViewCount - 1, viewType);//mViewCount从1开始
+        int positionStart = mViewCount - 1;
         mViewCount++;
-        notifyDataSetChanged();
+        notifyItemRangeInserted(positionStart, 1);
     }
 
     public <T> void addAll(Class<? extends BaseViewHolder<T>> viewHolder, T[] data) {
@@ -50,33 +49,32 @@ public class MultiTypeAdapter extends RecyclerAdapter {
     }
 
     public <T> void addAll(Class<? extends BaseViewHolder<T>> viewHolder, List<T> data) {
-        if (isShowNoMore || data.size() == 0) {
+        int size = data.size();
+        if (isShowNoMore || size == 0) {
             return;
         }
-        isLoadingMore = false;
         mViewsData.addAll(data);
         mViewHolderManager.addViewHolder(viewHolder);
         int viewType = mViewHolderManager.getViewType(viewHolder);
-        for (int i = 0; i < data.size(); i++) {
-            mPositionViewType.put(mViewCount - 1, viewType);//mViewCount从1开始
+        int positionStart = mViewCount - 1;
+        for (int i = 0; i < size; i++) {
+            mPositionViewType.put(mViewCount - 1, viewType); //mViewCount从1开始
             mViewCount++;
         }
-        notifyDataSetChanged();
+        notifyItemRangeInserted(positionStart, size);
     }
 
     public void clear() {
-        if (mViewsData == null || mViewsData.size() == 0) {
+        if (mViewsData == null) {
+            log("clear() mData is null");
             return;
         }
         mViewsData.clear();
         mViewCount = 1;
-        notifyDataSetChanged();
-
-        isRefreshing = false;
         isShowNoMore = false;
-        isLoadingMore = false;
         mLoadMoreView.setVisibility(View.GONE);
         mNoMoreView.setVisibility(View.GONE);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -130,17 +128,17 @@ public class MultiTypeAdapter extends RecyclerAdapter {
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         log("onBindViewHolder -- position : " + position);
-        if (position == 0 && mViewCount == 1) return;
-        if (position == mViewCount - 1) { //显示加载更多
-            isLoadEnd = true;
-            if (loadMoreAble && mLoadMoreAction != null && !isShowNoMore && !isLoadingMore) {
+        if (position == 0 && mViewCount == 1) {
+
+        } else if (position == mViewCount - 1) {
+            // 显示加载更多
+            if (loadMoreAble && mLoadMoreAction != null && !isShowNoMore) {
                 mLoadMoreView.setVisibility(View.VISIBLE);
                 mLoadMoreAction.onAction();
-                isLoadingMore = true;
             }
         } else {
             holder.setData(mViewsData.get(position));
         }
-
     }
+
 }

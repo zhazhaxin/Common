@@ -101,6 +101,9 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
                     mAdapter.showNoMore();
                 }
                 mPage++;
+                if(isRefresh){
+                    mRecyclerView.getRecyclerView().scrollToPosition(0);
+                }
             }
 
             @Override
