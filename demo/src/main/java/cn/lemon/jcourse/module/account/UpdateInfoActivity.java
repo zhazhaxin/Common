@@ -143,7 +143,7 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
                         super.onNext(info);
                         dismissLoadingDialog();
                         Utils.Toast("上传成功");
-                        mAvatarUrl = Config.CACHE_IMAGE + new File(imagePath.toString()).getName();
+                        mAvatarUrl = Config.SERVER_IMAGE_PATH + new File(imagePath.toString()).getName();
                     }
                 });
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {

@@ -1,6 +1,7 @@
 package cn.lemon.jcourse.module.bbs;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.google.gson.Gson;
 
@@ -49,10 +50,15 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
 
     //上传图片
     public void uploadPic(final File pic) {
-        BBSModel.getInstance().uploadPicture(pic, new ServiceResponse<Info>() {
+        BitmapFactory.Options op = new BitmapFactory.Options();
+        op.inJustDecodeBounds = true;  //不分配内存设置
+        BitmapFactory.decodeFile(pic.getPath(), op);
+        int width = op.outWidth;
+        int height = op.outHeight;
+        BBSModel.getInstance().uploadPicture(pic, width, height, new ServiceResponse<Info>() {
             @Override
             public void onNext(Info info) {
-                picUrls.add(Config.CACHE_IMAGE + pic.getName());
+                picUrls.add(Config.SERVER_IMAGE_PATH + pic.getName());
                 picNum--;
                 if (picNum == 0) {
                     getView().dismissLoadingDialog();

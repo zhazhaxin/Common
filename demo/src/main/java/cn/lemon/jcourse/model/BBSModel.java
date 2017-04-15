@@ -30,41 +30,44 @@ public class BBSModel extends SuperModel {
     }
 
     //上传图片
-    public void uploadPicture(File file, ServiceResponse<Info> response) {
+    public void uploadPicture(File file, int width, int height, ServiceResponse<Info> response) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/type"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("picture", file.getName(), requestBody);
-        RetrofitModel.getServiceAPI().uploadPicture(part)
+        RetrofitModel.getServiceAPI().uploadPicture(part, width, height)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);
     }
 
-    public void publishBBS(String picsJson, String title,String content, ServiceResponse<Info> response) {
-        RetrofitModel.getServiceAPI().publishBBS(picsJson,title, content)
+    public void publishBBS(String picsJson, String title, String content, ServiceResponse<Info> response) {
+        RetrofitModel.getServiceAPI().publishBBS(picsJson, title, content)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);
     }
 
-    public void getBBSDetail(int id,ServiceResponse<BBS> response){
+    public void getBBSDetail(int id, ServiceResponse<BBS> response) {
         RetrofitModel.getServiceAPI().getBBSDetail(id)
                 .compose(new SchedulersTransformer<BBS>())
                 .subscribe(response);
     }
 
-    public void comment(int bbsId,int objectId,String content,ServiceResponse<Info> response){
-        RetrofitModel.getServiceAPI().comment(bbsId,objectId,content)
+    public void comment(int bbsId, int objectId, String content, ServiceResponse<Info> response) {
+        RetrofitModel.getServiceAPI().comment(bbsId, objectId, content)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);
     }
-    public void follow(int id,ServiceResponse<Info> response){
+
+    public void follow(int id, ServiceResponse<Info> response) {
         RetrofitModel.getServiceAPI().follow(id)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);
     }
-    public void unfollow(int id,ServiceResponse<Info> response){
+
+    public void unfollow(int id, ServiceResponse<Info> response) {
         RetrofitModel.getServiceAPI().unfollow(id)
                 .compose(new SchedulersTransformer<Info>())
                 .subscribe(response);
     }
+
     public void getBannerList(ServiceResponse<Banner[]> response) {
         RetrofitModel.getServiceAPI().getBannerList()
                 .compose(new SchedulersTransformer<Banner[]>())
