@@ -3,12 +3,12 @@ package cn.lemon.jcourse.module.java;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.bean.Exercise;
-import cn.lemon.view.RefreshRecyclerView;
 
 /**
  * Created by linlongxin on 2017.1.22.
@@ -17,7 +17,7 @@ import cn.lemon.view.RefreshRecyclerView;
 @RequirePresenter(ExercisePresenter.class)
 public class ExerciseActivity extends ToolbarActivity<ExercisePresenter> {
 
-    private RefreshRecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     private ExerciseAdapter mAdapter;
 
     @Override
@@ -26,14 +26,18 @@ public class ExerciseActivity extends ToolbarActivity<ExercisePresenter> {
         setContentView(R.layout.java_activity_exercise_list);
         setToolbarHomeBack(true);
 
-        mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mRecyclerView.setAdapter(mAdapter = new ExerciseAdapter(this));
+        mRecyclerView.setAdapter(mAdapter = new ExerciseAdapter());
     }
 
     public void setData(Exercise[] exercises){
-        mAdapter.addAll(exercises);
+        if(exercises.length == 0){
+            showEmpty();
+        }else {
+            showContent();
+            mAdapter.addAll(exercises);
+        }
     }
 
 }

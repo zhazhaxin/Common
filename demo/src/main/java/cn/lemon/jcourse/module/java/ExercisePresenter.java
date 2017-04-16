@@ -15,7 +15,7 @@ public class ExercisePresenter extends SuperPresenter<ExerciseActivity> {
     @Override
     public void onCreate() {
         super.onCreate();
-        int id = getView().getIntent().getIntExtra(Config.EXERCISE_ID,-1);
+        int id = getView().getIntent().getIntExtra(Config.EXERCISE_ID, -1);
         getData(id);
     }
 
@@ -24,7 +24,6 @@ public class ExercisePresenter extends SuperPresenter<ExerciseActivity> {
             @Override
             public void onNext(Exercise[] exercises) {
                 super.onNext(exercises);
-                getView().showContent();
                 getView().setData(exercises);
             }
 

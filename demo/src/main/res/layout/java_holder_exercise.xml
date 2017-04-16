@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="16dp"
@@ -17,8 +18,13 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textSize="16sp" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            tools:text="分析下面的句子，选择答案" />
 
         <RadioGroup
             android:id="@+id/radio_group"
@@ -28,22 +34,35 @@
             <RadioButton
                 android:id="@+id/radio_a"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="@android:color/tertiary_text_dark"
+                tools:text="选择A" />
 
             <RadioButton
                 android:id="@+id/radio_b"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="@android:color/tertiary_text_dark"
+                tools:text="选择A" />
 
             <RadioButton
                 android:id="@+id/radio_c"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:textColor="@android:color/tertiary_text_dark"
+                tools:text="选择A" />
 
             <RadioButton
                 android:id="@+id/radio_d"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="4dp"
+                android:textColor="@android:color/tertiary_text_dark"
+                tools:text="选择A" />
 
         </RadioGroup>
 

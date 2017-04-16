@@ -19,6 +19,7 @@ import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.BBS;
+import cn.lemon.jcourse.model.bean.Picture;
 import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.view.RefreshRecyclerView;
 import cn.lemon.view.adapter.Action;
@@ -65,9 +66,8 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
     public void setData(BBS bbs) {
         showContent();
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<String>>() {
-        }.getType();
-        List<String> pics = gson.fromJson(bbs.pictures, listType);
+        Type listType = new TypeToken<List<Picture>>() {}.getType();
+        List<Picture> pics = gson.fromJson(bbs.pictures, listType);
         mAdapter.clear();
         mAdapter.add(ContentViewHolder.class, bbs);
         mAdapter.addAll(PictureViewHolder.class, pics);

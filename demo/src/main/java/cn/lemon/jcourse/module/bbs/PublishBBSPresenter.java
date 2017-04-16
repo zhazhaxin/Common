@@ -16,6 +16,7 @@ import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.BBSModel;
 import cn.lemon.jcourse.model.bean.Info;
+import cn.lemon.jcourse.model.bean.Picture;
 
 /**
  * Created by linlongxin on 2016/9/16.
@@ -23,11 +24,11 @@ import cn.lemon.jcourse.model.bean.Info;
 
 public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
 
-    private List<String> picUrls = new ArrayList<>();
+    private List<Picture> pics = new ArrayList<>();
     private int picNum;
 
     public void dealPictures(List<String> paths) {
-        picUrls.clear();
+        pics.clear();
         if (paths.size() > 0) {
             getView().showLoadingDialog();
             //批量压缩图片
@@ -55,10 +56,10 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
         BitmapFactory.decodeFile(pic.getPath(), op);
         int width = op.outWidth;
         int height = op.outHeight;
-        BBSModel.getInstance().uploadPicture(pic, width, height, new ServiceResponse<Info>() {
+        BBSModel.getInstance().uploadPicture(pic, width, height, new ServiceResponse<Picture>() {
             @Override
-            public void onNext(Info info) {
-                picUrls.add(Config.SERVER_IMAGE_PATH + pic.getName());
+            public void onNext(Picture picture) {
+                pics.add(picture);
                 picNum--;
                 if (picNum == 0) {
                     getView().dismissLoadingDialog();
@@ -71,7 +72,7 @@ public class PublishBBSPresenter extends SuperPresenter<PublishBBSActivity> {
     //发布BBS
     public void publishBBS(String title, String content) {
         Gson gson = new Gson();
-        String json = gson.toJson(picUrls);
+        String json = gson.toJson(pics);
         BBSModel.getInstance().publishBBS(json, title, content, new ServiceResponse<Info>() {
             @Override
             public void onNext(Info info) {

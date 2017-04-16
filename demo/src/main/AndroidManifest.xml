@@ -48,6 +48,7 @@
         <activity
             android:name=".module.main.MainActivity"
             android:label="@string/title_activity_main"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity

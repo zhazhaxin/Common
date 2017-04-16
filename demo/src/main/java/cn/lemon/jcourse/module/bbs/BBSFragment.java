@@ -49,7 +49,7 @@ public class BBSFragment extends SuperFragment implements View.OnClickListener {
         mAdapter = new BBSAdapter(getActivity());
         mBannerAdapter = new BannerAdapter(getContext());
         mBanner = new RollPagerView(getContext());
-        mBanner.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dip2px(220)));
+        mBanner.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Utils.dip2px(190)));
         mBanner.setPlayDelay(3000);
         mAdapter.setHeader(mBanner);
         mBanner.setOnItemClickListener(new OnItemClickListener() {
@@ -92,25 +92,20 @@ public class BBSFragment extends SuperFragment implements View.OnClickListener {
     public void getData(final boolean isRefresh) {
         if (isRefresh) {
             mPage = 0;
+            mAdapter.clear();
+            mRecyclerView.dismissSwipeRefresh();
         } else {
             mPage++;
         }
         BBSModel.getInstance().getBBSList(mPage, new ServiceResponse<BBS[]>() {
             @Override
             public void onNext(BBS[] data) {
-                if (data.length == 0 && isRefresh) {
-                    showEmpty();
-                } else {
-                    showContent();
-                }
-
-                if (isRefresh) {
-                    mAdapter.clear();
-                    mRecyclerView.dismissSwipeRefresh();
-                }
-                mAdapter.addAll(data);
-                if (data.length < 10) {
-                    mAdapter.showNoMore();
+                showContent();
+                if (data.length > 0) {
+                    mAdapter.addAll(data);
+                    if (data.length < 10) {
+                        mAdapter.showNoMore();
+                    }
                 }
             }
 

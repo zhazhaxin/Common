@@ -8,6 +8,7 @@ import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
+import cn.lemon.jcourse.model.bean.Picture;
 import cn.lemon.jcourse.model.net.RetrofitModel;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -30,11 +31,11 @@ public class BBSModel extends SuperModel {
     }
 
     //上传图片
-    public void uploadPicture(File file, int width, int height, ServiceResponse<Info> response) {
+    public void uploadPicture(File file, int width, int height, ServiceResponse<Picture> response) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/type"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("picture", file.getName(), requestBody);
         RetrofitModel.getServiceAPI().uploadPicture(part, width, height)
-                .compose(new SchedulersTransformer<Info>())
+                .compose(new SchedulersTransformer<Picture>())
                 .subscribe(response);
     }
 

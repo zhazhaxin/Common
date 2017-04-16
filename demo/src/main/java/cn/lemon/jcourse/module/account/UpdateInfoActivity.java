@@ -2,6 +2,7 @@ package cn.lemon.jcourse.module.account;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -23,7 +24,7 @@ import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
-import cn.lemon.jcourse.model.bean.Info;
+import cn.lemon.jcourse.model.bean.Picture;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
@@ -130,8 +131,13 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
                 mAvatar.setImageURI(resultUri);
                 final StringBuilder imagePath = new StringBuilder(String.valueOf(resultUri));
                 imagePath.delete(0, 7); //删除file://
+                BitmapFactory.Options op = new BitmapFactory.Options();
+                op.inJustDecodeBounds = true;  //不分配内存设置
+                BitmapFactory.decodeFile(imagePath.toString(), op);
+                int width = op.outWidth;
+                int height = op.outHeight;
                 //上传图片
-                AccountModel.getInstance().updateAvatar(new File(imagePath.toString()), new ServiceResponse<Info>() {
+                AccountModel.getInstance().updateAvatar(new File(imagePath.toString()), width, height, new ServiceResponse<Picture>() {
                     @Override
                     public void onStart() {
                         super.onStart();
@@ -139,8 +145,8 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
                     }
 
                     @Override
-                    public void onNext(Info info) {
-                        super.onNext(info);
+                    public void onNext(Picture picture) {
+                        super.onNext(picture);
                         dismissLoadingDialog();
                         Utils.Toast("上传成功");
                         mAvatarUrl = Config.SERVER_IMAGE_PATH + new File(imagePath.toString()).getName();

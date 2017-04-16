@@ -8,6 +8,7 @@ import cn.lemon.jcourse.model.bean.Exercise;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JVideo;
 import cn.lemon.jcourse.model.bean.JavaCourse;
+import cn.lemon.jcourse.model.bean.Picture;
 import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -33,7 +34,7 @@ public interface ServiceAPI {
     //上传图片
     @Multipart
     @POST("base/uploadPicture.php")
-    Observable<Info> uploadPicture(@Part MultipartBody.Part file, @Field("width") int width, @Field("height") int height);
+    Observable<Picture> uploadPicture(@Part MultipartBody.Part file, @Part("width") int width, @Part("height") int height);
 
 
     //Accounts相关

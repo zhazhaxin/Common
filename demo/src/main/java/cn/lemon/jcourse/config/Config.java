@@ -42,7 +42,8 @@ public class Config {
 
     public static class Color {
         public static int RED = 0Xf42930;
-        public static int BLUE = 0Xff5677fc;
+        public static int GREEN = 0XFF5EEA7D;
         public static int WHITE = 0xffffffff;
+        public static int TEXT_ANSWER_COLOR = 0XFF808080;
     }
 }

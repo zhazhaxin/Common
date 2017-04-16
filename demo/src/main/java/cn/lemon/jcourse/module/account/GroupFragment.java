@@ -69,8 +69,8 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
     }
 
     public void checkStatus() {
-        showContent();
         if (!AccountModel.getInstance().isLogin()) {
+            showContent();
             mRecyclerView.setVisibility(View.GONE);
             mHolder.setVisibility(View.VISIBLE);
             mLogin.setOnClickListener(this);
@@ -84,16 +84,18 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
     public void getData(final boolean isRefresh) {
         if (isRefresh) {
             mPage = 0;
+            mRecyclerView.dismissSwipeRefresh();
         }
         AccountModel.getInstance().group(mPage, new ServiceResponse<BBS[]>() {
             @Override
             public void onNext(BBS[] bbses) {
                 super.onNext(bbses);
+
                 if (bbses.length == 0 && isRefresh) {
                     showEmpty();
+                    return;
                 } else if (isRefresh) {
                     mAdapter.clear();
-                    mRecyclerView.dismissSwipeRefresh();
                 }
                 showContent();
                 mAdapter.addAll(bbses);
