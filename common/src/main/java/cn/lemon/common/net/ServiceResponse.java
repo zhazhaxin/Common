@@ -1,6 +1,8 @@
 package cn.lemon.common.net;
 
 
+import android.util.Log;
+
 import rx.Subscriber;
 
 /**
@@ -9,6 +11,8 @@ import rx.Subscriber;
 
 public class ServiceResponse<T> extends Subscriber<T> {
 
+    private final String TAG = "ServiceResponse";
+
     @Override
     public void onCompleted() {
 
@@ -16,6 +20,7 @@ public class ServiceResponse<T> extends Subscriber<T> {
 
     @Override
     public void onError(Throwable e) {
+        Log.e(TAG,"onError : " + e.getMessage());
     }
 
     @Override

@@ -19,6 +19,7 @@ import cn.lemon.common.base.presenter.RequirePresenter;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.BBS;
+import cn.lemon.jcourse.model.bean.Picture;
 import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.view.RefreshRecyclerView;
 import cn.lemon.view.adapter.Action;
@@ -29,8 +30,6 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
 
     private RefreshRecyclerView mRecyclerView;
     private MultiTypeAdapter mAdapter;
-    private ImageView mAvatar;
-    private ImageView mSend;
     public EditText mCommentContent;
     public String mObjectName = "";
     public int mObjectId = 0;
@@ -38,12 +37,11 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(true);
         setContentView(R.layout.bbs_activity_detail);
 
-        mAvatar = $(R.id.avatar);
+        ImageView mAvatar = $(R.id.avatar);
         mCommentContent = $(R.id.comment_content);
-        mSend = $(R.id.send);
+        ImageView mSend = $(R.id.send);
         mRecyclerView = $(R.id.recycler_view);
 
         mAdapter = new MultiTypeAdapter(this);
@@ -68,9 +66,8 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
     public void setData(BBS bbs) {
         showContent();
         Gson gson = new Gson();
-        Type listType = new TypeToken<List<String>>() {
-        }.getType();
-        List<String> pics = gson.fromJson(bbs.pictures, listType);
+        Type listType = new TypeToken<List<Picture>>() {}.getType();
+        List<Picture> pics = gson.fromJson(bbs.pictures, listType);
         mAdapter.clear();
         mAdapter.add(ContentViewHolder.class, bbs);
         mAdapter.addAll(PictureViewHolder.class, pics);
@@ -89,6 +86,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
 
     public void clearText() {
         mCommentContent.setText("");
+        mCommentContent.setHint("评论");
         Utils.hideSoftInput(this);
     }
 

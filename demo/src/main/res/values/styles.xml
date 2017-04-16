@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- App & Activity 主题 -->
 
@@ -6,17 +6,23 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowEnterTransition" tools:targetApi="lollipop">
+            @transition/slide_start_activity
+        </item>
+        <item name="android:windowExitTransition" tools:targetApi="lollipop">
+            @transition/slide_finish_activity
+        </item>
     </style>
 
 
     <!-- Toolbar 主题 -->
 
-    <style name="ToolbarTheme" parent="Theme.AppCompat"/>
+    <style name="ToolbarTheme" parent="Theme.AppCompat" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 
 
 </resources>

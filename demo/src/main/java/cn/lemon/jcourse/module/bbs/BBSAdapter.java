@@ -12,12 +12,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.alien95.util.TimeTransform;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.bean.BBS;
+import cn.lemon.jcourse.model.bean.Picture;
 import cn.lemon.jcourse.model.net.CircleTransform;
 import cn.lemon.jcourse.module.account.UserBBSListActivity;
 import cn.lemon.multi.MultiView;
@@ -92,12 +94,17 @@ public class BBSAdapter extends RecyclerAdapter<BBS> {
             mContent.setText(bbs.content);
             mTime.setText(TimeTransform.getRecentlyDate(bbs.time * 1000));
             mCommentNum.setText(" " + bbs.commentNum);
-            if (bbs.pictures.length() > 0) {
+            if (!bbs.pictures.isEmpty()) {
                 Gson gson = new Gson();
-                Type listType = new TypeToken<List<String>>() {}.getType();
-                List<String> pics = gson.fromJson(bbs.pictures, listType);
+                Type listType = new TypeToken<List<Picture>>() {}.getType();
+                List<Picture> pics = gson.fromJson(bbs.pictures, listType);
+                List<String> urls = new ArrayList<>();
+                int length = pics.size();
+                for (int i = 0; i < length; i ++){
+                    urls.add(pics.get(i).url);
+                }
                 mMultiView.clear();
-                mMultiView.setImages(pics);
+                mMultiView.setImages(urls);
             }
 
             if(isJumpToUserBBSList){

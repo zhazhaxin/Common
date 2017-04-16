@@ -4,9 +4,11 @@ package cn.lemon.jcourse.model;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Banner;
+import cn.lemon.jcourse.model.bean.Exercise;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.JVideo;
 import cn.lemon.jcourse.model.bean.JavaCourse;
+import cn.lemon.jcourse.model.bean.Picture;
 import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -32,8 +34,7 @@ public interface ServiceAPI {
     //上传图片
     @Multipart
     @POST("base/uploadPicture.php")
-    Observable<Info> uploadPicture(@Part MultipartBody.Part file);
-
+    Observable<Picture> uploadPicture(@Part MultipartBody.Part file, @Part("width") int width, @Part("height") int height);
 
 
     //Accounts相关
@@ -65,9 +66,7 @@ public interface ServiceAPI {
 
     @FormUrlEncoded
     @POST("accounts/feedback.php")
-    Observable<Info> feedback(@Field("content") String content,@Field("relation") String relation);
-
-
+    Observable<Info> feedback(@Field("content") String content, @Field("relation") String relation);
 
 
     //courses相关
@@ -93,7 +92,7 @@ public interface ServiceAPI {
 
     @FormUrlEncoded
     @POST("courses/javaCourseFromDir.php")
-    Observable<JavaCourse[]> getJavaCourseFromDir(@Field("unit") int unit,@Field("page") int page);
+    Observable<JavaCourse[]> getJavaCourseFromDir(@Field("unit") int unit, @Field("page") int page);
 
     @FormUrlEncoded
     @POST("courses/javaVideoList.php")
@@ -103,6 +102,9 @@ public interface ServiceAPI {
     @POST("courses/visit.php")
     Observable<Info> visit(@Field("id") int id);
 
+    @FormUrlEncoded
+    @POST("courses/exerciseList.php")
+    Observable<Exercise[]> getExerciseList(@Field("id") int id);
 
 
     //BBS相关
@@ -116,11 +118,11 @@ public interface ServiceAPI {
 
     @FormUrlEncoded
     @POST("bbs/publishBBS.php")
-    Observable<Info> publishBBS(@Field("pictures") String pictures,@Field("title") String title,@Field("content") String content);
+    Observable<Info> publishBBS(@Field("pictures") String pictures, @Field("title") String title, @Field("content") String content);
 
     @FormUrlEncoded
     @POST("bbs/comment.php")
-    Observable<Info> comment(@Field("bbsId") int bbsId,@Field("objectId") int objectId,@Field("content") String content);
+    Observable<Info> comment(@Field("bbsId") int bbsId, @Field("objectId") int objectId, @Field("content") String content);
 
     @FormUrlEncoded
     @POST("bbs/follow.php")

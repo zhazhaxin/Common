@@ -17,12 +17,6 @@
         android:label="深入浅出"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="57c3fd24e0f55a756700263e" />
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <!-- 图片剪切 -->
         <activity
@@ -54,6 +48,7 @@
         <activity
             android:name=".module.main.MainActivity"
             android:label="@string/title_activity_main"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
@@ -112,6 +107,10 @@
             android:name=".module.main.WebActivity"
             android:label="Banner"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".module.java.ExerciseActivity"
+            android:label="习题练习"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

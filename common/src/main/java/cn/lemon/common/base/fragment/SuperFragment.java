@@ -1,6 +1,7 @@
 package cn.lemon.common.base.fragment;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -56,14 +57,17 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     public SuperFragment(){}
 
+    @SuppressLint("ValidFragment")
     public SuperFragment(View fragment) {
         mView = fragment;
     }
 
+    @SuppressLint("ValidFragment")
     public SuperFragment(@LayoutRes int layoutResID) {
         this(layoutResID, false);
     }
 
+    @SuppressLint("ValidFragment")
     public SuperFragment(@LayoutRes int layoutResID, boolean isUseStatusPages) {
         this.mLayoutResId = layoutResID;
         this.isUseStatusPages = isUseStatusPages;

@@ -13,18 +13,17 @@ import cn.lemon.jcourse.config.Config;
 @RequirePresenter(CourseDirListPresenter.class)
 public class CourseDirListActivity extends ToolbarActivity<CourseDirListPresenter> implements View.OnClickListener {
 
-    private Button mOne, mTwo, mThree, mFour, mFive;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(false);
         setContentView(R.layout.java_activity_course_dirs);
 
-        mOne = (Button) findViewById(R.id.one);
-        mTwo = (Button) findViewById(R.id.two);
-        mThree = (Button) findViewById(R.id.three);
-        mFour = (Button) findViewById(R.id.four);
-        mFive = (Button) findViewById(R.id.five);
+        Button mOne = $(R.id.one);
+        Button mTwo = $(R.id.two);
+        Button mThree = $(R.id.three);
+        Button mFour = $(R.id.four);
+        Button mFive = $(R.id.five);
 
         mOne.setOnClickListener(this);
         mTwo.setOnClickListener(this);

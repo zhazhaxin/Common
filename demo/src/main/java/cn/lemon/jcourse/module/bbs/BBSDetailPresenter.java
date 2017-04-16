@@ -52,11 +52,11 @@ public class BBSDetailPresenter extends SuperPresenter<BBSDetailActivity> {
             getView().startActivity(new Intent(getView(), LoginActivity.class));
             return;
         }
-        if (objectId > 0) {  //有回复对象
-            StringBuilder sb = new StringBuilder(content);
-            sb.delete(0, getView().mObjectName.length() + 1);
-            content = sb.toString();
-        }
+//        if (objectId > 0) {  //有回复对象
+//            StringBuilder sb = new StringBuilder(content);
+//            sb.delete(0, getView().mObjectName.length() + 1);
+//            content = sb.toString();
+//        }
         final BBS.Comment comment = new BBS.Comment();
         comment.name = AccountModel.getInstance().getAccount().name;
         comment.avatar = AccountModel.getInstance().getAccount().avatar;

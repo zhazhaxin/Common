@@ -43,6 +43,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(false);
         setContentView(R.layout.bbs_activity_publish);
         setToolbarHomeBack(true);
 

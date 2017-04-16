@@ -1,12 +1,13 @@
-#通用技术 --- Android
+# MVP 框架 & 通用模块
 
-> - 开发中的顶级父类，如：SuperActivity,SuperFragment,SuperModel,SuperPresenter
-> - 网络当然也是必不可少的，在OkHttp下添加日志拦截器LogInterceptor，添加请求头的拦截器HeadersInterceptor，还有一些用法不好封装成通用，详细看demo
-> - UI设计尽量遵循Material Design
+> - 开发中的顶级父类组件，如：SuperActivity,SuperFragment,SuperModel,SuperPresenter
+> - 网络当然也是必不可少，给 OkHttp 添加日志拦截器 LogInterceptor，添加请求头的拦截器 HeadersInterceptor ，还有一些用法不好封装成通用，详细看 demo module
+> - UI设计尽量遵循 Material Design
+> - **使用请下载并依赖 [common module](https://github.com/llxdaxia/Common/tree/dev/common)，敏捷开发**
 
-##SuperFragment & SuperActivity
+## SuperFragment & SuperActivity
 
-###状态页
+### 状态页
 
 <img src="loading.png" width="260" height="462"/>
 <img src="empty.png" width="260" height="462"/>
@@ -71,7 +72,7 @@
  mTitle = $(R.id.title);  //取代findViewById()
  ```
 
-###Dialog
+### Dialog
 
 <img src="material_dialog.png" width="320" height="569"/>
 <img src="loading_dialog.png" width="320" height="569"/>
@@ -104,7 +105,7 @@ public void showLoadingDialog()
 public void dismissLoadingDialog()
 ```
 
-##SuperPresenter --- MVP模型
+## SuperPresenter --- MVP模型
 
 >MVP中presenter层的顶级父类，把Activity作为View层
 
@@ -147,7 +148,7 @@ activity中
 public P getPresenter()
 ```
 
-##SuperModel
+## SuperModel
 
 >MVP中的model层，即数据管理层。
 >通常APP中的数据存储或者来源主要通过：本地数据库，网络，SharedPreferences，文件。
@@ -169,7 +170,7 @@ public Object getObject(String key);
 
 >数据库和网络还没有整理封装，后期持续更新。。。
 
-##ToolbarActivity
+## ToolbarActivity
 
 >继承SuperActivity，拥有SuperActivity的所有特性，此外主要针对带有Toolbar的Activity
 

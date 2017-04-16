@@ -20,6 +20,7 @@ public class AboutActivity extends ToolbarActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(false);
         setContentView(R.layout.main_activity_about);
 
         mTellAuthor = (LinearLayout) findViewById(R.id.tell_author);

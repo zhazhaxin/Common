@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,11 +34,8 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     private boolean hasHeader = false;
     private boolean hasFooter = false;
-    public boolean isRefreshing = false; //刷新
-    public boolean isLoadingMore = false; //正在加载
-    public boolean isShowNoMore = false;//停止加载
-    public boolean isLoadEnd = false;  //是否加载到底部
-    public boolean loadMoreAble = false; //是够可加载更多
+    public boolean isShowNoMore = false;   //停止加载
+    public boolean loadMoreAble = false;   //是否可加载更多
 
     protected Action mLoadMoreAction;
 
@@ -82,73 +80,80 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     @Override
     public BaseViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
-        log("onCreateViewHolder -- viewType : " + viewType);
         if (viewType == HEADER_TYPE) {
-            return new BaseViewHolder(headerView);
+            return new BaseViewHolder<>(headerView);
         } else if (viewType == FOOTER_TYPE) {
-            return new BaseViewHolder(footerView);
+            return new BaseViewHolder<>(footerView);
         } else if (viewType == STATUS_TYPE) {
-            return new BaseViewHolder(mStatusView);
+            return new BaseViewHolder<>(mStatusView);
         } else
             return onCreateBaseViewHolder(parent, viewType);
     }
 
     public abstract BaseViewHolder<T> onCreateBaseViewHolder(ViewGroup parent, int viewType);
 
+    /* ViewHolder 绑定数据，这里的 position 和 getItemViewType() 方法的 position 不一样
+        这里的 position 指当前可见的 item 的 position 的位置。
+        注意 ：每个 ViewHolder 绑定数据时值调用此方法一次
+     */
     @Override
     public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
-        log("onBindViewHolder -- position : " + position);
-        if (position == mViewCount - 1) {
-            return;
+        log("onBindViewHolder()  viewCount : " + mViewCount + " position : " + position);
+        if (position == 0) {
+            // 最先加载 mStatusView 时不需要绑定数据
+            if (mViewCount == 1 || hasHeader) {
+                return;
+            } else {
+                holder.setData(mData.get(0));
+            }
         } else if (!hasHeader && !hasFooter && position < mData.size()) { //没有Header和Footer
             holder.setData(mData.get(position));
         } else if (hasHeader && !hasFooter && position > 0 && position < mViewCount - 1) { //有Header没有Footer
             holder.setData(mData.get(position - 1));
         } else if (!hasHeader && position < mViewCount - 2) { //没有Header，有Footer
             holder.setData(mData.get(position));
-        } else { //都有
-            if (position > 0 && position < mViewCount - 2) {
-                holder.setData(mData.get(position - 1));
-            }
+        } else if (position > 0 && position < mViewCount - 2) { //都有
+            holder.setData(mData.get(position - 1));
         }
-        //加载到最后一个Item，显示加载更多
-        if (position == mViewCount - 2 && !isShowNoMore) {
-            if (hasHeader && !hasFooter && position != 0) { //有header，没有footer
-                mLoadMoreView.setVisibility(View.VISIBLE);
-            } else if (hasFooter && !hasHeader && position != 0) { //有footer，没有header
-                mLoadMoreView.setVisibility(View.VISIBLE);
-            } else if (!hasHeader && !hasFooter) { //mViewCount - 2 == -1不用处理
-                mLoadMoreView.setVisibility(View.VISIBLE);
-            } else if (hasHeader && hasFooter && position != 1) { //都有
-                mLoadMoreView.setVisibility(View.VISIBLE);
-            }
-            isLoadEnd = true;
-            if (mLoadMoreAction != null && !isLoadingMore && loadMoreAble) {
+
+        // 最后一个可见的 item 时 加载更多。解决 remove 时 bug
+        int positionEnd;
+        if ((hasHeader && hasFooter) || (!hasHeader && hasFooter)) {
+            positionEnd = mViewCount - 3;
+        } else {
+            positionEnd = mViewCount - 2;
+        }
+        if (loadMoreAble && !isShowNoMore && position == positionEnd) {
+            mLoadMoreView.setVisibility(View.VISIBLE);
+            if (mLoadMoreAction != null) {
                 mLoadMoreAction.onAction();
-                isLoadingMore = true;
             }
         }
     }
 
+    /**
+     * ViewHolder 更新 Item 的位置选择 ViewType , 和 UI 是同步的
+     */
     @Override
     public int getItemViewType(int position) {
-        log("getItemViewType --- position : " + position);
-        if (hasHeader && position == 0) {  //header
+        if (hasHeader && position == 0) {   //header
             return HEADER_TYPE;
         }
-        if (hasFooter && position == mViewCount - 2) { //footer
+        if (hasFooter && position == mViewCount - 2) {  //footer
             return FOOTER_TYPE;
         }
-        if (position == mViewCount - 1) { //添加最后的状态view
+        if (position == mViewCount - 1) {  //最后View的状态
             return STATUS_TYPE;
         }
 
         return super.getItemViewType(position);
     }
 
+    /**
+     * 包含了 Header , Footer , 状态显示 Item
+     */
     @Override
     public int getItemCount() {
-        log("getItemCount : " + mViewCount);
         return mViewCount;
     }
 
@@ -180,45 +185,45 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
 
     public void add(T object) {
         if (!isShowNoMore) {
-            isLoadingMore = false;
             mData.add(object);
-            mViewCount++;
-            int position = mData.size();
-            if (hasHeader) {
-                position++;
+            int position;
+            if (hasFooter) {
+                position = mViewCount - 2;
+            } else {
+                position = mViewCount - 1;
             }
+            mViewCount++;
             notifyItemInserted(position);
         }
     }
 
-    public void insert(T object, int position) {
-        if (!isShowNoMore) {
-            isLoadingMore = false;
-            mData.add(position, object);
+    public void insert(T object, int itemPosition) {
+        if (mData != null && itemPosition < mViewCount) {
+            int dataPosition;
+            if(hasHeader){
+                dataPosition = itemPosition - 1;
+            }else {
+                dataPosition = itemPosition;
+            }
+            mData.add(dataPosition, object);
             mViewCount++;
-            notifyItemInserted(position);
+            notifyItemInserted(itemPosition);
         }
     }
 
     public void addAll(List<T> data) {
-        if (!isShowNoMore && data.size() > 0) {
-            isLoadingMore = false;
-            if (data.size() == 0) {
-                return;
-            }
-            int startPosition = mData.size();
-            if (hasHeader) {
-                startPosition++;
-            }
+        int size = data.size();
+        if (!isShowNoMore && size > 0) {
             mData.addAll(data);
-            if (mViewCount == 1 || (hasHeader && mViewCount == 2)) {
-                mViewCount += data.size();
-                notifyDataSetChanged();
+            int positionStart;
+            if (hasFooter) {
+                positionStart = mViewCount - 2;
             } else {
-                mViewCount += data.size();
-                notifyItemRangeInserted(startPosition, data.size());
+                positionStart = mViewCount - 1;
             }
-            log("addAll : startPosition : " + startPosition + "  itemCount : " + data.size());
+            mViewCount += size;
+            notifyItemRangeInserted(positionStart, size);
+            log("addAll()  startPosition : " + positionStart + "  itemCount : " + size);
         }
     }
 
@@ -226,47 +231,70 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         addAll(Arrays.asList(objects));
     }
 
-    public void replace(T object, int position) {
-        isLoadingMore = false;
-        mData.set(position, object);
-        mViewCount++;
-        notifyItemChanged(position);
+    public void replace(T object, int itemPosition) {
+        if(mData != null){
+            int dataPosition;
+            if(hasHeader){
+                dataPosition = itemPosition - 1;
+            }else {
+                dataPosition = itemPosition;
+            }
+            if(dataPosition < mData.size()){
+                mData.set(dataPosition, object);
+                mViewCount++;
+                notifyItemChanged(itemPosition);
+            }
+        }
     }
 
     //position start with 0
     public void remove(T object) {
-        if(!mData.contains(object)){
+        if (!mData.contains(object)) {
+            Toast.makeText(getContext(),"删除失败", Toast.LENGTH_SHORT).show();
+            log("remove()  without the object : " + object.getClass().getName());
             return;
         }
-        isLoadingMore = false;
-        mData.remove(object);
-        if (hasHeader) {
-            notifyItemRemoved(mData.indexOf(object) + 1);
-        } else {
-            notifyItemRemoved(mData.indexOf(object));
+        int dataPosition = mData.indexOf(object);
+        int itemPosition;
+        if(hasHeader){
+            itemPosition = dataPosition + 1;
+        }else {
+            itemPosition = dataPosition;
         }
-        mViewCount--;
+        remove(itemPosition);
     }
 
-    //position start with 0
-    public void remove(int position) {
-        isLoadingMore = false;
+    //positionItem start with 0
+    public void remove(int itemPosition) {
+        int dataPosition;
+        int dataSize = mData.size();
         if (hasHeader) {
-            if (position - 1 >= 0) {
-                mData.remove(position - 1);
-                notifyItemRemoved(position);
+            dataPosition = itemPosition - 1;
+            if (dataPosition >= 0 && dataPosition < dataSize) {
+                mData.remove(dataPosition);
+                notifyItemRemoved(itemPosition);
+                mViewCount--;
+            } else if (dataPosition >= dataSize) {
+                Toast.makeText(getContext(),"删除失败", Toast.LENGTH_SHORT).show();
             } else {
-                throw new IndexOutOfBoundsException("RecyclerView has header,position is should more than 0");
+                throw new IndexOutOfBoundsException("RecyclerView has header,position is should more than 0 ." +
+                        "if you want remove header , pleasure user removeHeader()");
             }
         } else {
-            mData.remove(position);
-            notifyItemRemoved(position);
+            dataPosition = itemPosition;
+            if (dataPosition >= dataSize) {
+                Toast.makeText(getContext(),"删除失败", Toast.LENGTH_SHORT).show();
+            } else {
+                mData.remove(dataPosition);
+                notifyItemRemoved(itemPosition);
+                mViewCount--;
+            }
         }
-        mViewCount--;
     }
 
     public void clear() {
-        if (mData == null || mData.size() == 0) {
+        if (mData == null) {
+            log("clear() mData is null");
             return;
         }
         mData.clear();
@@ -277,13 +305,10 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
         if (hasFooter) {
             mViewCount++;
         }
-        notifyDataSetChanged();
-
-        isRefreshing = false;
         isShowNoMore = false;
-        isLoadingMore = false;
         mLoadMoreView.setVisibility(View.GONE);
         mNoMoreView.setVisibility(View.GONE);
+        notifyDataSetChanged();
     }
 
 
@@ -318,13 +343,23 @@ public abstract class RecyclerAdapter<T> extends RecyclerView.Adapter<BaseViewHo
     public void removeHeader() {
         if (hasHeader) {
             hasHeader = false;
+            notifyItemRemoved(0);
         }
     }
 
     public void removeFooter() {
         if (hasFooter) {
             hasFooter = false;
+            notifyItemRemoved(mViewCount - 2);
         }
+    }
+
+    public List<T> getData() {
+        return mData;
+    }
+
+    public Context getContext() {
+        return mContext;
     }
 
     public void log(String content) {

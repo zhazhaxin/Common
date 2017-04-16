@@ -23,6 +23,7 @@ public class RegisterActivity extends ToolbarActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        useStatusPages(false);
         setContentView(R.layout.account_activity_register);
 
         mTextName = (TextInputLayout) findViewById(R.id.name);

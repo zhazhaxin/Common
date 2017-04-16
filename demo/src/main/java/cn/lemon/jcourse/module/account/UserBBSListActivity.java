@@ -23,7 +23,6 @@ public class UserBBSListActivity extends ToolbarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(true);
         setContentView(R.layout.bbs_activity_user_bbslist);
 
         mId = getIntent().getIntExtra(Config.USER_BBS_LIST, 0);

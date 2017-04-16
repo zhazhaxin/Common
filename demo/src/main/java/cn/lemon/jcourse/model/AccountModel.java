@@ -11,6 +11,7 @@ import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.BBS;
 import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
+import cn.lemon.jcourse.model.bean.Picture;
 import cn.lemon.jcourse.model.net.RetrofitModel;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -107,11 +108,11 @@ public class AccountModel extends SuperModel {
                 .subscribe(response);
     }
 
-    public void updateAvatar(File file, ServiceResponse<Info> response) {
+    public void updateAvatar(File file, int width, int height, ServiceResponse<Picture> response) {
         RequestBody requestBody = RequestBody.create(MediaType.parse("image/type"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("picture", file.getName(), requestBody);
-        RetrofitModel.getServiceAPI().uploadPicture(part)
-                .compose(new SchedulersTransformer<Info>())
+        RetrofitModel.getServiceAPI().uploadPicture(part, width, height)
+                .compose(new SchedulersTransformer<Picture>())
                 .subscribe(response);
     }
 

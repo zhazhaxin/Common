@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.lemon.jcourse.R;
-import cn.lemon.jcourse.model.net.RotateTransformation;
+import cn.lemon.jcourse.model.bean.Picture;
 import cn.lemon.multi.ui.ViewImageActivity;
 import cn.lemon.view.adapter.BaseViewHolder;
 
-public class PictureViewHolder extends BaseViewHolder<String> {
+public class PictureViewHolder extends BaseViewHolder<Picture> {
 
     private ImageView mPicture;
     private static List<String> mData = new ArrayList<>();
@@ -34,20 +34,21 @@ public class PictureViewHolder extends BaseViewHolder<String> {
     }
 
     @Override
-    public void setData(String object) {
-        super.setData(object);
-        if (!mData.contains(object)) {
-            mData.add(object);
+    public void setData(Picture data) {
+        super.setData(data);
+        if (!mData.contains(data.url)) {
+            mData.add(data.url);
         }
+//        float ratio = (float)data.height / data.width;
+//        mPicture.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,));
         Glide.with(itemView.getContext())
-                .load(object)
-                .transform(new RotateTransformation(itemView.getContext()))
+                .load(data.url)
                 .placeholder(R.drawable.ic_place_holder)
                 .into(mPicture);
     }
 
     @Override
-    public void onItemViewClick(String object) {
+    public void onItemViewClick(Picture data) {
         Intent intent = new Intent(itemView.getContext(), ViewImageActivity.class);
         intent.putExtra(ViewImageActivity.IMAGE_NUM, getAdapterPosition() - 1);
         intent.putExtra(ViewImageActivity.IMAGES_DATA_LIST, (Serializable) mData);

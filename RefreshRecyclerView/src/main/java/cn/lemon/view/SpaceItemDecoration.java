@@ -4,6 +4,10 @@ import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+/**
+ * Created by linlongxin on 2015/12/19.
+ */
+
 public class SpaceItemDecoration extends RecyclerView.ItemDecoration {
 
     private int top;

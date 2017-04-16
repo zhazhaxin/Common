@@ -53,11 +53,10 @@
                 android:layout_toLeftOf="@+id/send"
                 android:layout_toRightOf="@+id/avatar"
                 android:background="@drawable/bg_frame_edit"
-                android:hint="回复"
+                android:hint="评论"
                 android:maxLines="3"
                 android:padding="8dp"
                 android:textColor="@color/blackLight"
-                android:textColorHint="@color/blackLight"
                 android:textSize="14sp" />
 
             <ImageView

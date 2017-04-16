@@ -1,7 +1,9 @@
 package cn.lemon.common.base;
 
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
@@ -10,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -34,10 +37,11 @@ import cn.lemon.common.base.widget.MaterialDialog;
 public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
     private final String TAG = "SuperActivity";
-    private boolean isUseStatusPages = false;
+    private boolean isUseStatusPages = true;
     private boolean isShowLoading = true;
     private boolean isShowingContent = false;
     private boolean isShowingError = false;
+    private boolean useAnimWithActivity = true;
 
     protected TextView mEmptyPage;
     protected TextView mLoadDataButton;
@@ -54,7 +58,12 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
 
     private P mPresenter;
 
-    //在setContentView()之前调用，如果activity的toolbar功能会受到其他view影响则不能使用状态页，如：带DrawLayout的toolbar
+    /**
+     * 在setContentView()之前调用，如果activity的toolbar功能会受到其他view影响则不能使用状态页。
+     * 如：DrawerLayout的ToolBar
+     * 默认：显示状态页
+     */
+
     public void useStatusPages(boolean show) {
         isUseStatusPages = show;
     }
@@ -113,8 +122,10 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
         return mPresenter;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
+        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         if (isUseStatusPages) {
             addStatusPage(layoutResID);
         } else
@@ -297,6 +308,18 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
             mDialog = null;
         }
     }
+
+//    @Override
+//    public void startActivity(Intent intent) {
+//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+//            super.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+//        } else {
+//            super.startActivity(intent);
+//            if (useAnimWithActivity) {
+//                this.overridePendingTransition(0, R.anim.start_activity);
+//            }
+//        }
+//    }
 
     @Override
     protected void onDestroy() {
