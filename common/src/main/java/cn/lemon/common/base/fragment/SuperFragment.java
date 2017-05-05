@@ -79,10 +79,24 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
         attachPresenter();
     }
 
-    //onCreateView之后
+    @Nullable
+    @Override //container ---> activity
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (isUseStatusPages) {
+            addStatusPage(inflater, container);
+            return mView;
+        } else {
+            if (mLayoutResId != 0) {
+                mView = inflater.inflate(mLayoutResId, container, false);
+            }
+            return mView;
+        }
+    }
+    // onCreateView 之后回调
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        onInitialView();
         if (mPresenter != null)
             mPresenter.onCreate();
     }
@@ -117,20 +131,6 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     public T getPresenter() {
         return mPresenter;
-    }
-
-    @Nullable
-    @Override //container ---> activity
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (isUseStatusPages) {
-            addStatusPage(inflater, container);
-            return mView;
-        } else {
-            if (mLayoutResId != 0) {
-                mView = inflater.inflate(mLayoutResId, container, false);
-            }
-            return mView;
-        }
     }
 
     @Override
@@ -170,6 +170,8 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
             }
         });
     }
+
+    public void onInitialView(){}
 
     public void onClickErrorLoadData(View v) {
         showLoading();

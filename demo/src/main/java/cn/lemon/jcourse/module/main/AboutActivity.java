@@ -41,4 +41,11 @@ public class AboutActivity extends ToolbarActivity implements View.OnClickListen
                 break;
         }
     }
+
+    // singleTop , singleTask Activity 不重新创建时，回调此方法拦截 intent 信息
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+    }
 }

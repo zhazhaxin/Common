@@ -3,6 +3,7 @@
     package="cn.lemon.jcourse">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -47,8 +48,8 @@
         </activity>
         <activity
             android:name=".module.main.MainActivity"
-            android:label="@string/title_activity_main"
             android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_activity_main"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
@@ -108,9 +109,10 @@
             android:label="Banner"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".module.java.ExerciseActivity"
+        <activity
+            android:name=".module.java.ExerciseActivity"
             android:label="习题练习"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

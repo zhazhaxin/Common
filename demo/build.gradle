@@ -14,10 +14,10 @@ android {
     //签名配置
     signingConfigs {
         release {
-            storeFile file(RELEASE_STORE_FILE)
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
+            storeFile file("F:\\key\\sign.jks")
+            storePassword "linlongxin"
+            keyAlias "apk"
+            keyPassword "linlongxin"
         }
     }
     buildTypes {
