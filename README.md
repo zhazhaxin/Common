@@ -72,8 +72,7 @@
 
 ### Dialog
 
-<img src="material_dialog.png" width="320" height="569"/>
-<img src="loading_dialog.png" width="320" height="569"/>
+<img src="material_dialog.png" width="320" height="569"/> <img src="loading_dialog.png" width="320" height="569"/>
 
  - SuperFragment
 
