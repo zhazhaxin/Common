@@ -55,8 +55,6 @@ public class SuperFragment<T extends SuperPresenter> extends Fragment {
 
     private T mPresenter;
 
-    public SuperFragment(){}
-
     @SuppressLint("ValidFragment")
     public SuperFragment(View fragment) {
         mView = fragment;

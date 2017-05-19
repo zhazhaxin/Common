@@ -14,7 +14,7 @@ import cn.lemon.common.base.presenter.SuperPresenter;
 
 
 /**
- * Activity顶部可添加一个标准的toolbar，只需在xml中添加一个id = toolbar的Toolbar即可，样式可自定义
+ * Activity 顶部可添加一个标准的 toolbar，只需在 xml 中添加一个 @+id = toolbar 的 Toolbar 即可，样式需自定义
  * <p>
  * Created by linlongxin on 2016/7/31.
  */
@@ -24,7 +24,7 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
     private boolean isHomeBack = true;
     private Toolbar mToolbar;
 
-    //设置toolbar是否显示返回键
+    //设置 toolbar 是否显示返回键
     public void setToolbarHomeBack(boolean isHomeBack) {
         this.isHomeBack = isHomeBack;
     }

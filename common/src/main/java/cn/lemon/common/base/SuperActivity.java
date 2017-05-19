@@ -26,8 +26,8 @@ import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.base.widget.MaterialDialog;
 
 /**
- * Activity顶级父类 : 添加各种状态(数据错误，数据为空，数据加载中)页的展示，
- * 自定义的MaterialDialog的显示，进度条dialog显示
+ * Activity 顶级父类 : 添加各种状态 ( 数据错误，数据为空，数据加载中 ) 页的展示，
+ * 自定义的 MaterialDialog 的显示，进度条 dialog 显示
  * <p>
  * MVP模型中把Activity作为view层，可通过getPresenter()调用对应的presenter实例
  * <p>
@@ -59,8 +59,8 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     private P mPresenter;
 
     /**
-     * 在setContentView()之前调用，如果activity的toolbar功能会受到其他view影响则不能使用状态页。
-     * 如：DrawerLayout的ToolBar
+     * 在 setContentView() 之前调用，如果 activity 的 toolbar 功能会受到其他 view 影响则不能使用状态页。
+     * 如：DrawerLayout 的 ToolBar
      * 默认：显示状态页
      */
 
@@ -262,7 +262,7 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
     }
 
     /**
-     * 展示一个对话框 : title,content,确定按钮，取消按钮
+     * 展示一个对话框 : title , content , 确定按钮 , 取消按钮
      */
     public void showDialog(String title,
                            DialogInterface.OnClickListener positiveListener) {
@@ -308,18 +308,6 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
             mDialog = null;
         }
     }
-
-//    @Override
-//    public void startActivity(Intent intent) {
-//        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-//            super.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
-//        } else {
-//            super.startActivity(intent);
-//            if (useAnimWithActivity) {
-//                this.overridePendingTransition(0, R.anim.start_activity);
-//            }
-//        }
-//    }
 
     @Override
     protected void onDestroy() {
