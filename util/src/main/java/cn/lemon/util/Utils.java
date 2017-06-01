@@ -1,4 +1,4 @@
-package cn.alien95.util;
+package cn.lemon.util;
 
 import android.Manifest;
 import android.annotation.TargetApi;

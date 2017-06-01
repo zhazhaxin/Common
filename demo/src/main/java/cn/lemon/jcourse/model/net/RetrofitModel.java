@@ -2,7 +2,7 @@ package cn.lemon.jcourse.model.net;
 
 import java.util.concurrent.TimeUnit;
 
-import cn.alien95.util.Utils;
+import cn.lemon.util.Utils;
 import cn.lemon.common.net.HeadersInterceptor;
 import cn.lemon.common.net.LogInterceptor;
 import cn.lemon.jcourse.BuildConfig;

@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import cn.alien95.util.Utils;
+import cn.lemon.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.jcourse.R;
 

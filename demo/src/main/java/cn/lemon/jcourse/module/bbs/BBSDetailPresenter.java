@@ -3,7 +3,7 @@ package cn.lemon.jcourse.module.bbs;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import cn.alien95.util.Utils;
+import cn.lemon.util.Utils;
 import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.config.Config;

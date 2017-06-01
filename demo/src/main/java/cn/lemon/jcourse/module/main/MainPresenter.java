@@ -4,7 +4,7 @@ import android.content.DialogInterface;
 
 import org.greenrobot.eventbus.EventBus;
 
-import cn.alien95.util.Utils;
+import cn.lemon.util.Utils;
 import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;

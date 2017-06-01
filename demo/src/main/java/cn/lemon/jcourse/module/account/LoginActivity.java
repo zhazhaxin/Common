@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import org.greenrobot.eventbus.EventBus;
 
-import cn.alien95.util.Utils;
+import cn.lemon.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;

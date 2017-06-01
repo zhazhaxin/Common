@@ -3,7 +3,7 @@ package cn.lemon.jcourse.base;
 import android.app.Application;
 
 import cn.alien95.resthttp.request.RestHttp;
-import cn.alien95.util.Utils;
+import cn.lemon.util.Utils;
 import cn.lemon.common.base.model.SuperModel;
 import cn.lemon.jcourse.BuildConfig;
 import cn.lemon.jcourse.model.AccountModel;

@@ -2,7 +2,7 @@ package cn.lemon.jcourse.module.java;
 
 import android.content.Intent;
 
-import cn.alien95.util.Utils;
+import cn.lemon.util.Utils;
 import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;

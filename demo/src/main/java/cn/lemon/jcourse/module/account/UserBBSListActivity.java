@@ -3,7 +3,7 @@ package cn.lemon.jcourse.module.account;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
-import cn.alien95.util.Utils;
+import cn.lemon.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
