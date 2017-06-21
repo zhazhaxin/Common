@@ -33,24 +33,24 @@ public class RetrofitModel {
 
     private static Retrofit getRetrofit() {
         if (mRetrofit == null) {
-            OkHttpClient.Builder mOkHttpClientBuilder = new OkHttpClient.Builder();
+            OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
             if (BuildConfig.DEBUG) {
                 //debug模式下添加日志拦截器
                 LogInterceptor logInterceptor = new LogInterceptor()
                         .setLogTag(Config.NET_LOG_TAG);
-                mOkHttpClientBuilder
+                clientBuilder
                         .addInterceptor(logInterceptor);
             }
-            mOkHttpClientBuilder.addInterceptor(new HeadersInterceptor());
-            mOkHttpClientBuilder.connectTimeout(10, TimeUnit.SECONDS);
-            mOkHttpClientBuilder.readTimeout(20, TimeUnit.SECONDS);
-            mOkHttpClientBuilder.writeTimeout(20, TimeUnit.SECONDS);
-            mOkHttpClientBuilder.retryOnConnectionFailure(true);
+            clientBuilder.addInterceptor(new HeadersInterceptor());
+            clientBuilder.connectTimeout(10, TimeUnit.SECONDS);
+            clientBuilder.readTimeout(20, TimeUnit.SECONDS);
+            clientBuilder.writeTimeout(20, TimeUnit.SECONDS);
+            clientBuilder.retryOnConnectionFailure(true);
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(Config.BASE_URL)
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .client(mOkHttpClientBuilder.build())
+                    .client(clientBuilder.build())
                     .build();
         }
         return mRetrofit;
