@@ -106,12 +106,9 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
                     try {
                         mPresenter = (P) presenter.value().newInstance();
                         mPresenter.attachView(this);
-                    } catch (InstantiationException e) {
+                    } catch (Throwable e) {
                         e.printStackTrace();
-                        Log.i(TAG, "SuperActivity : " + e.getMessage());
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                        Log.i(TAG, "SuperActivity : " + e.getMessage());
+                        Log.i(TAG, "SuperActivity attachPresenter : " + e.getMessage());
                     }
                 }
             }
@@ -321,7 +318,6 @@ public class SuperActivity<P extends SuperPresenter> extends AppCompatActivity {
         if (mPresenter != null) {
             mPresenter.onDestroy();
         }
-        mPresenter = null;
     }
 
     public int dp2px(float dpValue) {

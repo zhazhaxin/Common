@@ -32,7 +32,7 @@ public class TextListPresenter extends SuperPresenter<TextListFragment> {
         } else {
             mPage++;
         }
-        JavaCourseModel.getInstance().getTextJavaCourseList(mPage, new ServiceResponse<JavaCourse[]>() {
+        ServiceResponse<JavaCourse[]> serviceResponse = new ServiceResponse<JavaCourse[]>() {
             @Override
             public void onNext(JavaCourse[] javaCourses) {
 
@@ -58,6 +58,8 @@ public class TextListPresenter extends SuperPresenter<TextListFragment> {
                 super.onError(e);
                 getView().showError();
             }
-        });
+        };
+        JavaCourseModel.getInstance().getTextJavaCourseList(mPage, serviceResponse);
+        putDisposable(serviceResponse);
     }
 }
