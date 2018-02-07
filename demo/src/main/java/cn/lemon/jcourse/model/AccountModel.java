@@ -1,7 +1,8 @@
 package cn.lemon.jcourse.model;
 
-import java.io.File;
+import org.reactivestreams.Subscription;
 
+import java.io.File;
 import cn.lemon.common.base.model.SuperModel;
 import cn.lemon.common.net.HeadersInterceptor;
 import cn.lemon.common.net.SchedulersTransformer;
@@ -13,10 +14,12 @@ import cn.lemon.jcourse.model.bean.Banner;
 import cn.lemon.jcourse.model.bean.Info;
 import cn.lemon.jcourse.model.bean.Picture;
 import cn.lemon.jcourse.model.net.RetrofitModel;
+import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import rx.functions.Action1;
 
 /**
  * Created by linlongxin on 2016/8/7.
@@ -87,9 +90,9 @@ public class AccountModel extends SuperModel {
     public void login(String name, String password, ServiceResponse<Account> subscriber) {
         RetrofitModel.getServiceAPI().login(name, password)
                 .compose(new SchedulersTransformer<Account>())
-                .doOnNext(new Action1<Account>() {
+                .doOnNext(new Consumer<Account>() {
                     @Override
-                    public void call(Account account) {
+                    public void accept(Account account) throws Exception {
                         saveAccount(account);
                     }
                 })

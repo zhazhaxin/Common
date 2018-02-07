@@ -12,22 +12,22 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     //签名配置
-    signingConfigs {
-        release {
-            storeFile file("F:\\key\\sign.jks")
-            storePassword "linlongxin"
-            keyAlias "apk"
-            keyPassword "linlongxin"
-        }
-    }
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.release
-        }
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
+//    signingConfigs {
+//        release {
+//            storeFile file("F:\\key\\sign.jks")
+//            storePassword "linlongxin"
+//            keyAlias "apk"
+//            keyPassword "linlongxin"
+//        }
+//    }
+//    buildTypes {
+//        debug {
+//            signingConfig signingConfigs.release
+//        }
+//        release {
+//            signingConfig signingConfigs.release
+//        }
+//    }
     lintOptions {
         checkReleaseBuilds false
         abortOnError false

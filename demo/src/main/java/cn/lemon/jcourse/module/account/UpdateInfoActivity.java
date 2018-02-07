@@ -25,6 +25,7 @@ import cn.lemon.jcourse.config.Config;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
 import cn.lemon.jcourse.model.bean.Picture;
+import io.reactivex.disposables.Disposable;
 import me.nereo.multi_image_selector.MultiImageSelector;
 import me.nereo.multi_image_selector.MultiImageSelectorActivity;
 
@@ -140,7 +141,6 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
                 AccountModel.getInstance().updateAvatar(new File(imagePath.toString()), width, height, new ServiceResponse<Picture>() {
                     @Override
                     public void onStart() {
-                        super.onStart();
                         showLoadingDialog();
                     }
 

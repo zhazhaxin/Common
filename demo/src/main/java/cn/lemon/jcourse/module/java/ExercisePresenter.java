@@ -32,11 +32,6 @@ public class ExercisePresenter extends SuperPresenter<ExerciseActivity> {
                 super.onError(e);
                 getView().showError();
             }
-
-            @Override
-            public void onCompleted() {
-                super.onCompleted();
-            }
         });
     }
 }
