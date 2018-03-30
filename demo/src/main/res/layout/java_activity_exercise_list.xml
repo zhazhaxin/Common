@@ -7,11 +7,12 @@
 
     <include layout="@layout/include_toolbar" />
 
+    <!--app:load_more_able="false"
+        app:refresh_able="false" -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:load_more_able="false"
-        app:refresh_able="false" />
+        />
 
 </LinearLayout>

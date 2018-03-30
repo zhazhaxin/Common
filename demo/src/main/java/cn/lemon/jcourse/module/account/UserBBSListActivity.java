@@ -38,7 +38,7 @@ public class UserBBSListActivity extends ToolbarActivity {
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setRefreshAction(new Action() {
+        mRecyclerView.addRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getData();

@@ -1,1 +1,11 @@
-include ':demo', ':common', ':RefreshRecyclerView', ':multiview', ':util'
+File file = new File('local.properties')
+Properties properties = new Properties()
+properties.load(file.newDataInputStream())
+if (properties.getProperty('debug_test')){
+    include ':recycler'
+    def libDir = properties.getProperty('recyclerview.dir')
+    print("path : " + libDir)
+    project(':recycler').projectDir = new File("$libDir")
+}
+
+include ':demo', ':common', ':multiview', ':util'

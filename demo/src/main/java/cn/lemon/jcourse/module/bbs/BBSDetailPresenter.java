@@ -1,6 +1,7 @@
 package cn.lemon.jcourse.module.bbs;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 
 import cn.lemon.util.Utils;
@@ -22,8 +23,7 @@ public class BBSDetailPresenter extends SuperPresenter<BBSDetailActivity> {
     private int bbsId;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle b) {
         bbsId = getView().getIntent().getIntExtra(Config.BBS_DETAIL_ID, 0);
         getData();
     }

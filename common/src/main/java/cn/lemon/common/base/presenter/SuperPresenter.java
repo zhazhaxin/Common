@@ -1,5 +1,9 @@
 package cn.lemon.common.base.presenter;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
@@ -26,7 +30,7 @@ public class SuperPresenter<V> {
     }
 
     //在Activity的onStart之后回调，在Fragment的onCreateView之后回调
-    public void onCreate(){}
+    public void onCreate(@Nullable Bundle savedInstanceState){}
 
     //在Activity的onResume之后回调，在Fragment的onResume中回调
     public void onResume(){}
@@ -36,6 +40,11 @@ public class SuperPresenter<V> {
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();
         }
+    }
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
     }
 
     protected void putDisposable(Disposable disposable) {

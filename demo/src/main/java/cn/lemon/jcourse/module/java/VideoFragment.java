@@ -4,9 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-
-import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.common.base.presenter.RequirePresenter;
+import cn.lemon.common.base.view.SuperFragment;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.model.bean.JVideo;
 import cn.lemon.view.RefreshRecyclerView;
@@ -34,7 +33,7 @@ public class VideoFragment extends SuperFragment<VideoPresenter> {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAdapter = new VideoAdapter(getActivity());
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setRefreshAction(new Action() {
+        mRecyclerView.addRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().getData(true);
@@ -64,8 +63,7 @@ public class VideoFragment extends SuperFragment<VideoPresenter> {
     }
 
     @Override
-    public void onClickErrorLoadData(View v) {
-        super.onClickErrorLoadData(v);
+    public void onErrorRetry(View v) {
         getPresenter().getData(true);
     }
 

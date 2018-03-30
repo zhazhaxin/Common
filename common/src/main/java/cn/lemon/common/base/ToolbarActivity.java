@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import cn.lemon.common.R;
 import cn.lemon.common.base.presenter.SuperPresenter;
+import cn.lemon.common.base.view.SuperActivity;
 
 
 /**
@@ -31,7 +31,7 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
 
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
-        if (isUseStatusPages()) { //添加状态页到activity
+        if (isUseStatusPages) { //添加状态页到activity
             LinearLayout linearLayout = new LinearLayout(this);
             linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
             linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -51,8 +51,8 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
             linearLayout.addView(mToolbar);
 
             getLayoutInflater().inflate(R.layout.base_status_page, linearLayout, true);
-            mSuperRealContent = (FrameLayout) linearLayout.findViewById(R.id.super_real_content);
-            mSuperRealContent.addView(mLayoutView);
+            mRealContent = (FrameLayout) linearLayout.findViewById(R.id.super_real_content);
+            mRealContent.addView(mLayoutView);
             mDecorContent.addView(linearLayout);
             initStatusPages(linearLayout);
         } else {
@@ -70,19 +70,19 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
         mLoadDataButton = (TextView) parent.findViewById(R.id.error_to_load_button);
         mErrorPage = (LinearLayout) parent.findViewById(R.id.error_page);
         mLoadingPage = (LinearLayout) parent.findViewById(R.id.loading_page);
-        mCurrentShowView = mLoadingPage;
+        mCurrentPage = mLoadingPage;
         mLoadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickErrorLoadData(v);
+                onErrorRetry(v);
             }
         });
     }
 
     @Override
     public View findViewById(int id) {
-        if (isUseStatusPages()) {
-            return mSuperRealContent.findViewById(id);
+        if (isUseStatusPages) {
+            return mRealContent.findViewById(id);
         } else {
             return super.findViewById(id);
         }

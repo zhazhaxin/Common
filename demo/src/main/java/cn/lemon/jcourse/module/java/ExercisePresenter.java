@@ -1,5 +1,7 @@
 package cn.lemon.jcourse.module.java;
 
+import android.os.Bundle;
+
 import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.config.Config;
@@ -13,8 +15,7 @@ import cn.lemon.jcourse.model.bean.Exercise;
 public class ExercisePresenter extends SuperPresenter<ExerciseActivity> {
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle b) {
         int id = getView().getIntent().getIntExtra(Config.EXERCISE_ID, -1);
         getData(id);
     }

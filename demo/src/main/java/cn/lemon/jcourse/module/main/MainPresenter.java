@@ -35,16 +35,16 @@ public class MainPresenter extends SuperPresenter<MainActivity> {
             Utils.Toast("请先登录");
             getView().startActivity(LoginActivity.class);
         } else {
-            getView().showDialog("确定要退出？", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Utils.Toast("已退出");
-                    getView().dismissDialog();
-                    AccountModel.getInstance().deleteAccount();
-                    getView().updateAccountInfo();
-                    EventBus.getDefault().post(Config.CHECK_STATUS_FOR_GROUP_FRAGMENT);
-                }
-            }, null);
+//            getView().showDialog("确定要退出？", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    Utils.Toast("已退出");
+//                    getView().dismissDialog();
+//                    AccountModel.getInstance().deleteAccount();
+//                    getView().updateAccountInfo();
+//                    EventBus.getDefault().post(Config.CHECK_STATUS_FOR_GROUP_FRAGMENT);
+//                }
+//            }, null);
         }
     }
 

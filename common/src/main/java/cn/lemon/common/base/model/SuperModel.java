@@ -46,10 +46,7 @@ public class SuperModel {
                     T instance = model.newInstance();
                     mInstanceMap.put(model.getSimpleName(), instance);
                     return instance;
-                } catch (InstantiationException e) {
-                    e.printStackTrace();
-                    return null;
-                } catch (IllegalAccessException e) {
+                } catch (Throwable e) {
                     e.printStackTrace();
                     return null;
                 }

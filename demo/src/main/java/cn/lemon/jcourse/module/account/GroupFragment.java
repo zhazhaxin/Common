@@ -7,11 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import cn.lemon.common.base.fragment.SuperFragment;
+import cn.lemon.common.base.view.SuperFragment;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
@@ -53,7 +51,7 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
         mHolder = (RelativeLayout) findViewById(R.id.holder);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setRefreshAction(new Action() {
+        mRecyclerView.addRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getData(true);
@@ -117,8 +115,7 @@ public class GroupFragment extends SuperFragment implements View.OnClickListener
     }
 
     @Override
-    public void onClickErrorLoadData(View v) {
-        super.onClickErrorLoadData(v);
+    public void onErrorRetry(View v) {
         getData(true);
     }
 

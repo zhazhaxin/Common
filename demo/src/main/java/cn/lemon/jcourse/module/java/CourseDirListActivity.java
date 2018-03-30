@@ -16,7 +16,7 @@ public class CourseDirListActivity extends ToolbarActivity<CourseDirListPresente
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(false);
+        setStatusPageEnable(false);
         setContentView(R.layout.java_activity_course_dirs);
 
         Button mOne = $(R.id.one);

@@ -47,7 +47,7 @@ public class BBSDetailActivity extends ToolbarActivity<BBSDetailPresenter> imple
         mAdapter = new MultiTypeAdapter(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setRefreshAction(new Action() {
+        mRecyclerView.addRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().getData();

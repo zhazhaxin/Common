@@ -36,7 +36,7 @@ public class CourseUnitListActivity extends ToolbarActivity<CourseUnitListPresen
         mRecyclerView = (RefreshRecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setRefreshAction(new Action() {
+        mRecyclerView.addRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().getData(true);
@@ -51,8 +51,7 @@ public class CourseUnitListActivity extends ToolbarActivity<CourseUnitListPresen
     }
 
     @Override
-    public void onClickErrorLoadData(View v) {
-        super.onClickErrorLoadData(v);
+    public void onErrorRetry(View v) {
         getPresenter().getData(true);
     }
 

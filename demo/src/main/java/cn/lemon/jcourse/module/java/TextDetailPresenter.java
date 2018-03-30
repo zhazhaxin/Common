@@ -1,6 +1,7 @@
 package cn.lemon.jcourse.module.java;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import cn.lemon.util.Utils;
 import cn.lemon.common.base.presenter.SuperPresenter;
@@ -23,8 +24,7 @@ public class TextDetailPresenter extends SuperPresenter<TextDetailActivity> {
     private boolean isStar = false;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle b) {
         mData = (JavaCourse) getView().getIntent().getSerializableExtra(Config.JAVA_COURSE_DETAIL);
         getView().setData(mData);
         setIsStar(mData.id);

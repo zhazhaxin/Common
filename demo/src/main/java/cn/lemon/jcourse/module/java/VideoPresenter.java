@@ -1,5 +1,7 @@
 package cn.lemon.jcourse.module.java;
 
+import android.os.Bundle;
+
 import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.model.JavaCourseModel;
@@ -13,8 +15,7 @@ public class VideoPresenter extends SuperPresenter<VideoFragment> {
 
     private int page = 0;
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle b) {
         getData(true);
     }
 

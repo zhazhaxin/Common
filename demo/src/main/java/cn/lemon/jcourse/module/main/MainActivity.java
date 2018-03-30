@@ -47,7 +47,7 @@ public class MainActivity extends ToolbarActivity<MainPresenter>
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(false);
+        setStatusPageEnable(false);
 
         setContentView(R.layout.main_activity);
         setToolbarHomeBack(false);

@@ -1,5 +1,7 @@
 package cn.lemon.jcourse.module.java;
 
+import android.os.Bundle;
+
 import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.config.Config;
@@ -17,8 +19,7 @@ public class CourseUnitListPresenter extends SuperPresenter<CourseUnitListActivi
     private String[] mTitles = {"第一章", "第二章", "第三章", "第四章", "第五章", "第六章", "第七章", "第八章", "第九章", "第十章"};
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle savedInstanceState) {
         mUnit = getView().getIntent().getIntExtra(Config.JAVA_COURSE_UNIT, 1);
         getView().setTitle(mTitles[mUnit - 1]);
         getData(true);

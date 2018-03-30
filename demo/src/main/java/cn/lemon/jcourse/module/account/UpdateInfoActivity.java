@@ -40,7 +40,7 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(false);
+        setStatusPageEnable(false);
         setContentView(R.layout.account_activity_update_info);
 
         mAvatar = (ImageView) findViewById(R.id.avatar);
@@ -64,15 +64,15 @@ public class UpdateInfoActivity extends ToolbarActivity implements View.OnClickL
     }
 
     public void selectImage() {
-        showDialog("请选择图片", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MultiImageSelector.create()
-                        .single()
-                        .start(UpdateInfoActivity.this, Config.REQUEST_IMAGE_CODE);
-                dismissDialog();
-            }
-        });
+//        showDialog("请选择图片", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                MultiImageSelector.create()
+//                        .single()
+//                        .start(UpdateInfoActivity.this, Config.REQUEST_IMAGE_CODE);
+//                dismissDialog();
+//            }
+//        });
     }
 
     public void updateAccountInfo(String name, String sign, String avatar) {

@@ -1,5 +1,7 @@
 package cn.lemon.jcourse.module.java;
 
+import android.os.Bundle;
+
 import cn.lemon.common.base.presenter.SuperPresenter;
 
 /**
@@ -9,8 +11,7 @@ import cn.lemon.common.base.presenter.SuperPresenter;
 public class CourseDirListPresenter extends SuperPresenter<CourseDirListActivity> {
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle b) {
 
     }
 }

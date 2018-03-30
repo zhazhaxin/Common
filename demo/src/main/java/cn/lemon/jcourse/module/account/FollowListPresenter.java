@@ -1,12 +1,10 @@
 package cn.lemon.jcourse.module.account;
 
+import android.os.Bundle;
 import cn.lemon.common.base.presenter.SuperPresenter;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.model.AccountModel;
 import cn.lemon.jcourse.model.bean.Account;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 
 /**
  * Created by linlongxin on 2016/9/17.
@@ -15,8 +13,8 @@ import io.reactivex.ObservableOnSubscribe;
 public class FollowListPresenter extends SuperPresenter<FollowListActivity> {
 
     @Override
-    public void onCreate() {
-        super.onCreate();
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         getData();
     }
 

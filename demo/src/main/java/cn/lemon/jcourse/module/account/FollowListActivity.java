@@ -19,7 +19,7 @@ public class FollowListActivity extends ToolbarActivity<FollowListPresenter> {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(true);
+        setStatusPageEnable(true);
         setContentView(R.layout.account_activity_follow);
 
         mAdapter = new FollowAdapter(this);
@@ -27,7 +27,7 @@ public class FollowListActivity extends ToolbarActivity<FollowListPresenter> {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.setRefreshAction(new Action() {
+        mRecyclerView.addRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getPresenter().getData();

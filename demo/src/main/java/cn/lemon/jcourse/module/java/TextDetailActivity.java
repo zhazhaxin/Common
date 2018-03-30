@@ -13,9 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 import cn.lemon.util.Utils;
 import cn.lemon.common.base.ToolbarActivity;
 import cn.lemon.common.base.presenter.RequirePresenter;
@@ -51,7 +49,7 @@ public class TextDetailActivity extends ToolbarActivity<TextDetailPresenter> imp
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(false);
+        setStatusPageEnable(false);
 
         setContentView(R.layout.java_activity_text_detail);
         setToolbarHomeBack(true);

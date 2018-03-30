@@ -43,7 +43,7 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        useStatusPages(false);
+        setStatusPageEnable(false);
         setContentView(R.layout.bbs_activity_publish);
         setToolbarHomeBack(true);
 
@@ -68,16 +68,16 @@ public class PublishBBSActivity extends ToolbarActivity<PublishBBSPresenter>
 
     //选取图片
     public void selectImage() {
-        showDialog("请选择图片", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MultiImageSelector.create()
-                        .count(20)
-                        .multi()
-                        .start(PublishBBSActivity.this, Config.REQUEST_IMAGE_CODE);
-                dismissDialog();
-            }
-        });
+//        showDialog("请选择图片", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                MultiImageSelector.create()
+//                        .count(20)
+//                        .multi()
+//                        .start(PublishBBSActivity.this, Config.REQUEST_IMAGE_CODE);
+//                dismissDialog();
+//            }
+//        });
     }
 
     public void publish() {

@@ -8,12 +8,10 @@ import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.jude.rollviewpager.OnItemClickListener;
 import com.jude.rollviewpager.RollPagerView;
-
+import cn.lemon.common.base.view.SuperFragment;
 import cn.lemon.util.Utils;
-import cn.lemon.common.base.fragment.SuperFragment;
 import cn.lemon.common.net.ServiceResponse;
 import cn.lemon.jcourse.R;
 import cn.lemon.jcourse.config.Config;
@@ -73,7 +71,7 @@ public class BBSFragment extends SuperFragment implements View.OnClickListener {
         mAddBBS.setOnClickListener(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setRefreshAction(new Action() {
+        mRecyclerView.addRefreshAction(new Action() {
             @Override
             public void onAction() {
                 getData(true);
@@ -130,8 +128,7 @@ public class BBSFragment extends SuperFragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClickErrorLoadData(View v) {
-        super.onClickErrorLoadData(v);
+    public void onErrorRetry(View v) {
         getBannerList();
         getData(true);
     }
