@@ -9,10 +9,4 @@
 
     <include layout="@layout/base_loading_page" />
 
-    <FrameLayout
-        android:id="@+id/super_real_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"/>
-
 </FrameLayout>

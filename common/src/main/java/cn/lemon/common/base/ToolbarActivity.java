@@ -36,24 +36,23 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
             linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
             linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-            FrameLayout mDecorView = (FrameLayout) getWindow().getDecorView();
-            FrameLayout mDecorContent = (FrameLayout) mDecorView.findViewById(android.R.id.content);
-            ViewGroup mLayoutView = (ViewGroup) getLayoutInflater().inflate(layoutResID, null);
-            mToolbar = (Toolbar) mLayoutView.findViewById(R.id.toolbar);
+            FrameLayout decorView = (FrameLayout) getWindow().getDecorView();
+            FrameLayout decorContent = (FrameLayout) decorView.findViewById(android.R.id.content);
+
+            ViewGroup content = (ViewGroup) getLayoutInflater().inflate(layoutResID, null);
+            mToolbar = (Toolbar) content.findViewById(R.id.toolbar);
             if (mToolbar != null) {
                 setSupportActionBar(mToolbar);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(isHomeBack);
-            }
-            mLayoutView.removeView(mToolbar);
-            if (mToolbar.getParent() != null) {
-                ((ViewGroup) mToolbar.getParent()).removeView(mToolbar);
+                if (mToolbar.getParent() != null && mToolbar.getParent() instanceof ViewGroup) {
+                    ((ViewGroup) mToolbar.getParent()).removeView(mToolbar);
+                }
             }
             linearLayout.addView(mToolbar);
 
-            getLayoutInflater().inflate(R.layout.base_status_page, linearLayout, true);
-            mRealContent = (FrameLayout) linearLayout.findViewById(R.id.super_real_content);
-            mRealContent.addView(mLayoutView);
-            mDecorContent.addView(linearLayout);
+            mRealContent = (FrameLayout) getLayoutInflater().inflate(R.layout.base_status_page, linearLayout, true);
+            mRealContent.addView(content);
+            decorContent.addView(linearLayout);
             initStatusPages(linearLayout);
         } else {
             super.setContentView(layoutResID);
