@@ -50,7 +50,8 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
             }
             linearLayout.addView(mToolbar);
 
-            mRealContent = (FrameLayout) getLayoutInflater().inflate(R.layout.base_status_page, linearLayout, true);
+            getLayoutInflater().inflate(R.layout.base_status_page, linearLayout, true);
+            mRealContent = (FrameLayout) linearLayout.findViewById(R.id.super_real_content);
             mRealContent.addView(content);
             decorContent.addView(linearLayout);
             initStatusPages(linearLayout);
