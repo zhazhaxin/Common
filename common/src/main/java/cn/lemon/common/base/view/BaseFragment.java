@@ -26,9 +26,9 @@ import cn.lemon.common.R;
  */
 public abstract class BaseFragment extends Fragment implements ISuperFunction {
 
-    private static final int ANIMATION_DURATION = 300;
+    private final String TAG = BaseFragment.class.getSimpleName();
 
-    private final String TAG = getClass().getSimpleName();
+    private static final int ANIMATION_DURATION = 300;
     private int mLayoutResId;
 
     protected boolean isUseStatusPages = false;
@@ -36,6 +36,7 @@ public abstract class BaseFragment extends Fragment implements ISuperFunction {
     private boolean isShowLoading = true;
     private boolean isShowingContent = false;
     private boolean isShowingError = false;
+    private boolean isShowingEmpty = false;
 
     private ViewPropertyAnimator mShowAnimator;
     private ViewPropertyAnimator mHideAnimator;
@@ -45,7 +46,7 @@ public abstract class BaseFragment extends Fragment implements ISuperFunction {
     protected LinearLayout mErrorPage;
     protected LinearLayout mLoadingPage;
 
-    protected FrameLayout mRealContent;
+    protected View mRealContent;
     // 当前显示的 page
     protected View mCurrentPage;
     protected TextView mLoadDataButton;
@@ -106,8 +107,10 @@ public abstract class BaseFragment extends Fragment implements ISuperFunction {
     public void onInitPages(LayoutInflater inflater, int contentId) {
         mRoot = inflater.inflate(R.layout.base_status_page, null);
         mRoot.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mRealContent = (FrameLayout) mRoot.findViewById(R.id.super_real_content);
-        inflater.inflate(contentId, mRealContent, true);
+        mRealContent = inflater.inflate(contentId, null);
+        if (mRoot instanceof FrameLayout) {
+            ((FrameLayout) mRoot).addView(mRealContent);
+        }
 
         mEmptyPage = findViewById(R.id.empty_page);
         mLoadDataButton = findViewById(R.id.error_to_load_button);
@@ -124,42 +127,52 @@ public abstract class BaseFragment extends Fragment implements ISuperFunction {
 
     @Override
     public void showEmpty() {
-        showView(mEmptyPage);
-        isShowingError = false;
-        isShowingContent = false;
-        isShowLoading = false;
+        Log.d(TAG, "showEmpty");
+        if (!isShowingEmpty) {
+            showView(mEmptyPage);
+            isShowingError = false;
+            isShowingContent = false;
+            isShowLoading = false;
+            isShowingEmpty = true;
+        }
     }
 
     @Override
     public void showError() {
+        Log.d(TAG, "showError");
         if (!isShowingError) {
             showView(mErrorPage);
             isShowingError = true;
             isShowingContent = false;
             isShowLoading = false;
+            isShowingEmpty = false;
         }
-
     }
 
     @Override
     public void showLoading() {
+        Log.d(TAG, "showLoading");
         if (!isShowLoading) {
             showView(mLoadingPage);
             isShowingError = false;
             isShowingContent = false;
             isShowLoading = true;
+            isShowingEmpty = false;
         }
     }
 
     @Override
     public void showContent() {
+        Log.d(TAG, "showContent");
         if (!isShowingContent) {
             showView(mRealContent);
             isShowingContent = true;
             isShowingError = false;
             isShowLoading = false;
+            isShowingEmpty = false;
         }
     }
+
 
     @Override
     public void onErrorRetry(View v) {

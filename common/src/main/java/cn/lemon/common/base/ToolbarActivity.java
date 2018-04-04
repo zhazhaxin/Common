@@ -39,8 +39,8 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
             FrameLayout decorView = (FrameLayout) getWindow().getDecorView();
             FrameLayout decorContent = (FrameLayout) decorView.findViewById(android.R.id.content);
 
-            ViewGroup content = (ViewGroup) getLayoutInflater().inflate(layoutResID, null);
-            mToolbar = (Toolbar) content.findViewById(R.id.toolbar);
+            mRealContent = getLayoutInflater().inflate(layoutResID, null);
+            mToolbar = (Toolbar) mRealContent.findViewById(R.id.toolbar);
             if (mToolbar != null) {
                 setSupportActionBar(mToolbar);
                 getSupportActionBar().setDisplayHomeAsUpEnabled(isHomeBack);
@@ -50,10 +50,13 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
             }
             linearLayout.addView(mToolbar);
 
-            getLayoutInflater().inflate(R.layout.base_status_page, linearLayout, true);
-            mRealContent = (FrameLayout) linearLayout.findViewById(R.id.super_real_content);
-            mRealContent.addView(content);
+            View root = getLayoutInflater().inflate(R.layout.base_status_page, linearLayout, false);
+            if (root instanceof FrameLayout) {
+                ((FrameLayout) root).addView(mRealContent);
+            }
+            linearLayout.addView(root);
             decorContent.addView(linearLayout);
+
             initStatusPages(linearLayout);
         } else {
             setTitleBarContentView(layoutResID);

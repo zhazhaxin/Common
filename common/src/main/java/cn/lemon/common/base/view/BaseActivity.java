@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
@@ -22,12 +23,14 @@ import cn.lemon.common.R;
  */
 public abstract class BaseActivity extends AppCompatActivity implements ISuperFunction {
 
+    protected final String TAG = BaseActivity.class.getSimpleName();
     private static final int ANIMATION_DURATION = 300;
     protected boolean isUseStatusPages = false;
 
     private boolean isShowLoading = true;
     private boolean isShowingContent = false;
     private boolean isShowingError = false;
+    private boolean isShowingEmpty = false;
 
     private ViewPropertyAnimator mShowAnimator;
     private ViewPropertyAnimator mHideAnimator;
@@ -37,7 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ISuperFu
     protected LinearLayout mErrorPage;
     protected LinearLayout mLoadingPage;
 
-    protected FrameLayout mRealContent;
+    protected View mRealContent;
     // 当前显示的 page
     protected View mCurrentPage;
     protected TextView mLoadDataButton;
@@ -60,17 +63,19 @@ public abstract class BaseActivity extends AppCompatActivity implements ISuperFu
 
     @Override
     public void onInitPages(@LayoutRes int contentId) {
-        FrameLayout mDecorContent = (FrameLayout) getWindow().getDecorView().findViewById(android.R.id.content);
-        getLayoutInflater().inflate(R.layout.base_status_page, mDecorContent, true);
-        // Activity 真正显示的 content
-        mRealContent = (FrameLayout) mDecorContent.findViewById(R.id.super_real_content);
+        FrameLayout decorContent = (FrameLayout) getWindow().getDecorView().findViewById(android.R.id.content);
+        View root = getLayoutInflater().inflate(R.layout.base_status_page, decorContent, false);
         // 把 activity 要显示的 xml 加载到 mContent 布局里
-        getLayoutInflater().inflate(contentId, mRealContent, true);
+        mRealContent = getLayoutInflater().inflate(contentId, null);
+        if (root instanceof FrameLayout) {
+            ((FrameLayout) root).addView(mRealContent);
+        }
+        decorContent.addView(root);
 
-        mEmptyPage = (TextView) mDecorContent.findViewById(R.id.empty_page);
-        mLoadDataButton = (TextView) mDecorContent.findViewById(R.id.error_to_load_button);
-        mErrorPage = (LinearLayout) mDecorContent.findViewById(R.id.error_page);
-        mLoadingPage = (LinearLayout) mDecorContent.findViewById(R.id.loading_page);
+        mEmptyPage = (TextView) decorContent.findViewById(R.id.empty_page);
+        mLoadDataButton = (TextView) decorContent.findViewById(R.id.error_to_load_button);
+        mErrorPage = (LinearLayout) decorContent.findViewById(R.id.error_page);
+        mLoadingPage = (LinearLayout) decorContent.findViewById(R.id.loading_page);
         mCurrentPage = mLoadingPage;
 
         mLoadDataButton.setOnClickListener(new View.OnClickListener() {
@@ -106,42 +111,52 @@ public abstract class BaseActivity extends AppCompatActivity implements ISuperFu
 
     @Override
     public void showEmpty() {
-        showView(mEmptyPage);
-        isShowingError = false;
-        isShowingContent = false;
-        isShowLoading = false;
+        Log.d(TAG, "showEmpty");
+        if (!isShowingEmpty) {
+            showView(mEmptyPage);
+            isShowingError = false;
+            isShowingContent = false;
+            isShowLoading = false;
+            isShowingEmpty = true;
+        }
     }
 
     @Override
     public void showError() {
+        Log.d(TAG, "showError");
         if (!isShowingError) {
             showView(mErrorPage);
             isShowingError = true;
             isShowingContent = false;
             isShowLoading = false;
+            isShowingEmpty = false;
         }
-
     }
 
     @Override
     public void showLoading() {
+        Log.d(TAG, "showLoading");
         if (!isShowLoading) {
             showView(mLoadingPage);
             isShowingError = false;
             isShowingContent = false;
             isShowLoading = true;
+            isShowingEmpty = false;
         }
     }
 
     @Override
     public void showContent() {
+        Log.d(TAG, "showContent");
         if (!isShowingContent) {
             showView(mRealContent);
             isShowingContent = true;
             isShowingError = false;
             isShowLoading = false;
+            isShowingEmpty = false;
         }
     }
+
 
     @Override
     public void onErrorRetry(View v) {
@@ -179,7 +194,9 @@ public abstract class BaseActivity extends AppCompatActivity implements ISuperFu
             mHideAnimator.setListener(null);
             mHideAnimator.cancel();
         }
-        mHideAnimator = view.animate().alphaBy(1f).alpha(0f)
+        view.setAlpha(1f);
+        mHideAnimator = view.animate()
+                .alpha(0f)
                 .setDuration(400);
         mHideAnimator.start();
         mHideAnimator.setListener(new AnimatorListenerAdapter() {
