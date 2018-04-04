@@ -56,7 +56,7 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
             decorContent.addView(linearLayout);
             initStatusPages(linearLayout);
         } else {
-            super.setContentView(layoutResID);
+            setTitleBarContentView(layoutResID);
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
             if (mToolbar != null) {
                 setSupportActionBar(mToolbar);

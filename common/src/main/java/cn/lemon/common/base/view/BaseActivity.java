@@ -54,6 +54,10 @@ public abstract class BaseActivity extends AppCompatActivity implements ISuperFu
         onInitViews();
     }
 
+    protected void setTitleBarContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+    }
+
     @Override
     public void onInitPages(@LayoutRes int contentId) {
         FrameLayout mDecorContent = (FrameLayout) getWindow().getDecorView().findViewById(android.R.id.content);
