@@ -116,6 +116,7 @@ public abstract class BaseFragment extends Fragment implements ISuperFunction {
         mLoadDataButton = findViewById(R.id.error_to_load_button);
         mErrorPage = findViewById(R.id.error_page);
         mLoadingPage = findViewById(R.id.loading_page);
+        mRealContent.setVisibility(View.GONE);
         mCurrentPage = mLoadingPage;
         mLoadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -76,6 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ISuperFu
         mLoadDataButton = (TextView) decorContent.findViewById(R.id.error_to_load_button);
         mErrorPage = (LinearLayout) decorContent.findViewById(R.id.error_page);
         mLoadingPage = (LinearLayout) decorContent.findViewById(R.id.loading_page);
+        mRealContent.setVisibility(View.GONE);
         mCurrentPage = mLoadingPage;
 
         mLoadDataButton.setOnClickListener(new View.OnClickListener() {

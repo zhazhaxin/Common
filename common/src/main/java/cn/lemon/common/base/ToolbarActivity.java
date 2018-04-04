@@ -73,6 +73,7 @@ public class ToolbarActivity<T extends SuperPresenter> extends SuperActivity<T> 
         mLoadDataButton = (TextView) parent.findViewById(R.id.error_to_load_button);
         mErrorPage = (LinearLayout) parent.findViewById(R.id.error_page);
         mLoadingPage = (LinearLayout) parent.findViewById(R.id.loading_page);
+        mRealContent.setVisibility(View.GONE);
         mCurrentPage = mLoadingPage;
         mLoadDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
