@@ -63,7 +63,10 @@ public class SuperFragment<T extends SuperPresenter> extends BaseFragment {
         }
     }
 
-    public void attachPresenter() {
+    private void attachPresenter() {
+        if (mPresenter != null) {
+            return;
+        }
         Annotation[] annotations = getClass().getAnnotations();
         if (annotations.length > 0) {
             for (Annotation annotation : annotations) {
@@ -82,6 +85,7 @@ public class SuperFragment<T extends SuperPresenter> extends BaseFragment {
     }
 
     public T getPresenter() {
+        attachPresenter();
         return mPresenter;
     }
 

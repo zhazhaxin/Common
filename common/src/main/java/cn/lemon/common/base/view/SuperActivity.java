@@ -57,7 +57,10 @@ public class SuperActivity<P extends SuperPresenter> extends BaseActivity {
         }
     }
 
-    public void attachPresenter() {
+    private void attachPresenter() {
+        if (mPresenter != null) {
+            return;
+        }
         Annotation[] annotations = getClass().getAnnotations();
         if (annotations.length > 0) {
             for (Annotation annotation : annotations) {
@@ -76,6 +79,7 @@ public class SuperActivity<P extends SuperPresenter> extends BaseActivity {
     }
 
     public P getPresenter() {
+        attachPresenter();
         return mPresenter;
     }
 
