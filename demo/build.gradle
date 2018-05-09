@@ -34,18 +34,18 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: '*.jar', dir: 'libs')
-    compile project(':common')
-    compile project(':multiview')
-    compile project(':util')
-     compile project(':recycler')
+    api fileTree(include: '*.jar', dir: 'libs')
+    api project(':common')
+    api project(':multiview')
+    api project(':util')
+    api project(':recycler')
     //noinspection GradleCompatible
-    compile 'com.android.support:cardview-v7:25.4.0'
-    compile 'com.android.support:design:25.4.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.theartofdev.edmodo:android-image-cropper:2.2.5'
-    compile 'com.github.lovetuzitong:MultiImageSelector:1.2'
-    compile 'com.jude:rollviewpager:1.4.5'
-    compile 'org.greenrobot:eventbus:3.1.1'
-    compile 'fm.jiecao:jiecaovideoplayer:5.5.2'
+    api 'com.android.support:cardview-v7:25.4.0'
+    api 'com.android.support:design:25.4.0'
+    api 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.2.5'
+    api 'com.github.lovetuzitong:MultiImageSelector:1.2'
+    api 'com.jude:rollviewpager:1.4.5'
+    api 'org.greenrobot:eventbus:3.1.1'
+    api 'fm.jiecao:jiecaovideoplayer:5.5.2'
 }
