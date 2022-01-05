@@ -1,3 +1,7 @@
+# 字节跳动 内推
+### 抖音/番茄小说 Android/ios 急招，有其他岗位或者要求可以邮件私聊
+欢迎发送简历到 1399750010@qq.com
+
 # MVP 框架 & 通用模块
 
 > - 开发中的顶级父类组件，如：SuperActivity,SuperFragment,SuperModel,SuperPresenter
